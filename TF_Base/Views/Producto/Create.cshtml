@@ -1,0 +1,86 @@
+﻿@model TF_Base.Models.Producto
+
+@{
+    ViewBag.Title = "Crear productos";
+}
+
+<h2>Crear productos</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+<fieldset>
+    <legend>Producto</legend>
+    <div class="form-group">
+        
+        <div class="editor-label">
+            @Html.LabelFor(model => model.idCategoria)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.idCategoria)
+            @Html.ValidationMessageFor(model => model.idCategoria)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.descripcion)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.descripcion)
+            @Html.ValidationMessageFor(model => model.descripcion)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.idTalle)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.idTalle)
+            @Html.ValidationMessageFor(model => model.idTalle)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.precioUnitario)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.precioUnitario)
+            @Html.ValidationMessageFor(model => model.precioUnitario)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.idGarantia)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.idGarantia)
+            @Html.ValidationMessageFor(model => model.idGarantia)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.idColor)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.idColor)
+            @Html.ValidationMessageFor(model => model.idColor)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.fotoUrl)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.fotoUrl)
+            @Html.ValidationMessageFor(model => model.fotoUrl)
+        </div>
+        <br />
+        <p>
+            <input type="submit" value="Crear producto nuevo" />
+        </p>
+        </div>
+</fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

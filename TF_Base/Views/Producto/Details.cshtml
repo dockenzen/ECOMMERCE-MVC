@@ -1,0 +1,65 @@
+﻿@model TF_Base.Models.Producto
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Producto</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.idProducto)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.idProducto)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Categoria.descripcion)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Categoria.descripcion)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.descripcion)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.descripcion)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Talle.descripcion)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Talle.descripcion)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.precioUnitario)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.precioUnitario)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Garantia.descripcion)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Garantia.descripcion)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Color.descripcion)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Color.descripcion)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

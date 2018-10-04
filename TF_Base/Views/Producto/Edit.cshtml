@@ -1,0 +1,85 @@
+﻿@model TF_Base.Models.Producto
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Producto</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.idProducto)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.idProducto)
+            @Html.ValidationMessageFor(model => model.idProducto)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.idCategoria, "Categoria")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("idCategoria", String.Empty)
+            @Html.ValidationMessageFor(model => model.idCategoria)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.descripcion)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.descripcion)
+            @Html.ValidationMessageFor(model => model.descripcion)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.idTalle, "Talle")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("idTalle", String.Empty)
+            @Html.ValidationMessageFor(model => model.idTalle)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.precioUnitario)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.precioUnitario)
+            @Html.ValidationMessageFor(model => model.precioUnitario)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.idGarantia, "Garantia")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("idGarantia", String.Empty)
+            @Html.ValidationMessageFor(model => model.idGarantia)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.idColor, "Color")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("idColor", String.Empty)
+            @Html.ValidationMessageFor(model => model.idColor)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

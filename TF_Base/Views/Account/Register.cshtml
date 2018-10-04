@@ -1,0 +1,56 @@
+﻿@model TF_Base.Models.Registro
+
+@{
+    ViewBag.Title = "Register";
+}
+
+<h2>Register</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Nuevo usuario</legend>
+        <div class="editor-label">
+            @Html.LabelFor(f => f.UserName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(f => f.UserName)
+            @Html.ValidationMessageFor(f => f.UserName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(f => f.UserFullName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(f => f.UserFullName)
+            @Html.ValidationMessageFor(f => f.UserFullName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(f => f.UserEmail)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(f => f.UserEmail)
+            @Html.ValidationMessageFor(f => f.UserEmail)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(f => f.Password)
+        </div>
+        <div class="editor-field">
+            @Html.PasswordFor(f => f.Password)
+        @Html.ValidationMessageFor(f => f.Password)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(f => f.PasswordConfirmation)
+        </div>
+        <div class="editor-field">
+            @Html.PasswordFor(f => f.PasswordConfirmation)
+        @Html.ValidationMessageFor(f => f.PasswordConfirmation)
+        </div>
+
+        <input type="submit" value="Create" />
+    </fieldset>
+}
