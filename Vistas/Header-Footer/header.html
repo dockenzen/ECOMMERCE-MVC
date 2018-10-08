@@ -1,0 +1,72 @@
+<div class="top-bar">
+  <div class="container">
+    <div class="row d-flex align-items-center">
+      <div class="col-md-2 d-md-block d-none">
+        <a href="#" data-toggle="modal" data-target="#login-modal" class="login-btn"><i class="fa fa-sign-in"></i><span class="d-none d-md-inline-block">Ingresar</span></a>              
+      </div>
+      <div class="col-md-2 d-md-block d-none">
+        <a href="customer-register.html" class="signup-btn"><i class="fa fa-user"></i><span class="d-none d-md-inline-block">Registrarse</span></a>
+      </div>
+      <div class="col-md-6">
+        <div class="d-flex justify-content-md-end justify-content-between">
+          <ul class="list-inline contact-info d-block d-md-none">
+            <li class="list-inline-item"><a href="#"><i class="fa fa-phone"></i></a></li>
+            <li class="list-inline-item"><a href="#"><i class="fa fa-envelope"></i></a></li>
+          </ul>
+          
+          <ul class="social-custom list-inline">
+            <li class="list-inline-item"><a href="https://www.facebook.com/dejameatraparte/"><i class="fa fa-facebook"></i></a></li>
+            <li class="list-inline-item"><a href="#"><i class="fa fa-google-plus"></i></a></li>
+            <li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
+            <li class="list-inline-item"><a href="#"><i class="fa fa-envelope"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Top bar end-->
+<!-- Login Modal-->
+<div id="login-modal" tabindex="-1" role="dialog" aria-labelledby="login-modalLabel" aria-hidden="true" class="modal fade">
+  <div role="document" class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="login-modalLabel" class="modal-title">Acceso a clientes</h4>
+        <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
+      </div>
+      <div class="modal-body">
+        <form action="customer-orders.html" method="get">
+          <div class="form-group">
+            <input id="email_modal" type="text" placeholder="email" class="form-control">
+          </div>
+          <div class="form-group">
+            <input id="password_modal" type="password" placeholder="password" class="form-control">
+          </div>
+          <p class="text-center">
+            <button class="btn btn-template-outlined"><i class="fa fa-sign-in"></i> Ingresar </button>
+          </p>
+        </form>
+        <p class="text-center text-muted">Aún no estás registrado?</p>
+        <p class="text-center text-muted"><a href="customer-register.html"><strong>Registrate ahora</strong></a>! Es facil, y no tomará más de un minuto para tener acceso especial a descuentos y mucho más !</p>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Login modal end-->
+<!-- Navbar Start-->
+<header class="nav-holder make-sticky">
+  <div id="navbar" role="navigation" class="navbar navbar-expand-lg">
+    <div class="container">
+      <a href="index.html" class="navbar-brand home">
+        <img src="img/logo.png" alt="LACOSTA logo" class="d-none d-md-inline-block" style="width: 270px; height: 150px;"><span class="sr-only">LACOSTA ( logo )</span></a>
+        <ul class="nav navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="index.html">Inicio </a></li>
+          <li class="nav-item"><a class="nav-link" href="shop-category-left.html">Productos<b class="caret"></b></a></li>
+          <li class="nav-item"><a class="nav-link" href="faq.html">Como comprar <b class="caret"></b></a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html"> Nosotros <b class="caret"></b></a></li>
+          <li class="nav-item"><a class="nav-link" href="contact2.html">Contacto <b class="caret"></b></a></li>
+        </ul>            
+    </div>
+  </div>
+</header>
+<!-- Navbar End-->
