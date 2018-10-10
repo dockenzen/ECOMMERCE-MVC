@@ -107,3 +107,7 @@ F:\backup\TF_Base\TF_Base\obj\Debug\TF_Base.csproj.CoreCompileInputs.cache
 F:\backup\TF_Base\TF_Base\obj\Debug\TF_Base.csproj.CopyComplete
 F:\backup\TF_Base\TF_Base\obj\Debug\TF_Base.dll
 F:\backup\TF_Base\TF_Base\obj\Debug\TF_Base.pdb
+C:\Users\lbaldassarre\Documents\ECOMMERCE-MVC\TF_Base\obj\Debug\TF_Base.csprojAssemblyReference.cache
+C:\Users\lbaldassarre\Documents\ECOMMERCE-MVC\TF_Base\obj\Debug\TF_Base.csproj.CoreCompileInputs.cache
+C:\Users\lbaldassarre\Documents\ECOMMERCE-MVC\TF_Base\obj\Debug\TF_Base.dll
+C:\Users\lbaldassarre\Documents\ECOMMERCE-MVC\TF_Base\obj\Debug\TF_Base.pdb
