@@ -11,8 +11,7 @@ namespace TF_Base.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Producto
     {
         public Producto()
@@ -23,26 +22,12 @@ namespace TF_Base.Models
         }
     
         public int idProducto { get; set; }
-
-        [Display(Name = "Categoría")]
         public int idCategoria { get; set; }
-
-        [Display(Name = "Descripción del producto")]
         public string descripcion { get; set; }
-
-        [Display(Name = "Talle")]
         public Nullable<int> idTalle { get; set; }
-
-        [Display(Name = "Precio unitario")]
         public decimal precioUnitario { get; set; }
-
-        [Display(Name = "Duración de garantía")]
         public int idGarantia { get; set; }
-
-        [Display(Name = "Color")]
         public int idColor { get; set; }
-
-        [Display(Name = "Imagen principal del producto")]
         public string fotoUrl { get; set; }
     
         public virtual Categoria Categoria { get; set; }

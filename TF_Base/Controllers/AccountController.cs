@@ -21,7 +21,6 @@ namespace TF_Base.Controllers
         //
         // POST: /Account/Login
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Login(Login login)
         {
             if (ModelState.IsValid)
@@ -63,7 +62,7 @@ namespace TF_Base.Controllers
             {
                 try
                 {
-                    WebSecurity.CreateUserAndAccount(registro.UserName, registro.Password);
+                    WebSecurity.CreateUserAndAccount(registro.UserName, registro.Password, new { Email = registro.UserEmail, idEstadoUsuario = 1 });
                     WebSecurity.Login(registro.UserName, registro.Password);
                     return RedirectToAction("Index", "Producto");
                 }
