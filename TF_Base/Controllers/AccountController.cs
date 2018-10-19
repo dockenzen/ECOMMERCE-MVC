@@ -32,7 +32,7 @@ namespace TF_Base.Controllers
                 }
             }
 
-            ModelState.AddModelError("", "Error al logearse");
+            ModelState.AddModelError("", "Datos incorrectos");
             return View(login);
         }
 
@@ -63,7 +63,9 @@ namespace TF_Base.Controllers
                 try
                 {
                     WebSecurity.CreateUserAndAccount(registro.UserName, registro.Password, new { Email = registro.UserEmail, idEstadoUsuario = 1 });
-                    WebSecurity.Login(registro.UserName, registro.Password);
+                    if(WebSecurity.Login(registro.UserName, registro.Password))
+                        return RedirectToAction("OrdenCompra","ShopBasket");
+                            else
                     return RedirectToAction("Index", "Producto");
                 }
                 catch (MembershipCreateUserException e)

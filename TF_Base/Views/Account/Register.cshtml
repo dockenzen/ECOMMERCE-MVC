@@ -9,15 +9,14 @@
         <div class="row">
             <div class="col-lg-6">
                 <div class="box">
-                    <h2 class="text-uppercase">Registro</h2>
-                    <p class="lead">Not our registered customer yet?</p>
+                    <u>
+                        <p class="lead">¿Aún no es nuestro cliente registrado?</p>
+                    </u>
                     <p>
-                        With registration with us new world of fashion, fantastic discounts and much more opens to you! The whole process
-                        will not take you more than a minute!
+                        Con el registro con nosotros, el nuevo mundo de la moda, fantásticos descuentos y mucho más se abren para ti. ¡Todo el proceso no te llevará más de un minuto!
                     </p>
                     <p class="text-muted">
-                        If you have any questions, please feel free to
-                        <a href="contact.html">contact us</a>, our customer service center is working for you 24/7.
+                        Si tiene alguna pregunta, no dude en <a href="contact.html"> comunicarse con nosotros </a>, nuestro centro de atención al cliente está trabajando para usted las 24 horas del día, los 7 días de la semana.
                     </p>
                     <hr>
 
@@ -27,46 +26,46 @@
                         @Html.ValidationSummary(true)
                         <fieldset>
                             <div class="editor-label">
-                                @Html.LabelFor(f => f.UserName)
+                                @Html.LabelFor(f => f.UserName, new { @class = "control-label" })
                             </div>
                             <div class="editor-field">
-                                @Html.EditorFor(f => f.UserName)
+                                @Html.TextBoxFor(f => f.UserName, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(f => f.UserName)
                             </div>
 
                             <div class="editor-label">
-                                @Html.LabelFor(f => f.UserFullName)
+                                @Html.LabelFor(f => f.UserFullName, new { @class = "control-label" })
                             </div>
                             <div class="editor-field">
-                                @Html.EditorFor(f => f.UserFullName)
+                                @Html.TextBoxFor(f => f.UserFullName, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(f => f.UserFullName)
                             </div>
 
                             <div class="editor-label">
-                                @Html.LabelFor(f => f.UserEmail)
+                                @Html.LabelFor(f => f.UserEmail, new { @class = "control-label" })
                             </div>
                             <div class="editor-field">
-                                @Html.EditorFor(f => f.UserEmail)
+                                @Html.TextBoxFor(f => f.UserEmail, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(f => f.UserEmail)
                             </div>
 
                             <div class="editor-label">
-                                @Html.LabelFor(f => f.Password)
+                                @Html.LabelFor(f => f.Password, new { @class = "control-label" })
                             </div>
                             <div class="editor-field">
-                                @Html.PasswordFor(f => f.Password)
+                                @Html.PasswordFor(f => f.Password, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(f => f.Password)
                             </div>
 
                             <div class="editor-label">
-                                @Html.LabelFor(f => f.PasswordConfirmation)
+                                @Html.LabelFor(f => f.PasswordConfirmation, new { @class = "control-label" })
                             </div>
                             <div class="editor-field">
-                                @Html.PasswordFor(f => f.PasswordConfirmation)
+                                @Html.PasswordFor(f => f.PasswordConfirmation, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(f => f.PasswordConfirmation)
                             </div>
                             <br />
-                            <input type="submit" value="Registrarse" />
+                            <input type="submit" value="Registrarse" class="btn btn-primary" />
                         </fieldset>
                     }
                 </div>

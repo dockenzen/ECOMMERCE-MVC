@@ -1,6 +1,218 @@
-﻿
+﻿@model TF_Base.Models.OrdenCompra
+
+
 @{
     ViewBag.Title = "ShopBasket";
 }
 
-<h2>ShopBasket</h2>
+<div id="all">
+    <div id="heading-breadcrumbs">
+        <div class="container">
+            <div class="row d-flex align-items-center flex-wrap">
+                <div class="col-md-7">
+                    <h1 class="h2">Carrito de compras</h1>
+                </div>
+                <div class="col-md-5">
+                    <ul class="breadcrumb d-flex justify-content-end">
+                        <li class="breadcrumb-item">
+                            <a href="index.html">Inicio</a>
+                        </li>
+                        <li class="breadcrumb-item active">Carrito de compras</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="content">
+        <div class="container">
+            <div class="row bar">
+                <div class="col-lg-12">
+                    <p class="text-muted lead">Actualmente tenés 3 elementos en tu carrito.</p>
+                </div>
+                <div id="basket" class="col-lg-9">
+                    <div class="box mt-0 pb-0 no-horizontal-padding">
+                        <form method="get" action="shop-checkout1.html">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th colspan="2">Productos</th>
+                                            <th>Cantidad</th>
+                                            <th>Precio Unitario</th>
+                                            <th>Descuento</th>
+                                            <th colspan="2">Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <a href="#">
+                                                    <img src="img/pantalon-chupin.jpg" alt="White Blouse Armani" class="img-fluid">
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a href="#">Pantalon Chupin Negro</a>
+                                            </td>
+                                            <td>
+                                                <input type="number" value="2" class="form-control">
+                                            </td>
+                                            <td>$123.00</td>
+                                            <td>$0.00</td>
+                                            <td>$246.00</td>
+                                            <td>
+                                                <a href="#">
+                                                    <i class="fa fa-trash-o"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a href="#">
+                                                    <img src="img/campera-termica.jpg" alt="Black Blouse Armani" class="img-fluid">
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a href="#">Campera Térmica</a>
+                                            </td>
+                                            <td>
+                                                <input type="number" value="1" class="form-control">
+                                            </td>
+                                            <td>$200.00</td>
+                                            <td>$0.00</td>
+                                            <td>$200.00</td>
+                                            <td>
+                                                <a href="#">
+                                                    <i class="fa fa-trash-o"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th colspan="5">Total</th>
+                                            <th colspan="2">$446.00</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <div class="box-footer d-flex justify-content-between align-items-center">
+                                <div class="left-col">
+                                    <a href="shop-category-left.html" class="btn btn-secondary mt-0">
+                                        <i class="fa fa-chevron-left"></i> CONTINUAR COMPRANDO
+                                    </a>
+                                </div>
+                                <div class="right-col">
+                                    <button class="btn btn-secondary">
+                                        <i class="fa fa-refresh"></i> ACTUALIZAR CARRITO
+                                    </button>
+                                    <button type="submit" class="btn btn-template-outlined">
+                                        Pasar por la caja
+                                        <i class="fa fa-chevron-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3 col-md-6">
+                            <div class="box text-uppercase mt-0 mb-2">
+                                <h3>You may also like these products</h3>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="product">
+                                <div class="image">
+                                    <a href="shop-detail.html">
+                                        <img src="img/product2.jpg" alt="" class="img-fluid image1">
+                                    </a>
+                                </div>
+                                <div class="text">
+                                    <h3 class="h5">
+                                        <a href="shop-detail.html">Fur coat</a>
+                                    </h3>
+                                    <p class="price">$143</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="product">
+                                <div class="image">
+                                    <a href="shop-detail.html">
+                                        <img src="img/product3.jpg" alt="" class="img-fluid image1">
+                                    </a>
+                                </div>
+                                <div class="text">
+                                    <h3 class="h5">
+                                        <a href="shop-detail.html">Fur coat</a>
+                                    </h3>
+                                    <p class="price">$143</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="product">
+                                <div class="image">
+                                    <a href="shop-detail.html">
+                                        <img src="img/product1.jpg" alt="" class="img-fluid image1">
+                                    </a>
+                                </div>
+                                <div class="text">
+                                    <h3 class="h5">
+                                        <a href="shop-detail.html">Fur coat</a>
+                                    </h3>
+                                    <p class="price">$143</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div id="order-summary" class="box mt-0 mb-4 p-0">
+                        <div class="box-header mt-0">
+                            <h3>Resumen de la orden</h3>
+                        </div>
+                        <p class="text-muted">El envío y los costos adicionales se calculan en función de los valores que ha ingresado.</p>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td>Subtotal</td>
+                                        <th>$446.00</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Envío y traslado</td>
+                                        <th>$10.00</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Impuestos</td>
+                                        <th>$0.00</th>
+                                    </tr>
+                                    <tr class="total">
+                                        <td>Total</td>
+                                        <th>$456.00</th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="box box mt-0 mb-4 p-0">
+                        <div class="box-header mt-0">
+                            <h4>Código Promocional</h4>
+                        </div>
+                        <p class="text-muted">Si tenés un cupón de descuento, ingresalo en el siguiente cuadro.</p>
+                        <form>
+                            <div class="input-group">
+                                <input type="text" class="form-control">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-template-main">
+                                        <i class="fa fa-gift"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

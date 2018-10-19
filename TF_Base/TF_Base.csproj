@@ -137,6 +137,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\OrdenCompraController.cs" />
     <Compile Include="Controllers\SharedController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -243,6 +244,7 @@
     <Content Include="Content\images\bannerImg3.png" />
     <Content Include="Content\images\bannerImg4.png" />
     <Content Include="Content\images\bg.jpg" />
+    <Content Include="Content\images\fondoLogin.jpg" />
     <Content Include="Content\images\intro-pic.jpg" />
     <Content Include="Content\images\logo.png" />
     <Content Include="Content\images\payment.png" />
@@ -305,7 +307,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Shared\Index.cshtml" />
     <Content Include="Views\Producto\Details.cshtml" />
     <Content Include="Views\Producto\Edit.cshtml" />
@@ -322,6 +323,12 @@
     <Content Include="Views\OrdenCompra\ShopCheckoutStep2.cshtml" />
     <Content Include="Views\OrdenCompra\ShopCheckoutStep3.cshtml" />
     <Content Include="Views\OrdenCompra\ShopCheckoutStep4.cshtml" />
+    <Content Include="Views\OrdenCompra\Index.cshtml" />
+    <Content Include="Views\OrdenCompra\Details.cshtml" />
+    <Content Include="Views\OrdenCompra\Create.cshtml" />
+    <Content Include="Views\OrdenCompra\Edit.cshtml" />
+    <Content Include="Views\OrdenCompra\Delete.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

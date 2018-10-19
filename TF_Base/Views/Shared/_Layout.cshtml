@@ -11,52 +11,39 @@
 
     @RenderSection("scripts", required: false)
 
-</head>
-<body>
-    <!-- Login Modal-->
-    <div id="login-modal" tabindex="-1" role="dialog" aria-labelledby="login-modalLabel" aria-hidden="true" class="modal fade">
-        <div role="document" class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 id="login-modalLabel" class="modal-title">Acceso a clientes</h4>
-                    <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
-                </div>
-                <div class="modal-body">
-                    <form action="customer-orders.html" method="get">
-                        <div class="form-group">
-                            <input id="email_modal" type="text" placeholder="email" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <input id="password_modal" type="password" placeholder="password" class="form-control">
-                        </div>
-                        <p class="text-center">
-                            <button class="btn btn-template-outlined"><i class="fa fa-sign-in"></i> Ingresar </button>
-                        </p>
-                    </form>
-                    <p class="text-center text-muted">Aún no estás registrado?</p>
-                    <p class="text-center text-muted"><strong>@Html.ActionLink("Registrate ahora", "Register", "Account")</strong>! Es facil, y no tomará más de un minuto para tener acceso especial a descuentos y mucho más !</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Login modal end-->
 
+</head>
+<body style="padding-top: 0px;">
     <nav class="navbar navbar-default" role="navigation">
         <div class="container">
             <!-- Collect the nav links, forms, and other content for toggling -->
-            <div id="navbar" role="navigation" class="navbar navbar-expand-lg">
+            <div id="navbar" role="navigation" class="navbar-expand-lg">
                 <ul class="nav navbar-nav pull-right">
-                    <li class="nav-item">
-                        <a href="#" data-toggle="modal" data-target="#login-modal" class="login-btn">
+                    @if (Request.IsAuthenticated)
+                    {
+                        <li class="nav-item">
+                            Esta logueado como <strong> @User.Identity.Name</strong>
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink(" Salir", "Logout", "Account", null, new { @class = "btn default glyphicon glyphicon-off" })
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
                             <span class="d-none d-md-inline-block">
-                                <label>Ingresar</label>
-                                <i class="glyphicon glyphicon-log-in"></i>
+                                @Html.ActionLink(" Ingresar", "Login", "Account", null, new { @class = "btn default glyphicon glyphicon-log-in -xs" })
                             </span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        @Html.ActionLink("Crear cuenta", "Register", "Account")
-                    </li>
+                        </li>
+                    }
+                    @if (!Request.IsAuthenticated)
+                    {
+                        <li class="nav-item">
+                            <span class="d-none d-md-inline-block">
+                                @Html.ActionLink("Registrarse", "Register", "Account", null, new { @class = "btn default glyphicon glyphicon-user -xs" })
+                            </span>
+                        </li>
+                    }
                 </ul>
             </div>
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
@@ -75,59 +62,61 @@
             <div class="col-md-3">
                 <img src=@Url.Content("~/Content/images/logo.png") alt="LACOSTA logo" class="img-responsive"><span class="sr-only">LACOSTA ( logo )</span>
             </div>
-            <ul class="nav navbar-nav" style="vertical-align: middle;">
+            <br /><br />
+            <ul class="nav navbar-nav pull-right">
                 <li class="nav-item">@Html.ActionLink("Inicio", "Index", "Shared", null, new { @class = "nav-link active h4" })</li>
                 <li class="nav-item">@Html.ActionLink("Productos", "Index", "Producto", null, new { @class = "nav-link h4" })</li>
                 <li class="nav-item">@Html.ActionLink("Como comprar", "Index", "Shared", null, new { @class = "nav-link h4" })</li>
-                <li class="nav-item">@Html.ActionLink("Nosotros", "Index", "Shared", null, new { @class = "nav-link h4" })"</li>
-                <li class="nav-item">@Html.ActionLink("Carrito", "Index", "Shared", null, new { @class = "nav-link h4" })</li>
+                <li class="nav-item">@Html.ActionLink("Nosotros", "Index", "Shared", null, new { @class = "nav-link h4" })</li>
                 <li class="nav-item">
-                    <a class="nav-link h4" href="basket.html">
+                    <a class="nav-link h4" href="/OrdenCompra/Index">
                         Carrito <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
                     </a>
                 </li>
             </ul>
         </div>
+        <hr />
     </div>
     <br />
     <!-- Navbar End-->
     <div class="row">
         @RenderBody()
-    </div>
-
+    </div> 
+    <br />
     <footer>
         <div class="container">
+            <hr />
             <div class="row">
                 <div class="col-lg-4">
-                    <h4 class="h6">Suscribite al Newsletter mensual</h4>
+                    <h4 class="h4">Suscribite al Newsletter mensual</h4>
                     <form>
                         <div class="input-group">
                             <input type="text" class="form-control">
-                            <div class="input-group-append">
-                                <button type="button" class="btn btn-secondary"><i class="fa fa-send"></i></button>
-                            </div>
+                            <button type="submit" class="btn btn-secondary">
+                                <i class="glyphicon glyphicon-send"></i>
+                            </button>
                         </div>
                     </form>
                     <hr class="d-block d-lg-none">
                 </div>
                 <div class="col-lg-4 ">
+                    <div class="h4 text-center">Redes sociales</div>
                     <ul class="list footer-blog-list text-center">
-                        <div class="h6">Redes sociales</div>
                         <li class="d-flex align-items-center">
                             <div class="text">
-                                <h5 class="mb-0"><i class="fa fa-facebook"></i> <a href="post.html">Facebook</a></h5>
+                                <h5 class="mb-0"><i class="glyphicon glyphicon-book"></i> <a href="post.html">Facebook</a></h5>
                             </div>
                         </li>
                         <li class="d-flex align-items-center">
                             <div class="text">
-                                <h5 class="mb-0"><i class="fa fa-instagram"></i> <a href="post.html">Instagram</a></h5>
+                                <h5 class="mb-0"><i class="glyphicon glyphicon-picture"></i> <a href="post.html">Instagram</a></h5>
                             </div>
                         </li>
                     </ul>
                     <hr class="d-block d-lg-none">
                 </div>
                 <div class="col-lg-4">
-                    <h4 class="h6">Acerca de </h4>
+                    <h4 class="h4">Acerca de </h4>
                     <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
                     <hr>
                 </div>
