@@ -1,5 +1,200 @@
-﻿@{
-    ViewBag.Title = "ShopCategory";
+﻿@model IEnumerable<TF_Base.Models.Producto>
+
+@{
+    ViewBag.Title = "Catalogo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>ShopCategory</h2>
+<div id="heading-breadcrumbs">
+    <div class="container">
+        <div class="row d-flex align-items-center flex-wrap">
+            <div class="col-md-7">
+                <h1 class="">Todos los productos</h1>
+            </div>
+            <div class="col-md-5">
+                <ul class="breadcrumb d-flex justify-content-end">
+                    <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
+                    <li class="breadcrumb-item active">Todos los productos</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="content">
+    <div class="container">
+        <div class="row bar">
+            <div class="col-md-3">
+                <!-- MENUS AND FILTERS-->
+                <div class="panel panel-default sidebar-menu">
+                    <div class="panel-heading">
+                        <h3 class="h4 panel-title">Categorias</h3>
+                    </div>
+                    <div class="panel-body">
+                        <ul class="nav nav-pills flex-column text-sm category-menu">
+                            <li class="nav-item">
+                                <a href="shop-category-left.html" class="nav-link d-flex align-items-center justify-content-between"><span>Hombre </span><span class="badge badge-secondary">42</span></a>
+                                <ul class="nav nav-pills flex-column">
+                                    <li class="nav-item"><a href="shop-category-left.html" class="nav-link">Remeras</a></li>
+                                    <li class="nav-item"><a href="shop-category-left.html" class="nav-link">Camisetas</a></li>
+                                    <li class="nav-item"><a href="shop-category-left.html" class="nav-link">Pantalones</a></li>
+                                    <li class="nav-item"><a href="shop-category-left.html" class="nav-link">Accesorios</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a href="shop-category-left.html" class="nav-link active d-flex align-items-center justify-content-between"><span>Dama  </span><span class="badge badge-light">123</span></a>
+                                <ul class="nav nav-pills flex-column">
+                                    <li class="nav-item"><a href="shop-category-left.html" class="nav-link">Remeras</a></li>
+                                    <li class="nav-item"><a href="shop-category-left.html" class="nav-link">Polleras</a></li>
+                                    <li class="nav-item"><a href="shop-category-left.html" class="nav-link">Pantalones</a></li>
+                                    <li class="nav-item"><a href="shop-category-left.html" class="nav-link">Accesorios</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a href="shop-category-left.html" class="nav-link d-flex align-items-center justify-content-between"><span>Niño  </span><span class="badge badge-secondary">11</span></a>
+                                <ul class="nav nav-pills flex-column">
+                                    <li class="nav-item"><a href="shop-category-left.html" class="nav-link">Remeras</a></li>
+                                    <li class="nav-item"><a href="shop-category-left.html" class="nav-link">Polleras</a></li>
+                                    <li class="nav-item"><a href="shop-category-left.html" class="nav-link">Pantaloness</a></li>
+                                    <li class="nav-item"><a href="shop-category-left.html" class="nav-link">Accesorios</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="panel panel-default sidebar-menu">
+                    <div class="panel-heading d-flex align-items-center justify-content-between">
+                        <h3 class="h4 panel-titlen">Colores</h3><a href="#" class="btn btn-sm btn-danger"><i class="fa fa-times-circle"></i><span class="d-none d-md-inline-block">Clear</span></a>
+                    </div>
+                    <div class="panel-body">
+                        <form>
+                            <div class="form-group">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox"><span class="colour white"></span> Blanco (14)
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox"><span class="colour blue"></span> Azul (10)
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox"><span class="colour green"></span>  Verde (20)
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox"><span class="colour yellow"></span>  Amarillo (13)
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox"><span class="colour red"></span>  Rojo (10)
+                                    </label>
+                                </div>
+                            </div>
+                            <button class="btn btn-sm btn-template-outlined"><i class="fa fa-pencil"></i> Apply</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <p class="text-muted lead">
+                    NUEVA COLECCIÓN OTOÑO-INVIERNO 2018
+                    <div class="row products products-big">
+                        <div class="col-lg-4 col-md-6">
+                            <div class="product">
+                                <div class="image">
+                                <a href="shop-detail.html"><img src="~/Content/images/product1.jpg" alt="" class="img-fluid image1"></a>
+                                </div>
+                                <div class="text">
+                                    <h3 class="h5"><a href="shop-detail.html">Tapados de tigre de bengala</a>
+                                    </h3>
+                                    
+                                <p class="price">$25.000</p>
+                                </div>
+                             </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                             <div class="product">
+                                <div class="image"><a href="shop-detail.html"><img src="img/product2.jpg" alt="" class="img-fluid image1"></a></div>
+                            <div class="text">
+                                <h3 class="h5"><a href="shop-detail.html">Remera blanca de algodón</a></h3>
+                                <p class="price">
+                                    <del>$280</del> $143.00
+                                </p>
+                            </div>
+                            <div class="ribbon-holder">
+                                <div class="ribbon sale">Oferta</div>
+                                <div class="ribbon new">Nuevo</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="product">
+                            <div class="image"><a href="shop-detail.html"><img src="~/Content/images/campera-termica.jpg" alt="" class="img-fluid image1"></a></div>
+                            <div class="text">
+                                <h3 class="h5"><a href="shop-detail.html">Campera térmica </a></h3>
+                                <p class="price">$400.00</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="product">
+                            <div class="image"><a href="shop-detail.html"><img src="~/Content/images/pantalon-chupin.jpg" alt="" class="img-fluid image1"></a></div>
+                            <div class="text">
+                                <h3 class="h5"><a href="shop-detail.html">Pantalon Chupin Hombre</a></h3>
+                                <p class="price">$850.00</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="product">
+                            <div class="image"><a href="shop-detail.html"><img src="~/Content/images/product1.jpg" alt="" class="img-fluid image1"></a></div>
+                            <div class="text">
+                                <h3 class="h5"><a href="shop-detail.html">Orejas de conejo</a></h3>
+                                <p class="price">
+                                    <del>$280</del> $155.00
+                                </p>
+                            </div>
+                            <div class="ribbon-holder">
+                                <div class="ribbon sale">Oferta</div>
+                                <div class="ribbon new">Nuevo</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="product">
+                            <div class="image"><a href="shop-detail.html"><img src="~/Content/images/product1.jpg" alt="" class="img-fluid image1"></a></div>
+                            <div class="text">
+                                <h3 class="h5"><a href="shop-detail.html">Camisa celeste corderito</a></h3>
+                                <p class="price">$350.00</p>
+                            </div>
+                            <div class="ribbon-holder">
+                                <div class="ribbon new">Nuevo</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="div">
+                    <div class="col-md-12 banner mb-small"><a href="#"><img src="~/Content/images/banner2.jpg" alt="" class="img-fluid"></a></div>
+                </div>
+                <div class="pages">
+                    <p class="loadMore text-center"><a href="#" class="btn btn-template-outlined"><i class="fa fa-chevron-down"></i> Cargar más</a></p>
+                    <nav aria-label="Page navigation example" class="d-flex justify-content-center">
+                        <ul class="pagination">
+                            <li class="page-item"><a href="#" class="page-link"> <i class="fa fa-angle-double-left"></i></a></li>
+                            <li class="page-item active"><a href="#" class="page-link">1</a></li>
+                            <li class="page-item"><a href="#" class="page-link">2</a></li>
+                            <li class="page-item"><a href="#" class="page-link">3</a></li>
+                            <li class="page-item"><a href="#" class="page-link">4</a></li>
+                            <li class="page-item"><a href="#" class="page-link">5</a></li>
+                            <li class="page-item"><a href="#" class="page-link"><i class="fa fa-angle-double-right"></i></a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>

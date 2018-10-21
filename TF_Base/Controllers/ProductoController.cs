@@ -136,5 +136,13 @@ namespace TF_Base.Controllers
             db.Dispose();
             base.Dispose(disposing);
         }
+
+        [HttpGet]
+        public ActionResult ShopCategory()
+        {
+            var producto = db.Producto.Include(p => p.Categoria).Include(p => p.Color).Include(p => p.Garantia).Include(p => p.Talle);
+            return View(producto.ToList());
+        }
+
     }
 }
