@@ -25,7 +25,7 @@ namespace TF_Base
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             //MODIFICAR
-            WebSecurity.InitializeDatabaseConnection("DefaultConnection", "Usuario", "idUsuario", "userName", true);
+            //WebSecurity.InitializeDatabaseConnection("DefaultConnection", "Usuario", "idUsuario", "userName", true);
             
         }
     }

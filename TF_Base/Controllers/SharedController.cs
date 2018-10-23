@@ -18,7 +18,7 @@ namespace TF_Base.Controllers
 
         public ActionResult Index()
         {
-            var producto = db.Producto.Include(p => p.Categoria).Include(p => p.Color).Include(p => p.Garantia).Include(p => p.Talle);
+            var producto = new List<Producto>();//db.Producto.Include(p => p.Categoria).Include(p => p.Color).Include(p => p.Garantia).Include(p => p.Talle);
             return View(producto.ToList());
         }
 
