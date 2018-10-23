@@ -18,7 +18,7 @@ namespace TF_Base.Controllers
 
         public ActionResult Index()
         {
-            var producto = new List<Producto>();//db.Producto.Include(p => p.Categoria).Include(p => p.Color).Include(p => p.Garantia).Include(p => p.Talle);
+            var producto = db.Producto.Include(p => p.Categoria).Include(p => p.Color).Include(p => p.Garantia).Include(p => p.Talle);
             return View(producto.ToList());
         }
 
@@ -136,5 +136,27 @@ namespace TF_Base.Controllers
             db.Dispose();
             base.Dispose(disposing);
         }
+
+        //GET
+        public ActionResult Faq()
+        {
+            return View("faq");
+        }
+
+        //GET
+        public ActionResult About()
+        {
+            return View("About");
+        }
+
+        //GET
+        public ActionResult Contact()
+        {
+            return View("Contact");
+        }
+
+
+
+
     }
 }
