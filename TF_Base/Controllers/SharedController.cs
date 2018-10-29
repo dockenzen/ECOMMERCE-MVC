@@ -22,6 +22,11 @@ namespace TF_Base.Controllers
             return View(producto.ToList());
         }
 
+        public ActionResult Home()
+        {
+            return View();
+        }
+
         //
         // GET: /Shared/Details/5
 
@@ -136,27 +141,5 @@ namespace TF_Base.Controllers
             db.Dispose();
             base.Dispose(disposing);
         }
-
-        //GET
-        public ActionResult Faq()
-        {
-            return View("faq");
-        }
-
-        //GET
-        public ActionResult About()
-        {
-            return View("About");
-        }
-
-        //GET
-        public ActionResult Contact()
-        {
-            return View("Contact");
-        }
-
-
-
-
     }
 }

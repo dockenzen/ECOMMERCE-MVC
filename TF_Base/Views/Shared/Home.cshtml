@@ -1,0 +1,149 @@
+﻿
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_eCommerceLayout.cshtml";
+}
+
+<div id="all">
+    <!-- Carousel Start-->
+    <section style="background: url('img/photogrid.jpg') center center repeat; background-size: contain;" class="relative-positioned">
+        <div class="dark-mask mask-primary"></div>
+        <div id="demo" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ul class="carousel-indicators">
+                <li data-target="#demo" data-slide-to="0" class="active"></li>
+                <li data-target="#demo" data-slide-to="1"></li>
+                <li data-target="#demo" data-slide-to="2"></li>
+                <li data-target="#demo" data-slide-to="3"></li>
+            </ul>
+            <!-- The slideshow -->
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <center><div class="col-md-6"><img src="~/Content/images/bannerImg1.png" alt="" class="img-fluid" style="height: 400px; width: 800px;"></div></center>
+                </div>
+                <div class="carousel-item">
+                    <center><div class="col-md-6"><img src="~/Content/images/bannerImg2.png" alt="" class="img-fluid" style="height: 400px; width: 800px;"></div></center>
+                </div>
+                <div class="carousel-item">
+                    <center><div class="col-md-6"><img src="~/Content/images/bannerImg3.png" alt="" class="img-fluid" style="height: 400px; width: 800px;"></div></center>
+                </div>
+                <div class="carousel-item">
+                    <center><div class="col-md-10"><img src="~/Content/images/bannerImg4.png" alt="" class="img-fluid" style="height: 400px; width: 800px;"></div></center>
+                </div>
+            </div>
+
+            <!-- Left and right controls -->
+            <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </a>
+            <a class="carousel-control-next" href="#demo" data-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </a>
+        </div>
+    </section>
+    <!-- Carousel End-->
+    <br><br>
+    <!--Destacados Start-->
+    <section class="bar background-white no-mb">
+        <div data-animate="fadeInUpBig" class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="heading text-center">
+                        <h2>Productos destacados</h2>
+                    </div>
+                    <div class="row portfolio text-center color-white">
+                        <div class="col-md-4">
+                            <div class="box-image">
+                                <div class="image">
+                                    <img src="~/Content/images/pantalon-chupin.jpg" alt="" class="img-fluid">
+                                    <div class="overlay d-flex align-items-center justify-content-center">
+                                        <div class="content">
+                                            <div class="name">
+                                                <h3><a href="portfolio-detail.html" class="color-white">Pantalon chupin</a></h3>
+                                            </div>
+                                            <div class="text">
+                                                <p class="buttons">
+                                                    <a href="shop-category-left.html" class="btn btn-template-outlined-white">Ver</a>
+                                                    <a href="#" class="btn btn-template-outlined-white">Agregar al carrito</a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="box-image">
+                                <div class="image">
+                                    <img src="~/Content/images/campera-termica.jpg" alt="" class="img-fluid">
+                                    <div class="overlay d-flex align-items-center justify-content-center">
+                                        <div class="content">
+                                            <div class="name">
+                                                <h3><a href="portfolio-detail.html" class="color-white">Campera térmica</a></h3>
+                                            </div>
+                                            <div class="text">
+                                                <p class="buttons">
+                                                    <a href="shop-detail.html" class="btn btn-template-outlined-white">Ver</a>
+                                                    <a href="#" class="btn btn-template-outlined-white">Agregar al carrito</a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="box-image">
+                                <div class="image">
+                                    <img src="~/Content/images/campera-rayada-nino.jpg" alt="" class="img-fluid">
+                                    <div class="overlay d-flex align-items-center justify-content-center">
+                                        <div class="content">
+                                            <div class="name">
+                                                <h3><a href="portfolio-detail.html" class="color-white">Campera a rayas de niño</a></h3>
+                                            </div>
+                                            <div class="text">
+                                                <p class="buttons">
+                                                    <a href="shop-category-left.html" class="btn btn-template-outlined-white">Ver</a>
+                                                    <a href="#" class="btn btn-template-outlined-white">Agregar al carrito</a>
+                                                </p>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--Destacados End-->
+    <br>
+    <!--Caracteristicas Start-->
+    <section class="bar background-pentagon no-mb">
+        <div class="container">
+            <div class="row showcase text-center">
+                <div class="col-md-4 col-sm-6">
+                    <div class="item">
+                        <div class="icon-outlined icon icon-thin "><i class="fa fa-paper-plane-o"></i></div>
+                        <h4>Envíos gratis a tu casa <br> para compras de más de $1500</h4>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="item">
+                        <div class="icon-outlined icon icon-thin"><i class="fa fa-credit-card"></i></div>
+                        <h4>Hasta 12 cuotas sin interés <br> a través de MercadoPago</h4>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="item">
+                        <div class="icon-outlined icon icon-thin"><i class="fa fa-lock"></i></div>
+                        <h4> Sitio seguro <br>Protegemos tus datos</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--Caracteristicas End-->
+</div>
