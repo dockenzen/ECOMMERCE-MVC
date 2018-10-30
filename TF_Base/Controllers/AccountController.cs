@@ -52,6 +52,11 @@ namespace TF_Base.Controllers
             return View();
         }
 
+        public ActionResult CustomerRegister()
+        {
+            return View();
+        }
+
         //
         // POST: /Account/Register
         [HttpPost]
@@ -63,10 +68,10 @@ namespace TF_Base.Controllers
                 try
                 {
                     WebSecurity.CreateUserAndAccount(registro.UserName, registro.Password, new { Email = registro.UserEmail, idEstadoUsuario = 1 });
-                    if(WebSecurity.Login(registro.UserName, registro.Password))
-                        return RedirectToAction("OrdenCompra","ShopBasket");
-                            else
-                    return RedirectToAction("Index", "Producto");
+                    if (WebSecurity.Login(registro.UserName, registro.Password))
+                        return RedirectToAction("OrdenCompra", "ShopBasket");
+                    else
+                        return RedirectToAction("Index", "Producto");
                 }
                 catch (MembershipCreateUserException e)
                 {

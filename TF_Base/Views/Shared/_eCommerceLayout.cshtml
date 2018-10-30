@@ -57,7 +57,7 @@
                         <a href="#" data-toggle="modal" data-target="#login-modal" class="login-btn"><i class="fa fa-sign-in"></i><span class="d-none d-md-inline-block">Ingresar</span></a>
                     </div>
                     <div class="col-md-2 d-md-block d-none">
-                        <a href="customer-register.html" class="signup-btn"><i class="fa fa-user"></i><span class="d-none d-md-inline-block">Registrarse</span></a>
+                        <i class="fa fa-user"></i>&nbsp;&nbsp;@Html.ActionLink("Registrar", "CustomerRegister", "Account", null, new { @class = "signup-btn d-none d-md-inline-block" })
                     </div>
                 }
                 <div class="col-md-6">
@@ -68,7 +68,7 @@
                         </ul>
 
                         <ul class="social-custom list-inline">
-                            <li class="list-inline-item"><a href="https://www.facebook.com/dejameatraparte/"><i class="fa fa-facebook"></i></a></li>
+                            <li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
                             <li class="list-inline-item"><a href="#"><i class="fa fa-google-plus"></i></a></li>
                             <li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
                             <li class="list-inline-item"><a href="#"><i class="fa fa-envelope"></i></a></li>
@@ -90,17 +90,17 @@
                 <div class="modal-body">
                     <form action="customer-orders.html" method="get">
                         <div class="form-group">
-                            <input id="email_modal" type="text" placeholder="email" class="form-control">
+                            <input id="email_modal" type="text" placeholder="Usuario" class="form-control">
                         </div>
                         <div class="form-group">
-                            <input id="password_modal" type="password" placeholder="password" class="form-control">
+                            <input id="password_modal" type="password" placeholder="Contraseña" class="form-control">
                         </div>
                         <p class="text-center">
                             <button class="btn btn-template-outlined"><i class="fa fa-sign-in"></i> Ingresar </button>
                         </p>
                     </form>
                     <p class="text-center text-muted">Aún no estás registrado?</p>
-                    <p class="text-center text-muted"><a href="customer-register.html"><strong>Registrate ahora</strong></a>! Es facil, y no tomará más de un minuto para tener acceso especial a descuentos y mucho más !</p>
+                    <p class="text-center text-muted"><strong>@Html.ActionLink("Registrate ahora", "CustomerRegister", "Account", null, new { @class = "nav-link active h4" })</strong>! Es facil, y no tomará más de un minuto para tener acceso especial a descuentos y mucho más !</p>
                 </div>
             </div>
         </div>
@@ -119,7 +119,7 @@
                     @*<li class="nav-item"><a class="nav-link" href="shop-category-left.html">Productos<b class="caret"></b></a></li>*@
                     <li class="nav-item">@Html.ActionLink("Como Comprar", "FAQ", "NavBar", null, new { @class = "nav-link active h4" })<b class="caret"></b></li>
                     @*<li class="nav-item"><a class="nav-link" href="about.html"> Nosotros <b class="caret"></b></a></li>*@
-                    <li class="nav-item">@Html.ActionLink("Contacto", "Contact", "NavBar", null, new { @class = "nav-link active h4" })</li>
+                    <li class="nav-item">@Html.ActionLink("Contacto", "Contact", "NavBar", null, new { @class = "nav-link active h4" })<b class="caret"></b></li>
                     @*<li class="nav-item"><a class="nav-link" href="shop-basket.html">Carrito <b class="caret"></b></a></li>*@
                 </ul>
             </div>

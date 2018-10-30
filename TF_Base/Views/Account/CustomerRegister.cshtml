@@ -1,7 +1,7 @@
 ﻿
 @{
     ViewBag.Title = "CustomerRegister";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_eCommerceLayout.cshtml";
 }
 
 <div id="all">
@@ -9,14 +9,14 @@
         <div class="container">
             <div class="row d-flex align-items-center flex-wrap">
                 <div class="col-md-7">
-                    <h1 class="h2">New Account / Sign In</h1>
+                    <h1 class="h2">Nueva Cuenta / Ingresar</h1>
                 </div>
                 <div class="col-md-5">
                     <ul class="breadcrumb d-flex justify-content-end">
                         <li class="breadcrumb-item">
                             <a href="index.html">Home</a>
                         </li>
-                        <li class="breadcrumb-item active">New Account / Sign In</li>
+                        <li class="breadcrumb-item active">Nueva Cuenta / Ingresar</li>
                     </ul>
                 </div>
             </div>
@@ -28,19 +28,18 @@
                 <div class="col-lg-6">
                     <div class="box">
                         <h2 class="text-uppercase">New account</h2>
-                        <p class="lead">Not our registered customer yet?</p>
+                        <p class="lead">Todavía no estás registrado ?</p>
                         <p>
-                            With registration with us new world of fashion, fantastic discounts and much more opens to you! The whole process
-                            will not take you more than a minute!
+                            Registrate ahora para obtener muchas ofertas, no te tomará más de unos minutos !
                         </p>
                         <p class="text-muted">
-                            If you have any questions, please feel free to
-                            <a href="contact.html">contact us</a>, our customer service center is working for you 24/7.
+                            Si tienes preguntas, porfavor @Html.ActionLink("contactenos", "Contact", "NavBar")
+                            , nuestro servicio de atención al cliente funciona 24/7.
                         </p>
                         <hr>
                         <form action="customer-orders.html" method="get">
                             <div class="form-group">
-                                <label for="name-login">Name</label>
+                                <label for="name-login">Nombre</label>
                                 <input id="name-login" type="text" class="form-control">
                             </div>
                             <div class="form-group">
@@ -48,12 +47,12 @@
                                 <input id="email-login" type="text" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label for="password-login">Password</label>
+                                <label for="password-login">Contraseña</label>
                                 <input id="password-login" type="password" class="form-control">
                             </div>
                             <div class="text-center">
                                 <button type="submit" class="btn btn-template-outlined">
-                                    <i class="fa fa-user-md"></i> Register
+                                    <i class="fa fa-user-md"></i> Registrarse
                                 </button>
                             </div>
                         </form>
@@ -62,7 +61,7 @@
                 <div class="col-lg-6">
                     <div class="box">
                         <h2 class="text-uppercase">Login</h2>
-                        <p class="lead">Already our customer?</p>
+                        <p class="lead">Ya tienes una cuenta ?</p>
                         <p class="text-muted">
                             Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor
                             quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.
@@ -75,12 +74,12 @@
                                 <input id="email" type="text" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label for="password">Password</label>
+                                <label for="password">Contraseña</label>
                                 <input id="password" type="password" class="form-control">
                             </div>
                             <div class="text-center">
                                 <button type="submit" class="btn btn-template-outlined">
-                                    <i class="fa fa-sign-in"></i> Log in
+                                    <i class="fa fa-sign-in"></i> Login
                                 </button>
                             </div>
                         </form>
