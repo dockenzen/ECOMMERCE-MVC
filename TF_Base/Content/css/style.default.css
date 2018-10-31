@@ -6,7 +6,7 @@
 *
 */
 .boxed {
-  background: url("../img/boxed-pattern.png");
+  background: url("../images/boxed-pattern.png");
 }
 
 .boxed #all {
@@ -227,9 +227,9 @@ p.lead {
 }
 
 .background-pentagon, #heading-breadcrumbs {
-  background: url("../img/texture-bw.png") center center repeat;
-  border-top: 1px solid #999;
-  border-bottom: 1px solid #999;
+    background: url("../images/texture-bw.png") center center repeat;
+    border-top: 1px solid #999;
+    border-bottom: 1px solid #999;
 }
 
 .heading, .panel-heading {

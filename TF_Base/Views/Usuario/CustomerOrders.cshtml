@@ -1,6 +1,6 @@
 ﻿@{
     ViewBag.Title = "CustomerOrders";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_eCommerceLayout.cshtml";
 }
 
 <div id="all">
@@ -8,12 +8,12 @@
         <div class="container">
             <div class="row d-flex align-items-center flex-wrap">
                 <div class="col-md-7">
-                    <h1 class="h2">My Orders</h1>
+                    <h1 class="h2">Mis Pedidos</h1>
                 </div>
                 <div class="col-md-5">
                     <ul class="breadcrumb d-flex justify-content-end">
                         <li class="breadcrumb-item">
-                            <a href="index.html">Home</a>
+                            <a href="@Url.Action("Home","Shared")">Inicio</a>
                         </li>
                         <li class="breadcrumb-item active">My Orders</li>
                     </ul>
@@ -27,18 +27,18 @@
                 <div id="customer-orders" class="col-md-9">
                     <p class="text-muted lead">
                         If you have any questions, please feel free to
-                        <a href="contact.html">contact us</a>, our customer service center is working for you 24/7.
+                        <a href="@Url.Action("Contact","Shared")">contact us</a>, our customer service center is working for you 24/7.
                     </p>
                     <div class="box mt-0 mb-lg-0">
                         <div class="table-responsive">
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th>Order</th>
-                                        <th>Date</th>
+                                        <th>Orden</th>
+                                        <th>Fecha</th>
                                         <th>Total</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
+                                        <th>Estado</th>
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -50,7 +50,7 @@
                                             <span class="badge badge-info">Being prepared</span>
                                         </td>
                                         <td>
-                                            <a href="customer-order.html" class="btn btn-template-outlined btn-sm">View</a>
+                                            <a href="@Url.Action("CustomerOrder","Usuario")" class="btn btn-template-outlined btn-sm">Ver</a>
                                         </td>
                                     </tr>
                                     <tr>
@@ -58,21 +58,10 @@
                                         <td>22/06/2013</td>
                                         <td>$ 150.00</td>
                                         <td>
-                                            <span class="badge badge-info">Being prepared</span>
+                                            <span class="badge badge-info">En preparacion</span>
                                         </td>
                                         <td>
-                                            <a href="customer-order.html" class="btn btn-template-outlined btn-sm">View</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th># 1735</th>
-                                        <td>22/06/2013</td>
-                                        <td>$ 150.00</td>
-                                        <td>
-                                            <span class="badge badge-success">Received</span>
-                                        </td>
-                                        <td>
-                                            <a href="customer-order.html" class="btn btn-template-outlined btn-sm">View</a>
+                                            <a href="customer-order.html" class="btn btn-template-outlined btn-sm">Ver</a>
                                         </td>
                                     </tr>
                                     <tr>
@@ -80,10 +69,21 @@
                                         <td>22/06/2013</td>
                                         <td>$ 150.00</td>
                                         <td>
-                                            <span class="badge badge-danger">Cancelled</span>
+                                            <span class="badge badge-success">Recibidos</span>
                                         </td>
                                         <td>
-                                            <a href="customer-order.html" class="btn btn-template-outlined btn-sm">View</a>
+                                            <a href="customer-order.html" class="btn btn-template-outlined btn-sm">Ver</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th># 1735</th>
+                                        <td>22/06/2013</td>
+                                        <td>$ 150.00</td>
+                                        <td>
+                                            <span class="badge badge-danger">Cancelados</span>
+                                        </td>
+                                        <td>
+                                            <a href="customer-order.html" class="btn btn-template-outlined btn-sm">Ver</a>
                                         </td>
                                     </tr>
                                     <tr>
@@ -94,7 +94,7 @@
                                             <span class="badge badge-warning">On hold</span>
                                         </td>
                                         <td>
-                                            <a href="customer-order.html" class="btn btn-template-outlined btn-sm">View</a>
+                                            <a href="customer-order.html" class="btn btn-template-outlined btn-sm">Ver</a>
                                         </td>
                                     </tr>
                                 </tbody>

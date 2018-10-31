@@ -1,9 +1,6 @@
-﻿@model TF_Base.Models.OrdenCompra
-
-
-@{
+﻿@{
     ViewBag.Title = "ShopBasket";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_eCommerceLayout.cshtml";
 }
 
 <div id="all">
@@ -16,7 +13,7 @@
                 <div class="col-md-5">
                     <ul class="breadcrumb d-flex justify-content-end">
                         <li class="breadcrumb-item">
-                            <a href="index.html">Inicio</a>
+                            <a href="@Url.Action("Home", "Shared")">Inicio</a>
                         </li>
                         <li class="breadcrumb-item active">Carrito de compras</li>
                     </ul>
@@ -82,7 +79,7 @@
                                             <td>$0.00</td>
                                             <td>$200.00</td>
                                             <td>
-                                                <a href="#">
+                                                <a href="">
                                                     <i class="fa fa-trash-o"></i>
                                                 </a>
                                             </td>
@@ -98,7 +95,7 @@
                             </div>
                             <div class="box-footer d-flex justify-content-between align-items-center">
                                 <div class="left-col">
-                                    <a href="shop-category-left.html" class="btn btn-secondary mt-0">
+                                    <a href="@Url.Action("ShopCategory","Producto")" class="btn btn-secondary mt-0">
                                         <i class="fa fa-chevron-left"></i> CONTINUAR COMPRANDO
                                     </a>
                                 </div>
@@ -123,13 +120,15 @@
                         <div class="col-lg-3 col-md-6">
                             <div class="product">
                                 <div class="image">
-                                    <a href="shop-detail.html">
+                                    <a href="@Url.Action("ShopDetail", "Producto")">
                                         <img src="img/product2.jpg" alt="" class="img-fluid image1">
                                     </a>
                                 </div>
                                 <div class="text">
                                     <h3 class="h5">
-                                        <a href="shop-detail.html">Fur coat</a>
+                                        <a href="@Url.Action("ShopDetail", "Producto")">
+                                            <img src="img/product2.jpg" alt="" class="img-fluid image1"> Fur coat
+                                        </a>
                                     </h3>
                                     <p class="price">$143</p>
                                 </div>
@@ -138,13 +137,15 @@
                         <div class="col-lg-3 col-md-6">
                             <div class="product">
                                 <div class="image">
-                                    <a href="shop-detail.html">
+                                    <a href="@Url.Action("ShopDetail", "Producto")">
                                         <img src="img/product3.jpg" alt="" class="img-fluid image1">
                                     </a>
                                 </div>
                                 <div class="text">
                                     <h3 class="h5">
-                                        <a href="shop-detail.html">Fur coat</a>
+                                        <a href="@Url.Action("ShopDetail", "Producto")">
+                                            Fur coat
+                                        </a>
                                     </h3>
                                     <p class="price">$143</p>
                                 </div>
@@ -153,13 +154,13 @@
                         <div class="col-lg-3 col-md-6">
                             <div class="product">
                                 <div class="image">
-                                    <a href="shop-detail.html">
+                                    <a href="@Url.Action("ShopDetail", "Producto")">
                                         <img src="img/product1.jpg" alt="" class="img-fluid image1">
                                     </a>
                                 </div>
                                 <div class="text">
                                     <h3 class="h5">
-                                        <a href="shop-detail.html">Fur coat</a>
+                                        <a href="@Url.Action("ShopDetail", "Producto")">Fur coat</a>
                                     </h3>
                                     <p class="price">$143</p>
                                 </div>

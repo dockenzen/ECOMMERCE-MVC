@@ -26,7 +26,7 @@ namespace TF_Base.Models
         public string descripcion { get; set; }
         public Nullable<int> idTalle { get; set; }
         public decimal precioUnitario { get; set; }
-        public int idGarantia { get; set; }
+        public Nullable<int> idGarantia { get; set; }
         public int idColor { get; set; }
         public string fotoUrl { get; set; }
     

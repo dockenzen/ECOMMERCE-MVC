@@ -124,5 +124,20 @@ namespace TF_Base.Controllers
             db.Dispose();
             base.Dispose(disposing);
         }
+
+        public ActionResult CustomerAccount()
+        {
+            return View();
+        }
+
+        public ActionResult CustomerOrder()
+        {
+            return View();
+        }
+
+        public ActionResult CustomerOrders()
+        {
+            return View();
+        }
     }
 }
