@@ -13,7 +13,7 @@
                 </div>
                 <div class="col-md-5">
                     <ul class="breadcrumb d-flex justify-content-end">
-                        <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
+                        <li class="breadcrumb-item">@Html.ActionLink("Inicio", "Home", "Shared")</li>
                         <li class="breadcrumb-item active">Preguntas Frecuentes</li>
                     </ul>
                 </div>
@@ -75,7 +75,7 @@
                                 </div>
                                 <div id="collapseFive" role="tabpanel" aria-labelledby="headingFour" data-parent="#accordion" class="collapse">
                                     <div class="card-body">
-                                        <p>Si, podes ver nuestra sección de <a href="about.html">política de cambio</a>.</p>
+                                        <p>Si, podes ver nuestra sección de @Html.ActionLink("política de cambio", "About", "NavBar").</p>
                                     </div>
                                 </div>
                             </div>
@@ -90,7 +90,7 @@
                                 </div>
                             </div>
                         </div>
-                        <p class="text-muted">En caso de que no haya encontrado la respuesta a su pregunta, no dude en <a href="contact.html">contactarnos</a>, nuestro servicio de atención al cliente estará encantado de ayudarlo.</p>
+                        <p class="text-muted">En caso de que no haya encontrado la respuesta a su pregunta, no dude en @Html.ActionLink("contactarnos", "Contact", "NavBar"), nuestro servicio de atención al cliente estará encantado de ayudarlo.</p>
                     </section>
                 </div>
             </div>
