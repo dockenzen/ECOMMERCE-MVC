@@ -52,6 +52,11 @@ namespace TF_Base.Controllers
             return View();
         }
 
+        public ActionResult CustomerRegister()
+        {
+            return View();
+        }
+
         //
         // POST: /Account/Register
         [HttpPost]
@@ -65,7 +70,7 @@ namespace TF_Base.Controllers
                     WebSecurity.CreateUserAndAccount(registro.UserName, registro.Password, new { Email = registro.UserEmail, idEstadoUsuario = 1 });
                     if(WebSecurity.Login(registro.UserName, registro.Password))
                         return RedirectToAction("ShopCategory", "Producto");
-                            else
+                    else
                     return RedirectToAction("Home", "Shared");
                 }
                 catch (MembershipCreateUserException e)
