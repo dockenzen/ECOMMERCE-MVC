@@ -22,7 +22,7 @@ namespace TF_Base.Models
     
         public int idCategoria { get; set; }
         public string descripcion { get; set; }
-        public int idCategoriaPadre { get; set; }
+        public Nullable<int> idCategoriaPadre { get; set; }
     
         public virtual ICollection<Categoria> Categoria1 { get; set; }
         public virtual Categoria Categoria2 { get; set; }

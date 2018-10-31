@@ -16,10 +16,11 @@ namespace TF_Base.Controllers
         //
         // GET: /OrdenCompra/
 
-        public ActionResult Index()
+        public ActionResult ShopBasket()
         {
-            var ordencompra = db.OrdenCompra.Include(o => o.Cupon).Include(o => o.OrdenCompraEstado).Include(o => o.Pago).Include(o => o.Sucursal).Include(o => o.Usuario);
-            return View(ordencompra.ToList());
+            /*var ordencompra = db.OrdenCompra.Include(o => o.Cupon).Include(o => o.OrdenCompraEstado).Include(o => o.Pago).Include(o => o.Sucursal).Include(o => o.Usuario);
+            */
+            return View();
         }
 
         //
@@ -71,47 +72,7 @@ namespace TF_Base.Controllers
         }
 
         //
-        // GET: /OrdenCompra/Edit/5
-
-        public ActionResult Edit(int id = 0)
-        {
-            OrdenCompra ordencompra = db.OrdenCompra.Find(id);
-            if (ordencompra == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.idCupon = new SelectList(db.Cupon, "idCupon", "codigo", ordencompra.idCupon);
-            ViewBag.idEstadoOrden = new SelectList(db.OrdenCompraEstado, "idEstadoOrden", "descripcion", ordencompra.idEstadoOrden);
-            ViewBag.idPago = new SelectList(db.Pago, "idPago", "idPago", ordencompra.idPago);
-            ViewBag.idSucursal = new SelectList(db.Sucursal, "idSucursal", "telefono", ordencompra.idSucursal);
-            ViewBag.idUsuario = new SelectList(db.Usuario, "idUsuario", "userName", ordencompra.idUsuario);
-            return View(ordencompra);
-        }
-
-        //
-        // POST: /OrdenCompra/Edit/5
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(OrdenCompra ordencompra)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(ordencompra).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.idCupon = new SelectList(db.Cupon, "idCupon", "codigo", ordencompra.idCupon);
-            ViewBag.idEstadoOrden = new SelectList(db.OrdenCompraEstado, "idEstadoOrden", "descripcion", ordencompra.idEstadoOrden);
-            ViewBag.idPago = new SelectList(db.Pago, "idPago", "idPago", ordencompra.idPago);
-            ViewBag.idSucursal = new SelectList(db.Sucursal, "idSucursal", "telefono", ordencompra.idSucursal);
-            ViewBag.idUsuario = new SelectList(db.Usuario, "idUsuario", "userName", ordencompra.idUsuario);
-            return View(ordencompra);
-        }
-
-        //
         // GET: /OrdenCompra/Delete/5
-
         public ActionResult Delete(int id = 0)
         {
             OrdenCompra ordencompra = db.OrdenCompra.Find(id);
@@ -141,5 +102,30 @@ namespace TF_Base.Controllers
             base.Dispose(disposing);
         }
 
+        public ActionResult ShopCheckoutStep1()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ShopCheckoutStep1(int id = 0)
+        {
+            return View();
+        }
+
+        public ActionResult ShopCheckoutStep2()
+        {
+            return View();
+        }
+
+        public ActionResult ShopCheckoutStep3()
+        {
+            return View();
+        }
+
+        public ActionResult ShopCheckoutStep4()
+        {
+            return View();
+        }
     }
 }

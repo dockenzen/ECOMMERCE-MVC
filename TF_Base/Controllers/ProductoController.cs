@@ -25,7 +25,7 @@ namespace TF_Base.Controllers
         //
         // GET: /Producto/Details/5
         [HttpGet]
-        public ActionResult Details(int id = 0)
+        public ActionResult ShopDetail(int id = 0)
         {
             Producto producto = db.Producto.Find(id);
             if (producto == null)
@@ -140,9 +140,8 @@ namespace TF_Base.Controllers
         [HttpGet]
         public ActionResult ShopCategory()
         {
-            var producto = db.Producto.Include(p => p.Categoria).Include(p => p.Color).Include(p => p.Garantia).Include(p => p.Talle);
+            var producto = db.Producto.Include(p => p.Categoria).Include(p => p.Color).Include(p => p.Talle);
             return View(producto.ToList());
         }
-
     }
 }

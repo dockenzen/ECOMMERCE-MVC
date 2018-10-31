@@ -28,7 +28,7 @@ namespace TF_Base.Controllers
                 bool res = WebSecurity.Login(login.UserName, login.Password, login.RememberMe);
                 if (res)
                 {
-                    return RedirectToAction("Index", "Producto");
+                    return RedirectToAction("ShopCategory", "Producto");
                 }
             }
 
@@ -41,7 +41,7 @@ namespace TF_Base.Controllers
         public ActionResult Logout()
         {
             WebSecurity.Logout();
-            return RedirectToAction("Index", "Producto");
+            return RedirectToAction("Home", "Shared");
         }
 
         //
@@ -68,10 +68,10 @@ namespace TF_Base.Controllers
                 try
                 {
                     WebSecurity.CreateUserAndAccount(registro.UserName, registro.Password, new { Email = registro.UserEmail, idEstadoUsuario = 1 });
-                    if (WebSecurity.Login(registro.UserName, registro.Password))
-                        return RedirectToAction("OrdenCompra", "ShopBasket");
+                    if(WebSecurity.Login(registro.UserName, registro.Password))
+                        return RedirectToAction("ShopCategory", "Producto");
                     else
-                        return RedirectToAction("Index", "Producto");
+                    return RedirectToAction("Home", "Shared");
                 }
                 catch (MembershipCreateUserException e)
                 {

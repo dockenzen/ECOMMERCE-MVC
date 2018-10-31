@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="ecommerceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="ecommerceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="BlackList">
           <Key>
             <PropertyRef Name="idPenalizacion" />
@@ -22,7 +22,7 @@
           </Key>
           <Property Name="idCategoria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="descripcion" Type="varchar" MaxLength="150" Nullable="false" />
-          <Property Name="idCategoriaPadre" Type="int" Nullable="false" />
+          <Property Name="idCategoriaPadre" Type="int" />
         </EntityType>
         <EntityType Name="Color">
           <Key>
@@ -149,7 +149,7 @@
           <Property Name="descripcion" Type="varchar" MaxLength="150" Nullable="false" />
           <Property Name="idTalle" Type="int" />
           <Property Name="precioUnitario" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="idGarantia" Type="int" Nullable="false" />
+          <Property Name="idGarantia" Type="int" />
           <Property Name="idColor" Type="int" Nullable="false" />
           <Property Name="fotoUrl" Type="varchar(max)" Nullable="false" />
         </EntityType>
@@ -259,7 +259,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Categoria_Categoria">
-          <End Role="Categoria" Type="Self.Categoria" Multiplicity="1" />
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="0..1" />
           <End Role="Categoria1" Type="Self.Categoria" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Categoria">
@@ -451,7 +451,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Producto_Garantia">
-          <End Role="Garantia" Type="Self.Garantia" Multiplicity="1" />
+          <End Role="Garantia" Type="Self.Garantia" Multiplicity="0..1" />
           <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Garantia">
@@ -706,7 +706,8 @@
             <End Role="WishList" EntitySet="WishList" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ecommerceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -728,7 +729,7 @@
           </Key>
           <Property Name="idCategoria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="idCategoriaPadre" Type="Int32" Nullable="false" />
+          <Property Name="idCategoriaPadre" Type="Int32" />
           <NavigationProperty Name="Categoria1" Relationship="Self.FK_Categoria_Categoria" FromRole="Categoria" ToRole="Categoria1" />
           <NavigationProperty Name="Categoria2" Relationship="Self.FK_Categoria_Categoria" FromRole="Categoria1" ToRole="Categoria" />
           <NavigationProperty Name="Producto" Relationship="Self.FK_Producto_Categoria" FromRole="Categoria" ToRole="Producto" />
@@ -883,7 +884,7 @@
           <Property Name="descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="idTalle" Type="Int32" />
           <Property Name="precioUnitario" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="idGarantia" Type="Int32" Nullable="false" />
+          <Property Name="idGarantia" Type="Int32" />
           <Property Name="idColor" Type="Int32" Nullable="false" />
           <Property Name="fotoUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Categoria" Relationship="Self.FK_Producto_Categoria" FromRole="Producto" ToRole="Categoria" />
@@ -998,7 +999,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Categoria_Categoria">
-          <End Role="Categoria" Type="Self.Categoria" Multiplicity="1" />
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="0..1" />
           <End Role="Categoria1" Type="Self.Categoria" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Categoria">
@@ -1118,7 +1119,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Producto_Garantia">
-          <End Role="Garantia" Type="Self.Garantia" Multiplicity="1" />
+          <End Role="Garantia" Type="Self.Garantia" Multiplicity="0..1" />
           <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Garantia">

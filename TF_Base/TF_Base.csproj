@@ -134,7 +134,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\NavBarController.cs" />
     <Compile Include="Controllers\OrdenCompraController.cs" />
     <Compile Include="Controllers\SharedController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
@@ -143,91 +142,91 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\BlackList.cs">
-      <DependentUpon>EcommerceModel.tt</DependentUpon>
+      <DependentUpon>Ecommerce.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Categoria.cs">
-      <DependentUpon>EcommerceModel.tt</DependentUpon>
+      <DependentUpon>Ecommerce.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Color.cs">
-      <DependentUpon>EcommerceModel.tt</DependentUpon>
+      <DependentUpon>Ecommerce.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Cupon.cs">
-      <DependentUpon>EcommerceModel.tt</DependentUpon>
+      <DependentUpon>Ecommerce.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DatosPersonales.cs">
-      <DependentUpon>EcommerceModel.tt</DependentUpon>
+      <DependentUpon>Ecommerce.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Direccion.cs">
-      <DependentUpon>EcommerceModel.tt</DependentUpon>
+      <DependentUpon>Ecommerce.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\EcommerceModel.Context.cs">
+    <Compile Include="Models\Ecommerce.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>EcommerceModel.Context.tt</DependentUpon>
+      <DependentUpon>Ecommerce.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\EcommerceModel.cs">
+    <Compile Include="Models\Ecommerce.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>EcommerceModel.tt</DependentUpon>
+      <DependentUpon>Ecommerce.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\EcommerceModel.Designer.cs">
+    <Compile Include="Models\Ecommerce.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>EcommerceModel.edmx</DependentUpon>
+      <DependentUpon>Ecommerce.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Envio.cs">
-      <DependentUpon>EcommerceModel.tt</DependentUpon>
+      <DependentUpon>Ecommerce.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EstadoPago.cs">
-      <DependentUpon>EcommerceModel.tt</DependentUpon>
+      <DependentUpon>Ecommerce.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Factura.cs">
-      <DependentUpon>EcommerceModel.tt</DependentUpon>
+      <DependentUpon>Ecommerce.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Garantia.cs">
-      <DependentUpon>EcommerceModel.tt</DependentUpon>
+      <DependentUpon>Ecommerce.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\OrdenCompra.cs">
-      <DependentUpon>EcommerceModel.tt</DependentUpon>
+      <DependentUpon>Ecommerce.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\OrdenCompraDetalle.cs">
-      <DependentUpon>EcommerceModel.tt</DependentUpon>
+      <DependentUpon>Ecommerce.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\OrdenCompraEnvio.cs">
-      <DependentUpon>EcommerceModel.tt</DependentUpon>
+      <DependentUpon>Ecommerce.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\OrdenCompraEstado.cs">
-      <DependentUpon>EcommerceModel.tt</DependentUpon>
+      <DependentUpon>Ecommerce.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Pago.cs">
-      <DependentUpon>EcommerceModel.tt</DependentUpon>
+      <DependentUpon>Ecommerce.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Producto.cs">
-      <DependentUpon>EcommerceModel.tt</DependentUpon>
+      <DependentUpon>Ecommerce.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Stock.cs">
-      <DependentUpon>EcommerceModel.tt</DependentUpon>
+      <DependentUpon>Ecommerce.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Sucursal.cs">
-      <DependentUpon>EcommerceModel.tt</DependentUpon>
+      <DependentUpon>Ecommerce.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Talle.cs">
-      <DependentUpon>EcommerceModel.tt</DependentUpon>
+      <DependentUpon>Ecommerce.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Usuario.cs">
-      <DependentUpon>EcommerceModel.tt</DependentUpon>
+      <DependentUpon>Ecommerce.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UsuarioEstado.cs">
-      <DependentUpon>EcommerceModel.tt</DependentUpon>
+      <DependentUpon>Ecommerce.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\webpages_Membership.cs">
-      <DependentUpon>EcommerceModel.tt</DependentUpon>
+      <DependentUpon>Ecommerce.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\webpages_OAuthMembership.cs">
-      <DependentUpon>EcommerceModel.tt</DependentUpon>
+      <DependentUpon>Ecommerce.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\webpages_Roles.cs">
-      <DependentUpon>EcommerceModel.tt</DependentUpon>
+      <DependentUpon>Ecommerce.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\ProductoController.cs" />
@@ -409,26 +408,19 @@
     <Content Include="Content\vendor\wowjs\wow.min.js" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <EntityDeploy Include="Models\EcommerceModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>EcommerceModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\EcommerceModel.edmx.diagram">
-      <DependentUpon>EcommerceModel.edmx</DependentUpon>
-    </Content>
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="Models\EcommerceModel.Context.tt">
+    <Content Include="Models\Ecommerce.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EcommerceModel.edmx</DependentUpon>
-      <LastGenOutput>EcommerceModel.Context.cs</LastGenOutput>
+      <DependentUpon>Ecommerce.edmx</DependentUpon>
+      <LastGenOutput>Ecommerce.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\EcommerceModel.tt">
+    <Content Include="Models\Ecommerce.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EcommerceModel.edmx</DependentUpon>
-      <LastGenOutput>EcommerceModel.cs</LastGenOutput>
+      <DependentUpon>Ecommerce.edmx</DependentUpon>
+      <LastGenOutput>Ecommerce.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\jquery-3.3.1.min.map" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
@@ -446,6 +438,13 @@
     <Content Include="Content\vendor\jquery.cookie\cookie.jquery.json" />
     <Content Include="Content\vendor\jquery.counterup\counterup.jquery.json" />
     <Content Include="Content\vendor\waypoints\testem.json" />
+    <EntityDeploy Include="Models\Ecommerce.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Ecommerce.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Ecommerce.edmx.diagram">
+      <DependentUpon>Ecommerce.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -468,17 +467,14 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Shared\Index.cshtml" />
     <Content Include="Views\Producto\Details.cshtml" />
     <Content Include="Views\Producto\Edit.cshtml" />
     <Content Include="Views\Producto\Delete.cshtml" />
     <Content Include="Views\Producto\Create.cshtml" />
     <Content Include="Views\OrdenCompra\ShopBasket.cshtml" />
-    <Content Include="Views\NavBar\About.cshtml" />
-    <Content Include="Views\NavBar\Contact.cshtml" />
+    <Content Include="Views\Shared\About.cshtml" />
+    <Content Include="Views\Shared\Contact.cshtml" />
     <Content Include="Views\Usuario\CustomerAccount.cshtml" />
     <Content Include="Views\Usuario\CustomerOrder.cshtml" />
     <Content Include="Views\Usuario\CustomerOrders.cshtml" />
@@ -487,13 +483,10 @@
     <Content Include="Views\OrdenCompra\ShopCheckoutStep2.cshtml" />
     <Content Include="Views\OrdenCompra\ShopCheckoutStep3.cshtml" />
     <Content Include="Views\OrdenCompra\ShopCheckoutStep4.cshtml" />
-    <Content Include="Views\OrdenCompra\Index.cshtml" />
-    <Content Include="Views\OrdenCompra\Details.cshtml" />
     <Content Include="Views\OrdenCompra\Create.cshtml" />
-    <Content Include="Views\OrdenCompra\Edit.cshtml" />
     <Content Include="Views\OrdenCompra\Delete.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\NavBar\FAQ.cshtml" />
+    <Content Include="Views\Shared\FAQ.cshtml" />
     <Content Include="Views\Shared\NotFound404.cshtml" />
     <Content Include="Views\Account\CustomerRegister.cshtml" />
     <Content Include="Views\Producto\ShopDetail.cshtml" />
