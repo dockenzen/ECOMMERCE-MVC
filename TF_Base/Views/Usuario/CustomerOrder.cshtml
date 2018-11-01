@@ -1,4 +1,6 @@
-﻿@{
+﻿@model TF_Base.Models.OrdenCompra
+
+@{
     ViewBag.Title = "CustomerOrder";
     Layout = "~/Views/Shared/_eCommerceLayout.cshtml";
 }
@@ -8,7 +10,7 @@
         <div class="container">
             <div class="row d-flex align-items-center flex-wrap">
                 <div class="col-md-7">
-                    <h1 class="h2">Order # 1735</h1>
+                    <h1 class="h2">Order #@Model.idOrdenCompra</h1>
                 </div>
                 <div class="col-md-5">
                     <ul class="breadcrumb d-flex justify-content-end">
@@ -18,7 +20,7 @@
                         <li class="breadcrumb-item">
                             @Html.ActionLink("Mis compras", "CustomerOrders", "Usuario")
                         </li>
-                        <li class="breadcrumb-item active">Order # 1735</li>
+                        <li class="breadcrumb-item active">Order #@Model.idOrdenCompra</li>
                     </ul>
                 </div>
             </div>
@@ -29,60 +31,48 @@
             <div class="row bar">
                 <div id="customer-order" class="col-lg-9">
                     <p class="lead">
-                        Order #1735 was placed on
-                        <strong>22/06/2013</strong> and is currently
-                        <strong>Being prepared</strong>.
+                        Orden #@Model.idOrdenCompra was placed on
+                        <strong>  22/06/2013</strong> se encuentra actualmente
+                        <strong>@Model.OrdenCompraEstado.descripcion</strong>.
                     </p>
                     <p class="lead text-muted">
-                        Si tienes alguna consulta, por favor
-                        @Html.ActionLink("contactenos", "Contact", "NavBar"), nuestro servicio de atención al cliente funciona 24/7.
+                        Si tienes alguna consulta, por favor @Html.ActionLink("contactenos", "Contact", "Shared"), nuestro servicio de atención al cliente funciona 24/7.
                     </p>
                     <div class="box">
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th colspan="2" class="border-top-0">Product</th>
-                                        <th class="border-top-0">Quantity</th>
-                                        <th class="border-top-0">Unit price</th>
-                                        <th class="border-top-0">Discount</th>
+                                        <th colspan="2" class="border-top-0">Producto</th>
+                                        <th class="border-top-0">Cantidad</th>
+                                        <th class="border-top-0">Precio unitario</th>
+                                        <th class="border-top-0">Descuento</th>
                                         <th class="border-top-0">Total</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>
-                                            <a href="#">
-                                                <img src="img/detailsquare.jpg" alt="White Blouse Armani" class="img-fluid">
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a href="#">White Blouse Armani</a>
-                                        </td>
-                                        <td>2</td>
-                                        <td>$123.00</td>
-                                        <td>$0.00</td>
-                                        <td>$246.00</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <a href="#">
-                                                <img src="img/basketsquare.jpg" alt="Black Blouse Armani" class="img-fluid">
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a href="#">Black Blouse Armani</a>
-                                        </td>
-                                        <td>1</td>
-                                        <td>$200.00</td>
-                                        <td>$0.00</td>
-                                        <td>$200.00</td>
-                                    </tr>
+                                    @foreach (var detalle in Model.OrdenCompraDetalle)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <a href="#">
+                                                    <img src="@Url.Content(detalle.Producto.fotoUrl)" alt="White Blouse Armani" class="img-fluid">
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a href="#">@detalle.Producto.descripcion</a>
+                                            </td>
+                                            <td>@detalle.cantidad</td>
+                                            <td>$ @detalle.Producto.precioUnitario</td>
+                                            <td>$ 0.00</td>
+                                            <td>$ @(detalle.cantidad * detalle.Producto.precioUnitario)</td>
+                                        </tr>
+                                    }
                                 </tbody>
                                 <tfoot>
                                     <tr>
                                         <th colspan="5" class="text-right">Order subtotal</th>
-                                        <th>$446.00</th>
+                                        <th>$ 446.00</th>
                                     </tr>
                                     <tr>
                                         <th colspan="5" class="text-right">Shipping and handling</th>

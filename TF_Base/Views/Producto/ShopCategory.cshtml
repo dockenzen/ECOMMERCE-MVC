@@ -105,26 +105,29 @@
                 <div class="row products products-big">
                     @foreach (var sarasa in Model)
                     {
-                    <div class="col-lg-4 col-md-6">
-                        <div class="product">
-                                <div class="image"><a href="@Url.Action("ShopDetail","Producto", new { id = sarasa.idProducto })"><img src="@Url.Content(sarasa.fotoUrl)" alt="Image" class="img-fluid image1"></a></div>
-                            <div class="text">
-                                    
-                                <h3 class="h5">
-                                    <a href="shop-detail.html">Tapados de tigre de bengala</a>
-                                </h3>
-                                <p class="price">$25.000</p>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="product">
+                                <div class="image">
+                                    <a href="@Url.Action("ShopDetail","Producto", new { id = sarasa.idProducto })">
+                                        <img src="@Url.Content(sarasa.fotoUrl)" alt="Image" class="img-fluid image1">
+                                    </a>
+                                </div>
+                                <div class="text">
+                                    <h3 class="h5">
+                                        <a href="shop-detail.html">Tapados de tigre de bengala</a>
+                                    </h3>
+                                    <p class="price">$25.000</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="product">
-                            <div class="image"><a href="shop-detail.html"><img src="~/Content/images/pantalon-chupin.jpg" alt="" class="img-fluid image1"></a></div>
-                            <div class="text">
-<h3 class="h5"><a href="@Url.Action("ShopDetail","Producto", new { id = sarasa.idProducto })">Remera blanca de algodón</a></h3>                                <p class="price">
+                        <div class="col-lg-4 col-md-6">
+                            <div class="product">
+                                <div class="image"><a href="shop-detail.html"><img src="~/Content/images/pantalon-chupin.jpg" alt="" class="img-fluid image1"></a></div>
+                                <div class="text">
+                                    <h3 class="h5"><a href="@Url.Action("ShopDetail","Producto", new { id = sarasa.idProducto })">Remera blanca de algodón</a></h3>                                <p class="price">
                                         <del>$</del> @sarasa.precioUnitario
-                                </p>
-                            </div>
+                                    </p>
+                                </div>
                             </div>
                             <div class="ribbon-holder">
                                 <div class="ribbon sale">Oferta</div>
@@ -132,28 +135,28 @@
                             </div>
                         </div>
                     }
-                    </div>
-                            </div>
-                            </div>
-                <p class="loadMore text-center"><a href="#" class="btn btn-template-outlined"><i class="fa fa-chevron-down"></i> Cargar más</a></p>
+                </div>
             </div>
         </div>
-        <!-- PUBLICIDAD -->
-        <div id="div">
-            <div class="col-md-12 banner mb-small"><a href="#"><img src="~/Content/images/banner2.jpg" alt="" class="img-fluid"></a></div>
-        </div>
-        <div class="pages">
-            <nav aria-label="Page navigation example" class="d-flex justify-content-center">
-                <ul class="pagination">
-                    <li class="page-item"><a href="#" class="page-link"> <i class="fa fa-angle-double-left"></i></a></li>
-                    <li class="page-item active"><a href="#" class="page-link">1</a></li>
-                    <li class="page-item"><a href="#" class="page-link">2</a></li>
-                    <li class="page-item"><a href="#" class="page-link">3</a></li>
-                    <li class="page-item"><a href="#" class="page-link">4</a></li>
-                    <li class="page-item"><a href="#" class="page-link">5</a></li>
-                    <li class="page-item"><a href="#" class="page-link"><i class="fa fa-angle-double-right"></i></a></li>
-                </ul>
-            </nav>
-        </div>
+        <p class="loadMore text-center"><a href="#" class="btn btn-template-outlined"><i class="fa fa-chevron-down"></i> Cargar más</a></p>
+    </div>
+</div>
+<!-- PUBLICIDAD -->
+<div id="div">
+    <div class="col-md-12 banner mb-small"><a href="#"><img src="~/Content/images/banner2.jpg" alt="" class="img-fluid"></a></div>
+</div>
+<div class="pages">
+    <nav aria-label="Page navigation example" class="d-flex justify-content-center">
+        <ul class="pagination">
+            <li class="page-item"><a href="#" class="page-link"> <i class="fa fa-angle-double-left"></i></a></li>
+            <li class="page-item active"><a href="#" class="page-link">1</a></li>
+            <li class="page-item"><a href="#" class="page-link">2</a></li>
+            <li class="page-item"><a href="#" class="page-link">3</a></li>
+            <li class="page-item"><a href="#" class="page-link">4</a></li>
+            <li class="page-item"><a href="#" class="page-link">5</a></li>
+            <li class="page-item"><a href="#" class="page-link"><i class="fa fa-angle-double-right"></i></a></li>
+        </ul>
+    </nav>
+</div>
     </div>
 </div>

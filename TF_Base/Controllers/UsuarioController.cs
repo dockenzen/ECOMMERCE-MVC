@@ -139,5 +139,12 @@ namespace TF_Base.Controllers
         {
             return View();
         }
+
+        public ActionResult CustomerWishlist()
+        {
+            //var Wishlist = db.Producto.Where(p => p.wishlist.idusuario = WebMatrix.WebData.WebSecurity.CurrentUserId)
+            var deseos = db.Producto.Where(p => p.idCategoria == 1);
+            return View(deseos.ToList());
+        }
     }
 }
