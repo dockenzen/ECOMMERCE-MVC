@@ -141,7 +141,19 @@ namespace TF_Base.Controllers
         public ActionResult ShopCategory()
         {
             var producto = db.Producto.Include(p => p.Categoria).Include(p => p.Color).Include(p => p.Talle);
+            GetCategorias();
+            GetColores();
             return View(producto.ToList());
         }
+
+        private void GetCategorias()
+        {
+            ViewBag.Categorias = db.Categoria.ToList(); 
+        }
+        private void GetColores()
+        {
+            ViewBag.Colores = db.Color.ToList();
+        }
+        
     }
 }

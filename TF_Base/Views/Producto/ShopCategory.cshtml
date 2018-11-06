@@ -3,6 +3,8 @@
 @{
     ViewBag.Title = "Catalogo";
     Layout = "~/Views/Shared/_eCommerceLayout.cshtml";
+    IList<TF_Base.Models.Categoria> categorias = ViewBag.Categorias;
+    IList<TF_Base.Models.Color> colores = ViewBag.Colores;
 }
 
 <div id="heading-breadcrumbs">
@@ -23,41 +25,29 @@
 <div id="content">
     <div class="container">
         <div class="row bar">
+            <!-- MENUS AND FILTERS-->
             <div class="col-md-3">
-                <!-- MENUS AND FILTERS-->
                 <div class="panel panel-default sidebar-menu">
                     <div class="panel-heading">
                         <h3 class="h4 panel-title">Categorias</h3>
                     </div>
                     <div class="panel-body">
                         <ul class="nav nav-pills flex-column text-sm category-menu">
-                            <li class="nav-item">
-                                <a href="shop-category-left.html" class="nav-link d-flex align-items-center justify-content-between"><span>Hombre </span><span class="badge badge-secondary">42</span></a>
-                                <ul class="nav nav-pills flex-column">
-                                    <li class="nav-item"><a href="shop-category-left.html" class="nav-link">Remeras</a></li>
-                                    <li class="nav-item"><a href="shop-category-left.html" class="nav-link">Camisetas</a></li>
-                                    <li class="nav-item"><a href="shop-category-left.html" class="nav-link">Pantalones</a></li>
-                                    <li class="nav-item"><a href="shop-category-left.html" class="nav-link">Accesorios</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item">
-                                <a href="shop-category-left.html" class="nav-link active d-flex align-items-center justify-content-between"><span>Dama  </span><span class="badge badge-light">123</span></a>
-                                <ul class="nav nav-pills flex-column">
-                                    <li class="nav-item"><a href="shop-category-left.html" class="nav-link">Remeras</a></li>
-                                    <li class="nav-item"><a href="shop-category-left.html" class="nav-link">Polleras</a></li>
-                                    <li class="nav-item"><a href="shop-category-left.html" class="nav-link">Pantalones</a></li>
-                                    <li class="nav-item"><a href="shop-category-left.html" class="nav-link">Accesorios</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item">
-                                <a href="shop-category-left.html" class="nav-link d-flex align-items-center justify-content-between"><span>Niño  </span><span class="badge badge-secondary">11</span></a>
-                                <ul class="nav nav-pills flex-column">
-                                    <li class="nav-item"><a href="shop-category-left.html" class="nav-link">Remeras</a></li>
-                                    <li class="nav-item"><a href="shop-category-left.html" class="nav-link">Polleras</a></li>
-                                    <li class="nav-item"><a href="shop-category-left.html" class="nav-link">Pantaloness</a></li>
-                                    <li class="nav-item"><a href="shop-category-left.html" class="nav-link">Accesorios</a></li>
-                                </ul>
-                            </li>
+                            @foreach (var categoria in categorias.Where(c => !c.idCategoriaPadre.HasValue))
+                            {
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link d-flex align-items-center justify-content-between"><span>@categoria.descripcion</span><span class="badge badge-secondary">42</span></a>
+                                    <ul class="nav nav-pills flex-column">
+                                        @foreach (var subcategoria in categorias.Where(c => c.idCategoriaPadre.HasValue))
+                                        {
+                                            if (subcategoria.idCategoriaPadre.Value.Equals(categoria.idCategoria))
+                                            {
+                                                <li class="nav-item"><a href="shop-category-left.html" class="nav-link">@subcategoria.descripcion</a></li>
+                                            }
+                                        }
+                                    </ul>
+                                </li>
+                            }
                         </ul>
                     </div>
                 </div>
@@ -68,31 +58,14 @@
                     <div class="panel-body">
                         <form>
                             <div class="form-group">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox"><span class="colour white"></span> Blanco (14)
-                                    </label>
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox"><span class="colour blue"></span> Azul (10)
-                                    </label>
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox"><span class="colour green"></span>  Verde (20)
-                                    </label>
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox"><span class="colour yellow"></span>  Amarillo (13)
-                                    </label>
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox"><span class="colour red"></span>  Rojo (10)
-                                    </label>
-                                </div>
+                                @foreach (var color in colores)
+                                {
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox">@*<span class="colour white"></span>*@ @color.descripcion (14)
+                                        </label>
+                                    </div>
+                                }
                             </div>
                             <button class="btn btn-sm btn-template-outlined"><i class="fa fa-pencil"></i> Apply</button>
                         </form>
@@ -101,7 +74,6 @@
             </div>
             <div class="col-md-9">
                 <p class="text-muted lead">NUEVA COLECCIÓN OTOÑO-INVIERNO 2018</p>
-                </p>
                 <div class="row products products-big">
                     @foreach (var sarasa in Model)
                     {
@@ -114,19 +86,9 @@
                                 </div>
                                 <div class="text">
                                     <h3 class="h5">
-                                        <a href="shop-detail.html">Tapados de tigre de bengala</a>
+                                        <a href="@Url.Action("ShopDetail","Producto", new { id = sarasa.idProducto })">@sarasa.descripcion</a>
                                     </h3>
-                                    <p class="price">$25.000</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="product">
-                                <div class="image"><a href="shop-detail.html"><img src="~/Content/images/pantalon-chupin.jpg" alt="" class="img-fluid image1"></a></div>
-                                <div class="text">
-                                    <h3 class="h5"><a href="@Url.Action("ShopDetail","Producto", new { id = sarasa.idProducto })">Remera blanca de algodón</a></h3>                                <p class="price">
-                                        <del>$</del> @sarasa.precioUnitario
-                                    </p>
+                                    @*<del>$600</del>*@<p class="price">$@sarasa.precioUnitario</p>
                                 </div>
                             </div>
                             <div class="ribbon-holder">
@@ -138,12 +100,14 @@
                 </div>
             </div>
         </div>
-        <p class="loadMore text-center"><a href="#" class="btn btn-template-outlined"><i class="fa fa-chevron-down"></i> Cargar más</a></p>
+        <div id="div">
+            <p class="loadMore text-center"><a href="#" class="btn btn-template-outlined"><i class="fa fa-chevron-down"></i> Cargar más</a></p>
+        </div>
+        <!-- PUBLICIDAD -->
+        <div id="div">
+            <div class="col-md-12 banner mb-small"><a href="#"><img src="~/Content/images/banner2.jpg" alt="" class="img-fluid"></a></div>
+        </div>
     </div>
-</div>
-<!-- PUBLICIDAD -->
-<div id="div">
-    <div class="col-md-12 banner mb-small"><a href="#"><img src="~/Content/images/banner2.jpg" alt="" class="img-fluid"></a></div>
 </div>
 <div class="pages">
     <nav aria-label="Page navigation example" class="d-flex justify-content-center">
@@ -157,6 +121,4 @@
             <li class="page-item"><a href="#" class="page-link"><i class="fa fa-angle-double-right"></i></a></li>
         </ul>
     </nav>
-</div>
-    </div>
 </div>
