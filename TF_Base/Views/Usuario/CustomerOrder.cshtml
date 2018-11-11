@@ -10,7 +10,7 @@
         <div class="container">
             <div class="row d-flex align-items-center flex-wrap">
                 <div class="col-md-7">
-                    <h1 class="h2">Order #@Model.idOrdenCompra</h1>
+                    <h1 class="h2">Orden #@Model.idOrdenCompra</h1>
                 </div>
                 <div class="col-md-5">
                     <ul class="breadcrumb d-flex justify-content-end">
@@ -20,7 +20,7 @@
                         <li class="breadcrumb-item">
                             @Html.ActionLink("Mis compras", "CustomerOrders", "Usuario")
                         </li>
-                        <li class="breadcrumb-item active">Order #@Model.idOrdenCompra</li>
+                        <li class="breadcrumb-item active">Orden #@Model.idOrdenCompra</li>
                     </ul>
                 </div>
             </div>
@@ -31,9 +31,7 @@
             <div class="row bar">
                 <div id="customer-order" class="col-lg-9">
                     <p class="lead">
-                        Orden #@Model.idOrdenCompra was placed on
-                        <strong>  22/06/2013</strong> se encuentra actualmente
-                        <strong>@Model.OrdenCompraEstado.descripcion</strong>.
+                        <strong> Su orden se encuentra en estado @Model.OrdenCompraEstado.descripcion. </strong>
                     </p>
                     <p class="lead text-muted">
                         Si tienes alguna consulta, por favor @Html.ActionLink("contactenos", "Contact", "Shared"), nuestro servicio de atención al cliente funciona 24/7.
@@ -69,35 +67,33 @@
                                         </tr>
                                     }
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th colspan="5" class="text-right">Orden subtotal</th>
-                                        <th>$ 446.00</th>
-                                    </tr>
-                                    <tr>
-                                        <th colspan="5" class="text-right">Shipping and handling</th>
-                                        <th>$10.00</th>
-                                    </tr>
-                                    <tr>
-                                        <th colspan="5" class="text-right">Tax</th>
-                                        <th>$0.00</th>
-                                    </tr>
-                                    <tr>
-                                        <th colspan="5" class="text-right">Total</th>
-                                        <th>$@Model.OrdenCompraDetalle.Sum(o => o.cantidad * o.Producto.precioUnitario)</th>
-                                    </tr>
-                                </tfoot>
                             </table>
-                        </div>
-                        <div class="row addresses">
-                            <div class="col-md-6 text-right">
-                                <h3 class="text-uppercase">Direccion de envio</h3>
-                                <p>
-                                    @Model.Usuario.DatosPersonales.FirstOrDefault().nombre
-                                    <br> @Model.Usuario.DatosPersonales.FirstOrDefault().Direccion.direccion1
-                                    <br> @Model.Usuario.DatosPersonales.FirstOrDefault().Direccion.codigoPostal
-                                </p>
+                            <div class="row col-md-12">
+                                <div class="col-md-10 text-right">Orden subtotal</div>
+                                <div class="text-right">$ 446.00</div>
                             </div>
+                            <div class="row col-md-12">
+                                <div class="col-md-10 text-right">
+                                    Shipping and handling
+                                </div>
+                                <div class="text-right">$ 446.00</div>
+                            </div>
+                            <div class="row col-md-12">
+                                <div class="col-md-10 text-right">Total</div>
+                                <div class="text-right">$@Model.OrdenCompraDetalle.Sum(o => o.cantidad * o.Producto.precioUnitario)</div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="row addresses">
+                        <div class="col-md-12 text-center">
+                            <h3 class="text-uppercase">Dirección de envío</h3>
+                            <p>
+                                @Model.Usuario.DatosPersonales.FirstOrDefault().nombre @Model.Usuario.DatosPersonales.FirstOrDefault().apellido
+                                <br> @Model.Usuario.DatosPersonales.FirstOrDefault().Direccion.direccion1
+                                <br>CP @Model.Usuario.DatosPersonales.FirstOrDefault().Direccion.codigoPostal
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -111,7 +107,7 @@
                             <ul class="nav nav-pills flex-column text-sm">
                                 <li class="nav-item"><a href="@Url.Action("CustomerOrders","Usuario")" class="nav-link"><i class="fa fa-list"></i> Mis pedidos</a></li>
                                 <li class="nav-item"><a href="@Url.Action("CustomerWishlist","Usuario")" class="nav-link"><i class="fa fa-heart"></i> Mi lista de deseos</a></li>
-                                <li class="nav-item"><a href="@Url.Action("CustomerAccount", "Usuario")" class="nav-link active"><i class="fa fa-user"></i> Mi cuenta</a></li>
+                                <li class="nav-item"><a href="@Url.Action("CustomerAccount", "Usuario")" class="nav-link"><i class="fa fa-user"></i> Mi cuenta</a></li>
                             </ul>
                         </div>
                     </div>

@@ -44,61 +44,21 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th># 1735</th>
-                                        <td>22/06/2013</td>
-                                        <td>$ 150.00</td>
-                                        <td>
-                                            <span class="badge badge-info">Being prepared</span>
-                                        </td>
-                                        <td>
-                                            <a href="@Url.Action("CustomerOrder","Usuario")" class="btn btn-template-outlined btn-sm">Ver</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th># 1735</th>
-                                        <td>22/06/2013</td>
-                                        <td>$ 150.00</td>
-                                        <td>
-                                            <span class="badge badge-info">En preparacion</span>
-                                        </td>
-                                        <td>
-                                            <a href="customer-order.html" class="btn btn-template-outlined btn-sm">Ver</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th># 1735</th>
-                                        <td>22/06/2013</td>
-                                        <td>$ 150.00</td>
-                                        <td>
-                                            <span class="badge badge-success">Recibidos</span>
-                                        </td>
-                                        <td>
-                                            <a href="customer-order.html" class="btn btn-template-outlined btn-sm">Ver</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th># 1735</th>
-                                        <td>22/06/2013</td>
-                                        <td>$ 150.00</td>
-                                        <td>
-                                            <span class="badge badge-danger">Cancelados</span>
-                                        </td>
-                                        <td>
-                                            <a href="customer-order.html" class="btn btn-template-outlined btn-sm">Ver</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th># 1735</th>
-                                        <td>22/06/2013</td>
-                                        <td>$ 150.00</td>
-                                        <td>
-                                            <span class="badge badge-warning">On hold</span>
-                                        </td>
-                                        <td>
-                                            <a href="customer-order.html" class="btn btn-template-outlined btn-sm">Ver</a>
-                                        </td>
-                                    </tr>
+                                    @foreach (var ordenes in Model)
+                                    {
+                                        <tr>
+                                            <th># @ordenes.idOrdenCompra</th>
+                                            <td>@ordenes.fechaCompra</td>
+                                            <td>$ @ordenes.OrdenCompraDetalle.Sum(ocd => ocd.Producto.precioUnitario * ocd.cantidad)</td>
+                                            <td>
+                                                <span class="badge badge-info">@ordenes.OrdenCompraEstado.descripcion</span>
+                                            </td>
+                                            <td>
+                                                <a href="@Url.Action("CustomerOrder","Usuario", new { id = ordenes.idOrdenCompra })" class="btn btn-template-outlined btn-sm">Ver</a>
+                                            </td>
+                                        </tr>
+                                        
+                                    }
                                 </tbody>
                             </table>
                         </div>

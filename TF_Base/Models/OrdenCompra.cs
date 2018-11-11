@@ -28,6 +28,7 @@ namespace TF_Base.Models
         public int idOrdenCompraEnvio { get; set; }
         public int idPago { get; set; }
         public int idEstadoOrden { get; set; }
+        public Nullable<System.DateTime> fechaCompra { get; set; }
     
         public virtual Cupon Cupon { get; set; }
         public virtual OrdenCompraEstado OrdenCompraEstado { get; set; }

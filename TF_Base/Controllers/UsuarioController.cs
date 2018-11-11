@@ -153,21 +153,29 @@ namespace TF_Base.Controllers
             return View(datos);
         }
 
-        public ActionResult CustomerOrder()
+
+        public ActionResult CustomerOrder(int id = 0)
         {
-            return View();
+            var ordenCompra = db.OrdenCompra.Find(id);
+
+            return View(ordenCompra);
         }
 
         public ActionResult CustomerOrders()
         {
-            return View();
+            var ordenesCompra = db.OrdenCompra.Where(o => o.idUsuario == WebMatrix.WebData.WebSecurity.CurrentUserId);
+            return View(ordenesCompra.ToList());
         }
 
         public ActionResult CustomerWishlist()
         {
-            //var Wishlist = db.Producto.Where(p => p.wishlist.idusuario = WebMatrix.WebData.WebSecurity.CurrentUserId)
-            var deseos = db.Producto.Where(p => p.idCategoria == 1);
-            return View(deseos.ToList());
+            //todo iqualitycomparer de distinct x producto.id (?
+            var wishlist = db.WishList.Where(w => w.idUsuario == WebMatrix.WebData.WebSecurity.CurrentUserId)
+                                      .Select(p=> p.Producto)
+                                      .Distinct();
+            
+            return View(wishlist.ToList());
         }
+
     }
 }

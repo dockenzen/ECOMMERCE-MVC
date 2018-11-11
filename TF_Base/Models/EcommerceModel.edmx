@@ -114,6 +114,7 @@
           <Property Name="idOrdenCompraEnvio" Type="int" Nullable="false" />
           <Property Name="idPago" Type="int" Nullable="false" />
           <Property Name="idEstadoOrden" Type="int" Nullable="false" />
+          <Property Name="fechaCompra" Type="date" />
         </EntityType>
         <EntityType Name="OrdenCompraDetalle">
           <Key>
@@ -913,6 +914,7 @@
           <Property Name="idOrdenCompraEnvio" Type="Int32" Nullable="false" />
           <Property Name="idPago" Type="Int32" Nullable="false" />
           <Property Name="idEstadoOrden" Type="Int32" Nullable="false" />
+          <Property Name="fechaCompra" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Cupon" Relationship="Self.FK_OrdenCompra_Cupon" FromRole="OrdenCompra" ToRole="Cupon" />
           <NavigationProperty Name="OrdenCompraEstado" Relationship="Self.FK_OrdenCompra_OrdenCompraEstado" FromRole="OrdenCompra" ToRole="OrdenCompraEstado" />
           <NavigationProperty Name="Pago" Relationship="Self.FK_OrdenCompra_Pago" FromRole="OrdenCompra" ToRole="Pago" />
@@ -1443,7 +1445,7 @@
           <End Role="webpages_Roles" Type="Self.webpages_Roles" Multiplicity="*" />
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="ecommerceEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="ecommerceEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="BlackList" EntityType="Self.BlackList" />
           <EntitySet Name="Categoria" EntityType="Self.Categoria" />
           <EntitySet Name="Color" EntityType="Self.Color" />
@@ -1594,7 +1596,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ecommerceModelStoreContainer" CdmEntityContainer="ecommerceEntities1">
+        <EntityContainerMapping StorageEntityContainer="ecommerceModelStoreContainer" CdmEntityContainer="ecommerceEntities">
           <EntitySetMapping Name="BlackList">
             <EntityTypeMapping TypeName="ecommerceModel.BlackList">
               <MappingFragment StoreEntitySet="BlackList">
@@ -1713,6 +1715,7 @@
                 <ScalarProperty Name="idOrdenCompraEnvio" ColumnName="idOrdenCompraEnvio" />
                 <ScalarProperty Name="idPago" ColumnName="idPago" />
                 <ScalarProperty Name="idEstadoOrden" ColumnName="idEstadoOrden" />
+                <ScalarProperty Name="fechaCompra" ColumnName="fechaCompra" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
