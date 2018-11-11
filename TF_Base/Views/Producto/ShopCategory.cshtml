@@ -56,19 +56,18 @@
                         <h3 class="h4 panel-titlen">Colores</h3><a href="#" class="btn btn-sm btn-danger"><i class="fa fa-times-circle"></i><span class="d-none d-md-inline-block">Clear</span></a>
                     </div>
                     <div class="panel-body">
-                        <form>
+                        @using (Html.BeginForm())
+                        {
                             <div class="form-group">
                                 @foreach (var color in colores)
                                 {
                                     <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox">@*<span class="colour white"></span>*@ @color.descripcion (14)
-                                        </label>
+                                        <label>@Html.CheckBox(color.idColor.ToString()) @color.descripcion</label>
                                     </div>
                                 }
                             </div>
-                            <button class="btn btn-sm btn-template-outlined"><i class="fa fa-pencil"></i> Apply</button>
-                        </form>
+                            <button class="btn btn-sm btn-template-outlined"><i class="fa fa-pencil"></i> Aplicar</button>
+                        }
                     </div>
                 </div>
             </div>

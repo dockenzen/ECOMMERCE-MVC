@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using TF_Base.Models;
@@ -127,7 +128,29 @@ namespace TF_Base.Controllers
 
         public ActionResult CustomerAccount()
         {
-            return View();
+            var datos = db.DatosPersonales.FirstOrDefault(d => d.idUsuario == WebMatrix.WebData.WebSecurity.CurrentUserId);
+
+            ViewBag.Localidades = new SelectList(db.Localidad, "id", "localidad1", datos.Direccion.idLocalidad);
+            
+            return View(datos);
+        }
+
+        [HttpPost]
+        public ActionResult CustomerAccount(DatosPersonales datos)
+        {
+            if (ModelState.IsValid)
+            {
+                Localidad localidad = db.Localidad.Find(datos.Direccion.idLocalidad);
+                datos.Direccion.Localidad = localidad;
+
+                db.Entry(datos).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("CustomerAccount");
+            }
+
+            ViewBag.Localidades = new SelectList(db.Localidad, "id", "localidad1", datos.Direccion.idLocalidad);
+
+            return View(datos);
         }
 
         public ActionResult CustomerOrder()

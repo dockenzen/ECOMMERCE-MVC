@@ -1,0 +1,58 @@
+﻿@model IEnumerable<TF_Base.Models.DatosPersonales>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_eCommerceLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.apellido)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dni)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Direccion.direccion1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Usuario.userName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.apellido)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dni)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Direccion.direccion1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Usuario.userName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.datosPersonalesId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.datosPersonalesId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.datosPersonalesId })
+        </td>
+    </tr>
+}
+
+</table>

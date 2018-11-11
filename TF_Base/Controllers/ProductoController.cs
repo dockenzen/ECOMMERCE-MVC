@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using TF_Base.Models;
@@ -13,20 +14,20 @@ namespace TF_Base.Controllers
     {
         private ecommerceEntities db = new ecommerceEntities();
 
-        //
-        // GET: /Producto/
-        [HttpGet]
+        // GET: Productoes
         public ActionResult Index()
         {
             var producto = db.Producto.Include(p => p.Categoria).Include(p => p.Color).Include(p => p.Garantia).Include(p => p.Talle);
             return View(producto.ToList());
         }
 
-        //
-        // GET: /Producto/Details/5
-        [HttpGet]
-        public ActionResult ShopDetail(int id = 0)
+        // GET: Productoes/Details/5
+        public ActionResult Details(int? id)
         {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
             Producto producto = db.Producto.Find(id);
             if (producto == null)
             {
@@ -35,9 +36,7 @@ namespace TF_Base.Controllers
             return View(producto);
         }
 
-        //
-        // GET: /Producto/Create
-        [HttpGet]
+        // GET: Productoes/Create
         public ActionResult Create()
         {
             ViewBag.idCategoria = new SelectList(db.Categoria, "idCategoria", "descripcion");
@@ -47,12 +46,12 @@ namespace TF_Base.Controllers
             return View();
         }
 
-        //
-        // POST: /Producto/Create
-
+        // POST: Productoes/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Producto producto)
+        public ActionResult Create([Bind(Include = "idProducto,idCategoria,descripcion,idTalle,precioUnitario,idGarantia,idColor,fotoUrl")] Producto producto)
         {
             if (ModelState.IsValid)
             {
@@ -68,11 +67,13 @@ namespace TF_Base.Controllers
             return View(producto);
         }
 
-        //
-        // GET: /Producto/Edit/5
-
-        public ActionResult Edit(int id = 0)
+        // GET: Productoes/Edit/5
+        public ActionResult Edit(int? id)
         {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
             Producto producto = db.Producto.Find(id);
             if (producto == null)
             {
@@ -85,12 +86,12 @@ namespace TF_Base.Controllers
             return View(producto);
         }
 
-        //
-        // POST: /Producto/Edit/5
-
+        // POST: Productoes/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Producto producto)
+        public ActionResult Edit([Bind(Include = "idProducto,idCategoria,descripcion,idTalle,precioUnitario,idGarantia,idColor,fotoUrl")] Producto producto)
         {
             if (ModelState.IsValid)
             {
@@ -105,11 +106,13 @@ namespace TF_Base.Controllers
             return View(producto);
         }
 
-        //
-        // GET: /Producto/Delete/5
-
-        public ActionResult Delete(int id = 0)
+        // GET: Productoes/Delete/5
+        public ActionResult Delete(int? id)
         {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
             Producto producto = db.Producto.Find(id);
             if (producto == null)
             {
@@ -118,9 +121,7 @@ namespace TF_Base.Controllers
             return View(producto);
         }
 
-        //
-        // POST: /Producto/Delete/5
-
+        // POST: Productoes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -133,7 +134,10 @@ namespace TF_Base.Controllers
 
         protected override void Dispose(bool disposing)
         {
-            db.Dispose();
+            if (disposing)
+            {
+                db.Dispose();
+            }
             base.Dispose(disposing);
         }
 
@@ -148,12 +152,28 @@ namespace TF_Base.Controllers
 
         private void GetCategorias()
         {
-            ViewBag.Categorias = db.Categoria.ToList(); 
+            ViewBag.Categorias = db.Categoria.ToList();
         }
         private void GetColores()
         {
             ViewBag.Colores = db.Color.ToList();
         }
-        
+
+        [HttpPost]
+        public ActionResult ShopCategory(FormCollection form)
+        {
+            List<int> listaFiltro = new List<int>();
+            foreach (Color color in db.Color.ToList())
+            {
+                var sarasa = form.GetValues(color.idColor.ToString());
+                if (sarasa.Contains("true"))
+                    listaFiltro.Add(color.idColor);
+            }
+            var productos = db.Producto.Join(listaFiltro, p => p.idColor, l => l, (p, l) => new { Prod = p, Col = l }).Where(p => p.Prod.idColor == p.Col).Select(p => p.Prod).ToList();
+            GetCategorias();
+            GetColores();
+            return View(productos.ToList());
+        }
+
     }
 }

@@ -2,64 +2,74 @@
 
 @{
     ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_eCommerceLayout.cshtml";
 }
 
 <h2>Details</h2>
 
-<fieldset>
-    <legend>Producto</legend>
+<div>
+    <h4>Producto</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.descripcion)
+        </dt>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.idProducto)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.idProducto)
-    </div>
+        <dd>
+            @Html.DisplayFor(model => model.descripcion)
+        </dd>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Categoria.descripcion)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Categoria.descripcion)
-    </div>
+        <dt>
+            @Html.DisplayNameFor(model => model.precioUnitario)
+        </dt>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.descripcion)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.descripcion)
-    </div>
+        <dd>
+            @Html.DisplayFor(model => model.precioUnitario)
+        </dd>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Talle.descripcion)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Talle.descripcion)
-    </div>
+        <dt>
+            @Html.DisplayNameFor(model => model.fotoUrl)
+        </dt>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.precioUnitario)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.precioUnitario)
-    </div>
+        <dd>
+            @Html.DisplayFor(model => model.fotoUrl)
+        </dd>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Garantia.descripcion)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Garantia.descripcion)
-    </div>
+        <dt>
+            @Html.DisplayNameFor(model => model.Categoria.descripcion)
+        </dt>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Color.descripcion)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Color.descripcion)
-    </div>
-</fieldset>
+        <dd>
+            @Html.DisplayFor(model => model.Categoria.descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Color.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Color.descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Garantia.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Garantia.descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Talle.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Talle.descripcion)
+        </dd>
+
+    </dl>
+</div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idProducto }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
