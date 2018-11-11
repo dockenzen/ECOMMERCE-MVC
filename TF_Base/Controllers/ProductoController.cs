@@ -14,14 +14,14 @@ namespace TF_Base.Controllers
     {
         private ecommerceEntities db = new ecommerceEntities();
 
-        // GET: Productoes
+        // GET: Producto
         public ActionResult Index()
         {
             var producto = db.Producto.Include(p => p.Categoria).Include(p => p.Color).Include(p => p.Garantia).Include(p => p.Talle);
             return View(producto.ToList());
         }
 
-        // GET: Productoes/Details/5
+        // GET: Producto/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,7 +36,7 @@ namespace TF_Base.Controllers
             return View(producto);
         }
 
-        // GET: Productoes/Create
+        // GET: Producto/Create
         public ActionResult Create()
         {
             ViewBag.idCategoria = new SelectList(db.Categoria, "idCategoria", "descripcion");
@@ -46,7 +46,7 @@ namespace TF_Base.Controllers
             return View();
         }
 
-        // POST: Productoes/Create
+        // POST: Producto/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -67,7 +67,7 @@ namespace TF_Base.Controllers
             return View(producto);
         }
 
-        // GET: Productoes/Edit/5
+        // GET: Producto/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -86,7 +86,7 @@ namespace TF_Base.Controllers
             return View(producto);
         }
 
-        // POST: Productoes/Edit/5
+        // POST: Producto/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -106,7 +106,7 @@ namespace TF_Base.Controllers
             return View(producto);
         }
 
-        // GET: Productoes/Delete/5
+        // GET: Producto/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -121,7 +121,7 @@ namespace TF_Base.Controllers
             return View(producto);
         }
 
-        // POST: Productoes/Delete/5
+        // POST: Producto/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -145,18 +145,9 @@ namespace TF_Base.Controllers
         public ActionResult ShopCategory()
         {
             var producto = db.Producto.Include(p => p.Categoria).Include(p => p.Color).Include(p => p.Talle);
-            GetCategorias();
-            GetColores();
-            return View(producto.ToList());
-        }
-
-        private void GetCategorias()
-        {
             ViewBag.Categorias = db.Categoria.ToList();
-        }
-        private void GetColores()
-        {
             ViewBag.Colores = db.Color.ToList();
+            return View(producto.ToList());
         }
 
         [HttpPost]
@@ -170,9 +161,47 @@ namespace TF_Base.Controllers
                     listaFiltro.Add(color.idColor);
             }
             var productos = db.Producto.Join(listaFiltro, p => p.idColor, l => l, (p, l) => new { Prod = p, Col = l }).Where(p => p.Prod.idColor == p.Col).Select(p => p.Prod).ToList();
-            GetCategorias();
-            GetColores();
+            ViewBag.Categorias = db.Categoria.ToList();
+            ViewBag.Colores = db.Color.ToList();
             return View(productos.ToList());
+        }
+
+        [HttpGet]
+        public ActionResult ShopDetail(int id = 0)
+        {
+            var producto = db.Producto.Find(id);
+
+            ViewBag.Talles = new SelectList(db.Talle.ToList(), "idTalle", "descripcion", producto.Talle.idTalle);
+            ViewBag.ProductosAlAzar = db.Producto.Where(p => p.Categoria.idCategoria == producto.idCategoria).Take(3).ToList();
+
+            return View(producto);
+        }
+
+        public ActionResult AgregarProductoWishlist(int id = 0)
+        {
+            int idUsuario = WebMatrix.WebData.WebSecurity.CurrentUserId;
+            if (!db.WishList.Any(w => w.idProducto == id && w.idUsuario == idUsuario))
+            {
+                WishList wishList = new WishList()
+                {
+                    Producto = db.Producto.Find(id),
+                    Usuario = db.Usuario.Find(idUsuario)
+                };
+                db.WishList.Add(wishList);
+                db.SaveChanges();
+            }
+            else
+            {
+                WishList wish = db.WishList.FirstOrDefault(w => w.idProducto == id && w.idUsuario == idUsuario);
+                db.WishList.Remove(wish);
+                db.SaveChanges();
+            }
+            return RedirectToAction("CustomerWishlist","Usuario");
+        }
+
+        public ActionResult AgregarProductoCarrito(int id = 0)
+        {
+            return View();
         }
 
     }

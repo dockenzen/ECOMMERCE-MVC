@@ -35,6 +35,7 @@ namespace TF_Base.Models
         public virtual DbSet<EstadoPago> EstadoPago { get; set; }
         public virtual DbSet<Factura> Factura { get; set; }
         public virtual DbSet<Garantia> Garantia { get; set; }
+        public virtual DbSet<ImagenProducto> ImagenProducto { get; set; }
         public virtual DbSet<Localidad> Localidad { get; set; }
         public virtual DbSet<OrdenCompra> OrdenCompra { get; set; }
         public virtual DbSet<OrdenCompraDetalle> OrdenCompraDetalle { get; set; }

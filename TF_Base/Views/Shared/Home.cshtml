@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<TF_Base.Models.Producto>
 @{
     ViewBag.Title = "Home";
     Layout = "~/Views/Shared/_eCommerceLayout.cshtml";
@@ -52,67 +52,29 @@
                         <h2>Productos destacados</h2>
                     </div>
                     <div class="row portfolio text-center color-white">
-                        <div class="col-md-4">
-                            <div class="box-image">
-                                <div class="image">
-                                    <img src="~/Content/images/pantalon-chupin.jpg" alt="" class="img-fluid">
-                                    <div class="overlay d-flex align-items-center justify-content-center">
-                                        <div class="content">
-                                            <div class="name">
-                                                <h3><a href="portfolio-detail.html" class="color-white">Pantalon chupin</a></h3>
-                                            </div>
-                                            <div class="text">
-                                                <p class="buttons">
-                                                    <a href="shop-category-left.html" class="btn btn-template-outlined-white">Ver</a>
-                                                    <a href="#" class="btn btn-template-outlined-white">Agregar al carrito</a>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="box-image">
-                                <div class="image">
-                                    <img src="~/Content/images/campera-termica.jpg" alt="" class="img-fluid">
-                                    <div class="overlay d-flex align-items-center justify-content-center">
-                                        <div class="content">
-                                            <div class="name">
-                                                <h3><a href="portfolio-detail.html" class="color-white">Campera térmica</a></h3>
-                                            </div>
-                                            <div class="text">
-                                                <p class="buttons">
-                                                    <a href="shop-detail.html" class="btn btn-template-outlined-white">Ver</a>
-                                                    <a href="#" class="btn btn-template-outlined-white">Agregar al carrito</a>
-                                                </p>
+                        @foreach (var producto in Model)
+                        {
+                            <div class="col-md-4">
+                                <div class="box-image">
+                                    <div class="image">
+                                        <img src="@Url.Content(producto.ImagenProducto.First().url)" alt="" class="img-fluid">
+                                        <div class="overlay d-flex align-items-center justify-content-center">
+                                            <div class="content">
+                                                <div class="name">
+                                                    <h3>@Html.ActionLink(producto.descripcion, "ShopDetail", "Producto", new { id = producto.idProducto }, new { @class= "color-white"})</h3>
+                                                </div>
+                                                <div class="text">
+                                                    <p class="buttons">
+                                                        @Html.ActionLink("Ver", "ShopDetail", "Producto", new { id = producto.idProducto },new { @class = "btn btn-template-outlined-white"})
+                                                        <a href="#" class="btn btn-template-outlined-white">Agregar al carrito</a>
+                                                    </p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="box-image">
-                                <div class="image">
-                                    <img src="~/Content/images/campera-rayada-nino.jpg" alt="" class="img-fluid">
-                                    <div class="overlay d-flex align-items-center justify-content-center">
-                                        <div class="content">
-                                            <div class="name">
-                                                <h3><a href="portfolio-detail.html" class="color-white">Campera a rayas de niño</a></h3>
-                                            </div>
-                                            <div class="text">
-                                                <p class="buttons">
-                                                    <a href="shop-category-left.html" class="btn btn-template-outlined-white">Ver</a>
-                                                    <a href="#" class="btn btn-template-outlined-white">Agregar al carrito</a>
-                                                </p>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        }                        
                     </div>
                 </div>
             </div>

@@ -15,16 +15,10 @@ namespace TF_Base.Controllers
 
         //
         // GET: /Shared/
-
-        public ActionResult Index()
-        {
-            var producto = db.Producto.Include(p => p.Categoria).Include(p => p.Color).Include(p => p.Garantia).Include(p => p.Talle);
-            return View(producto.ToList());
-        }
-
         public ActionResult Home()
         {
-            return View();
+            var productos = db.Producto.Where(p => p.esDestacado == true).Take(3).ToList();
+            return View(productos);
         }
 
         public ActionResult FAQ()

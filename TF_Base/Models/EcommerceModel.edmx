@@ -95,6 +95,17 @@
           <Property Name="fechaInicio" Type="date" Nullable="false" />
           <Property Name="fechaFin" Type="date" Nullable="false" />
         </EntityType>
+        <EntityType Name="ImagenProducto">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="idProducto" Type="int" />
+          <Property Name="peso" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="url" Type="varchar(max)" Nullable="false" />
+          <Property Name="extension" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="esCarrusel" Type="bit" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
         <EntityType Name="Localidad">
           <Key>
             <PropertyRef Name="id" />
@@ -168,7 +179,7 @@
           <Property Name="precioUnitario" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="idGarantia" Type="int" />
           <Property Name="idColor" Type="int" Nullable="false" />
-          <Property Name="fotoUrl" Type="varchar(max)" Nullable="false" />
+          <Property Name="esDestacado" Type="bit" />
         </EntityType>
         <EntityType Name="Provincia">
           <Key>
@@ -272,6 +283,18 @@
           <Property Name="idProducto" Type="int" Nullable="false" />
           <Property Name="idWishlist" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="FK__ImagenPro__idPro__41B8C09B">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="0..1" />
+          <End Role="ImagenProducto" Type="Self.ImagenProducto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="idProducto" />
+            </Principal>
+            <Dependent Role="ImagenProducto">
+              <PropertyRef Name="idProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_BlackList_Usuario">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
           <End Role="BlackList" Type="Self.BlackList" Multiplicity="*" />
@@ -643,6 +666,7 @@
           <EntitySet Name="EstadoPago" EntityType="Self.EstadoPago" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Factura" EntityType="Self.Factura" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Garantia" EntityType="Self.Garantia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ImagenProducto" EntityType="Self.ImagenProducto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Localidad" EntityType="Self.Localidad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrdenCompra" EntityType="Self.OrdenCompra" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrdenCompraDetalle" EntityType="Self.OrdenCompraDetalle" Schema="dbo" store:Type="Tables" />
@@ -662,6 +686,10 @@
           <EntitySet Name="webpages_Roles" EntityType="Self.webpages_Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="webpages_UsersInRoles" EntityType="Self.webpages_UsersInRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WishList" EntityType="Self.WishList" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__ImagenPro__idPro__41B8C09B" Association="Self.FK__ImagenPro__idPro__41B8C09B">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="ImagenProducto" EntitySet="ImagenProducto" />
+          </AssociationSet>
           <AssociationSet Name="FK_BlackList_Usuario" Association="Self.FK_BlackList_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="BlackList" EntitySet="BlackList" />
@@ -893,6 +921,18 @@
           <Property Name="fechaFin" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="Producto" Relationship="Self.FK_Producto_Garantia" FromRole="Garantia" ToRole="Producto" />
         </EntityType>
+        <EntityType Name="ImagenProducto">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="idProducto" Type="Int32" />
+          <Property Name="peso" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="url" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="extension" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="esCarrusel" Type="Boolean" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Producto" Relationship="Self.FK__ImagenPro__idPro__41B8C09B" FromRole="ImagenProducto" ToRole="Producto" />
+        </EntityType>
         <EntityType Name="Localidad">
           <Key>
             <PropertyRef Name="id" />
@@ -984,10 +1024,11 @@
           <Property Name="precioUnitario" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="idGarantia" Type="Int32" />
           <Property Name="idColor" Type="Int32" Nullable="false" />
-          <Property Name="fotoUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="esDestacado" Type="Boolean" />
           <NavigationProperty Name="Categoria" Relationship="Self.FK_Producto_Categoria" FromRole="Producto" ToRole="Categoria" />
           <NavigationProperty Name="Color" Relationship="Self.FK_Producto_Color" FromRole="Producto" ToRole="Color" />
           <NavigationProperty Name="Garantia" Relationship="Self.FK_Producto_Garantia" FromRole="Producto" ToRole="Garantia" />
+          <NavigationProperty Name="ImagenProducto" Relationship="Self.FK__ImagenPro__idPro__41B8C09B" FromRole="Producto" ToRole="ImagenProducto" />
           <NavigationProperty Name="OrdenCompraDetalle" Relationship="Self.FK_OrdenCompraDetalle_Producto" FromRole="Producto" ToRole="OrdenCompraDetalle" />
           <NavigationProperty Name="Talle" Relationship="Self.FK_Producto_Producto" FromRole="Producto" ToRole="Talle" />
           <NavigationProperty Name="Stock" Relationship="Self.FK_Stock_Producto" FromRole="Producto" ToRole="Stock" />
@@ -1261,6 +1302,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__ImagenPro__idPro__41B8C09B">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="0..1" />
+          <End Role="ImagenProducto" Type="Self.ImagenProducto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="idProducto" />
+            </Principal>
+            <Dependent Role="ImagenProducto">
+              <PropertyRef Name="idProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Localidad_Provincia">
           <End Role="Provincia" Type="Self.Provincia" Multiplicity="1" />
           <End Role="Localidad" Type="Self.Localidad" Multiplicity="*" />
@@ -1456,6 +1509,7 @@
           <EntitySet Name="EstadoPago" EntityType="Self.EstadoPago" />
           <EntitySet Name="Factura" EntityType="Self.Factura" />
           <EntitySet Name="Garantia" EntityType="Self.Garantia" />
+          <EntitySet Name="ImagenProducto" EntityType="Self.ImagenProducto" />
           <EntitySet Name="Localidad" EntityType="Self.Localidad" />
           <EntitySet Name="OrdenCompra" EntityType="Self.OrdenCompra" />
           <EntitySet Name="OrdenCompraDetalle" EntityType="Self.OrdenCompraDetalle" />
@@ -1525,6 +1579,10 @@
           <AssociationSet Name="FK_Producto_Garantia" Association="Self.FK_Producto_Garantia">
             <End Role="Garantia" EntitySet="Garantia" />
             <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ImagenPro__idPro__41B8C09B" Association="Self.FK__ImagenPro__idPro__41B8C09B">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="ImagenProducto" EntitySet="ImagenProducto" />
           </AssociationSet>
           <AssociationSet Name="FK_Localidad_Provincia" Association="Self.FK_Localidad_Provincia">
             <End Role="Provincia" EntitySet="Provincia" />
@@ -1696,6 +1754,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ImagenProducto">
+            <EntityTypeMapping TypeName="ecommerceModel.ImagenProducto">
+              <MappingFragment StoreEntitySet="ImagenProducto">
+                <ScalarProperty Name="idProducto" ColumnName="idProducto" />
+                <ScalarProperty Name="peso" ColumnName="peso" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="extension" ColumnName="extension" />
+                <ScalarProperty Name="esCarrusel" ColumnName="esCarrusel" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Localidad">
             <EntityTypeMapping TypeName="ecommerceModel.Localidad">
               <MappingFragment StoreEntitySet="Localidad">
@@ -1774,7 +1844,7 @@
                 <ScalarProperty Name="precioUnitario" ColumnName="precioUnitario" />
                 <ScalarProperty Name="idGarantia" ColumnName="idGarantia" />
                 <ScalarProperty Name="idColor" ColumnName="idColor" />
-                <ScalarProperty Name="fotoUrl" ColumnName="fotoUrl" />
+                <ScalarProperty Name="esDestacado" ColumnName="esDestacado" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

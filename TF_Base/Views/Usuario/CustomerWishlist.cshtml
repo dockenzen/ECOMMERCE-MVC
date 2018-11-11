@@ -34,7 +34,7 @@
                                 <div class="product">
                                     <div class="image">
                                         <a href="@Url.Action("ShopDetail", "Producto", new { id = sarasa.idProducto })">
-                                            <img src="@Url.Content(sarasa.fotoUrl)" alt="Image" class="img-fluid image1">
+                                            <img src="@Url.Content(sarasa.ImagenProducto.FirstOrDefault().url)" alt="Image" class="img-fluid image1">
                                         </a>
                                     </div>
                                     <div class="text">

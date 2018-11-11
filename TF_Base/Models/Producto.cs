@@ -17,6 +17,7 @@ namespace TF_Base.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Producto()
         {
+            this.ImagenProducto = new HashSet<ImagenProducto>();
             this.OrdenCompraDetalle = new HashSet<OrdenCompraDetalle>();
             this.Stock = new HashSet<Stock>();
             this.WishList = new HashSet<WishList>();
@@ -29,11 +30,13 @@ namespace TF_Base.Models
         public decimal precioUnitario { get; set; }
         public Nullable<int> idGarantia { get; set; }
         public int idColor { get; set; }
-        public string fotoUrl { get; set; }
+        public Nullable<bool> esDestacado { get; set; }
     
         public virtual Categoria Categoria { get; set; }
         public virtual Color Color { get; set; }
         public virtual Garantia Garantia { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ImagenProducto> ImagenProducto { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrdenCompraDetalle> OrdenCompraDetalle { get; set; }
         public virtual Talle Talle { get; set; }
