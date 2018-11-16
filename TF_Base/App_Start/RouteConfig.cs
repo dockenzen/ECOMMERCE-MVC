@@ -16,7 +16,8 @@ namespace TF_Base
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Shared", action = "Home", id = UrlParameter.Optional }
+                defaults: new { controller = "Shared", action = "Home", id = UrlParameter.Optional },
+                namespaces: new string [] { "TF_Base.Controllers" }
             );
         }
     }
