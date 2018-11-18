@@ -5,6 +5,7 @@
     Layout = "~/Views/Shared/_eCommerceLayout.cshtml";
 
     IList<TF_Base.Models.Categoria> categorias = ViewBag.Categorias;
+    IList<TF_Base.Models.SubCategoria> subcategorias = ViewBag.SubCategorias;
     IList<TF_Base.Models.Color> colores = ViewBag.Colores;
 }
 
@@ -34,17 +35,14 @@
                     </div>
                     <div class="panel-body">
                         <ul class="nav nav-pills flex-column text-sm category-menu">
-                            @foreach (var categoria in categorias.Where(c => !c.idCategoriaPadre.HasValue))
+                            @foreach (var categoria in categorias)
                             {
                                 <li class="nav-item">
                                     <a href="#" class="nav-link d-flex align-items-center justify-content-between"><span>@categoria.descripcion</span><span class="badge badge-secondary">42</span></a>
                                     <ul class="nav nav-pills flex-column">
-                                        @foreach (var subcategoria in categorias.Where(c => c.idCategoriaPadre.HasValue))
+                                        @foreach (var subcategoria in subcategorias.Where(c => c.idCategoria==categoria.idCategoria))
                                         {
-                                            if (subcategoria.idCategoriaPadre.Value.Equals(categoria.idCategoria))
-                                            {
                                                 <li class="nav-item"><a href="shop-category-left.html" class="nav-link">@subcategoria.descripcion</a></li>
-                                            }
                                         }
                                     </ul>
                                 </li>

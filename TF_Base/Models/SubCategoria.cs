@@ -12,18 +12,20 @@ namespace TF_Base.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Categoria
+    public partial class SubCategoria
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Categoria()
+        public SubCategoria()
         {
-            this.SubCategoria = new HashSet<SubCategoria>();
+            this.Producto = new HashSet<Producto>();
         }
     
+        public int idSubCategoria { get; set; }
         public int idCategoria { get; set; }
         public string descripcion { get; set; }
     
+        public virtual Categoria Categoria { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SubCategoria> SubCategoria { get; set; }
+        public virtual ICollection<Producto> Producto { get; set; }
     }
 }
