@@ -1,0 +1,52 @@
+﻿@model TF_Base.Models.Producto
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="col-lg-4">
+    <div class="card">
+        <div class="card-header">
+            <h6 class="text-uppercase mb-0">Eliminar Producto</h6>
+        </div>
+        <div class="card-body">
+            <p>Seguro que desea eliminar este registro ?</p>
+            <table class="table table-striped table-hover card-text">
+                <thead>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.descripcion)</th>
+                        <th>@Html.DisplayNameFor(model => model.precioUnitario)</th>
+                        <th>@Html.DisplayNameFor(model => model.esDestacado)</th>
+                        <th>@Html.DisplayNameFor(model => model.Color.descripcion)</th>
+                        <th>@Html.DisplayNameFor(model => model.Garantia.descripcion)</th>
+                        <th>@Html.DisplayNameFor(model => model.SubCategoria.descripcion)</th>
+                        <th>@Html.DisplayNameFor(model => model.Talle.descripcion)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>@Html.DisplayFor(model => model.descripcion)</td>
+                        <td>@Html.DisplayFor(model => model.precioUnitario)</td>
+                        <td>@Html.DisplayFor(model => model.esDestacado)</td>
+                        <td>@Html.DisplayFor(model => model.Color.descripcion)</td>
+                        <td>@Html.DisplayFor(model => model.Garantia.descripcion)</td>
+                        <td>@Html.DisplayFor(model => model.SubCategoria.descripcion)</td>
+                        <td>@Html.DisplayFor(model => model.Talle.descripcion)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="card-body text-center">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color">
+                    <input type="submit" value="Eliminar" class="btn btn-primary" /> |
+                    @Html.ActionLink("Volver a la lista", "Index")
+                </div>
+            }
+        </div>
+    </div>
+</div>
