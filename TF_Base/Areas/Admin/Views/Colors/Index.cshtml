@@ -1,0 +1,43 @@
+﻿@model IEnumerable<TF_Base.Models.Color>
+
+    @{
+        ViewBag.Title = "Index";
+        Layout = "~/Areas/Admin/Views/Shared/AdminLayout.cshtml";
+    }
+
+    <div class="col-lg-10">
+        <p>
+            @Html.ActionLink("Crear Nuevo", "Create", "Colors", null, new { @class = "btn btn-primary" })
+        </p>
+    </div>
+
+    <div class="col-lg-7">
+        <div class="card">
+            <div class="card-header">
+                <h6 class="text-uppercase mb-0">Colores</h6>
+            </div>
+            <div class="card-body">
+                <table class="table table-striped table-hover card-text">
+                    <thead>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.descripcion)</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.descripcion)</td>
+                                <td>
+                                    @Html.ActionLink("Editar", "Edit", new { id = item.idColor }) |
+                                    @*@Html.ActionLink("Details", "Details", new { id = item.idColor }) |*@
+                                    @Html.ActionLink("Eliminar", "Delete", new { id = item.idColor })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
