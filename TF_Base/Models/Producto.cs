@@ -24,7 +24,7 @@ namespace TF_Base.Models
         }
     
         public int idProducto { get; set; }
-        public int idCategoria { get; set; }
+        public int idSubCategoria { get; set; }
         public string descripcion { get; set; }
         public Nullable<int> idTalle { get; set; }
         public decimal precioUnitario { get; set; }
@@ -32,13 +32,13 @@ namespace TF_Base.Models
         public int idColor { get; set; }
         public Nullable<bool> esDestacado { get; set; }
     
-        public virtual Categoria Categoria { get; set; }
         public virtual Color Color { get; set; }
         public virtual Garantia Garantia { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ImagenProducto> ImagenProducto { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrdenCompraDetalle> OrdenCompraDetalle { get; set; }
+        public virtual SubCategoria SubCategoria { get; set; }
         public virtual Talle Talle { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Stock> Stock { get; set; }

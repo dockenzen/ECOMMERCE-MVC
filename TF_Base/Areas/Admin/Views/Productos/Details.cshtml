@@ -1,0 +1,75 @@
+﻿@model TF_Base.Models.Producto
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Producto</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.precioUnitario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.precioUnitario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.esDestacado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.esDestacado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Color.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Color.descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Garantia.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Garantia.descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SubCategoria.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SubCategoria.descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Talle.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Talle.descripcion)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idProducto }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

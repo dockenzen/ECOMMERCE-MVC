@@ -17,7 +17,7 @@ namespace TF_Base.Controllers
         // GET: Producto
         public ActionResult Index()
         {
-            var producto = db.Producto.Include(p => p.Categoria).Include(p => p.Color).Include(p => p.Garantia).Include(p => p.Talle);
+            var producto = db.Producto.Include(p => p.SubCategoria).Include(p => p.Color).Include(p => p.Garantia).Include(p => p.Talle);
             return View(producto.ToList());
         }
 
@@ -39,7 +39,7 @@ namespace TF_Base.Controllers
         // GET: Producto/Create
         public ActionResult Create()
         {
-            ViewBag.idCategoria = new SelectList(db.Categoria, "idCategoria", "descripcion");
+            ViewBag.idCategoria = new SelectList(db.Categoria, "idSubCategoria", "descripcion");
             ViewBag.idColor = new SelectList(db.Color, "idColor", "descripcion");
             ViewBag.idGarantia = new SelectList(db.Garantia, "idGarantia", "descripcion");
             ViewBag.idTalle = new SelectList(db.Talle, "idTalle", "descripcion");
@@ -51,7 +51,7 @@ namespace TF_Base.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idProducto,idCategoria,descripcion,idTalle,precioUnitario,idGarantia,idColor,fotoUrl")] Producto producto)
+        public ActionResult Create([Bind(Include = "idProducto,idSubCategoria,descripcion,idTalle,precioUnitario,idGarantia,idColor,fotoUrl")] Producto producto)
         {
             if (ModelState.IsValid)
             {
@@ -60,7 +60,7 @@ namespace TF_Base.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.idCategoria = new SelectList(db.Categoria, "idCategoria", "descripcion", producto.idCategoria);
+            ViewBag.idCategoria = new SelectList(db.Categoria, "idSubCategoria", "descripcion", producto.idSubCategoria);
             ViewBag.idColor = new SelectList(db.Color, "idColor", "descripcion", producto.idColor);
             ViewBag.idGarantia = new SelectList(db.Garantia, "idGarantia", "descripcion", producto.idGarantia);
             ViewBag.idTalle = new SelectList(db.Talle, "idTalle", "descripcion", producto.idTalle);
@@ -79,7 +79,7 @@ namespace TF_Base.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.idCategoria = new SelectList(db.Categoria, "idCategoria", "descripcion", producto.idCategoria);
+            ViewBag.idCategoria = new SelectList(db.Categoria, "idSubCategoria", "descripcion", producto.idSubCategoria);
             ViewBag.idColor = new SelectList(db.Color, "idColor", "descripcion", producto.idColor);
             ViewBag.idGarantia = new SelectList(db.Garantia, "idGarantia", "descripcion", producto.idGarantia);
             ViewBag.idTalle = new SelectList(db.Talle, "idTalle", "descripcion", producto.idTalle);
@@ -91,7 +91,7 @@ namespace TF_Base.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idProducto,idCategoria,descripcion,idTalle,precioUnitario,idGarantia,idColor,fotoUrl")] Producto producto)
+        public ActionResult Edit([Bind(Include = "idProducto,idSubCategoria,descripcion,idTalle,precioUnitario,idGarantia,idColor,fotoUrl")] Producto producto)
         {
             if (ModelState.IsValid)
             {
@@ -99,7 +99,7 @@ namespace TF_Base.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.idCategoria = new SelectList(db.Categoria, "idCategoria", "descripcion", producto.idCategoria);
+            ViewBag.idCategoria = new SelectList(db.Categoria, "idSubCategoria", "descripcion", producto.idSubCategoria);
             ViewBag.idColor = new SelectList(db.Color, "idColor", "descripcion", producto.idColor);
             ViewBag.idGarantia = new SelectList(db.Garantia, "idGarantia", "descripcion", producto.idGarantia);
             ViewBag.idTalle = new SelectList(db.Talle, "idTalle", "descripcion", producto.idTalle);
@@ -144,8 +144,9 @@ namespace TF_Base.Controllers
         [HttpGet]
         public ActionResult ShopCategory()
         {
-            var producto = db.Producto.Include(p => p.Categoria).Include(p => p.Color).Include(p => p.Talle);
+            var producto = db.Producto.Include(p => p.SubCategoria).Include(p => p.Color).Include(p => p.Talle);
             ViewBag.Categorias = db.Categoria.ToList();
+            ViewBag.SubCategorias = db.SubCategoria.ToList();
             ViewBag.Colores = db.Color.ToList();
             return View(producto.ToList());
         }
@@ -172,7 +173,7 @@ namespace TF_Base.Controllers
             var producto = db.Producto.Find(id);
 
             ViewBag.Talles = new SelectList(db.Talle.ToList(), "idTalle", "descripcion", producto.Talle.idTalle);
-            ViewBag.ProductosAlAzar = db.Producto.Where(p => p.Categoria.idCategoria == producto.idCategoria).Take(3).ToList();
+            ViewBag.ProductosAlAzar = db.Producto.Where(p => p.SubCategoria.idCategoria == producto.idSubCategoria).Take(3).ToList();
 
             return View(producto);
         }

@@ -138,7 +138,11 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\ColorsController.cs" />
     <Compile Include="Areas\Admin\Controllers\CuponsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\GarantiasController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProductosController.cs" />
     <Compile Include="Areas\Admin\Controllers\SharedController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SubCategoriasController.cs" />
+    <Compile Include="Areas\Admin\Controllers\TallesController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DatosPersonalesController.cs" />
     <Compile Include="Controllers\OrdenCompraController.cs" />
@@ -225,6 +229,9 @@
       <DependentUpon>EcommerceModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Stock.cs">
+      <DependentUpon>EcommerceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SubCategoria.cs">
       <DependentUpon>EcommerceModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Sucursal.cs">
@@ -645,6 +652,26 @@
     <Content Include="Areas\Admin\Views\Cupons\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Cupons\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Cupons\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Garantias\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Garantias\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Garantias\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Garantias\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Garantias\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Talles\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Talles\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Talles\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Talles\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Talles\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\SubCategorias\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\SubCategorias\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\SubCategorias\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\SubCategorias\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\SubCategorias\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Productos\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Productos\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Productos\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Productos\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Productos\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TF_Base.Models.Color>
+﻿@model IEnumerable<TF_Base.Models.Garantia>
 
 @{
     ViewBag.Title = "Index";
@@ -7,7 +7,7 @@
 
 <div class="col-lg-10">
     <p>
-        @Html.ActionLink("Crear Nuevo", "Create", "Colors", null, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Crear Nueva", "Create", "Garantias", null, new { @class = "btn btn-primary" })
     </p>
 </div>
 
@@ -21,6 +21,7 @@
                 <thead>
                     <tr>
                         <th>@Html.DisplayNameFor(model => model.descripcion)</th>
+                        <th>@Html.DisplayNameFor(model => model.duracion)</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -29,10 +30,11 @@
                     {
                         <tr>
                             <td>@Html.DisplayFor(modelItem => item.descripcion)</td>
+                            <td>@Html.DisplayFor(modelItem => item.duracion)</td>
                             <td>
-                                @Html.ActionLink("Editar", "Edit", new { id = item.idColor }) |
-                                @*@Html.ActionLink("Details", "Details", new { id = item.idColor }) |*@
-                                @Html.ActionLink("Eliminar", "Delete", new { id = item.idColor })
+                                @Html.ActionLink("Editar", "Edit", new { id = item.idGarantia }) |
+                                @*@Html.ActionLink("Details", "Details", new { id = item.idGarantia }) |*@
+                                @Html.ActionLink("Eliminar", "Delete", new { id = item.idGarantia })
                             </td>
                         </tr>
                     }

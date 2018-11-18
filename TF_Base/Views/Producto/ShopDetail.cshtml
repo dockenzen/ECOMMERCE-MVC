@@ -4,7 +4,8 @@
     ViewBag.Title = "ShopDetail";
     Layout = "~/Views/Shared/_eCommerceLayout.cshtml";
 
-    var categoriaPadre = Model.Categoria.Categoria1.Count == 0 ? "" : Model.Categoria.Categoria1.FirstOrDefault(c => c != null).descripcion;
+    //var categoriaPadre = Model.Categoria.Categoria1.Count == 0 ? "" : Model.Categoria.Categoria1.FirstOrDefault(c => c != null).descripcion;
+    var categoriaPadre = Model.SubCategoria.Categoria.descripcion;
 }
 
 
@@ -12,14 +13,14 @@
     <div id="heading-breadcrumbs">
         <div class="container">
             <div class="row d-flex align-items-center flex-wrap">
-                <div class="col-md-7">
-                    <h1 class="h2">@Model.descripcion color @Model.Color.descripcion</h1>
+                <div class="col-md-6">
+                    <h1 class="h2">@Model.descripcion</h1>
                 </div>
-                <div class="col-md-5">
+                <div class="col-md-6">
                     <ul class="breadcrumb d-flex justify-content-end">
                         <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
-                        <li class="breadcrumb-item"><a href="shop-category-left.html">@Model.Categoria.descripcion</a></li>
                         <li class="breadcrumb-item"><a href="shop-category-left.html">@categoriaPadre</a></li>
+                        <li class="breadcrumb-item"><a href="shop-category-left.html">@Model.SubCategoria.descripcion</a></li>
                         <li class="breadcrumb-item active">@Model.descripcion</li>
                     </ul>
                 </div>
