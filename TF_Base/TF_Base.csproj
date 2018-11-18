@@ -137,6 +137,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\ColorsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CuponsController.cs" />
     <Compile Include="Areas\Admin\Controllers\SharedController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DatosPersonalesController.cs" />
@@ -639,6 +640,11 @@
     <Content Include="Areas\Admin\Views\Colors\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Colors\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Colors\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Cupons\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Cupons\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Cupons\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Cupons\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Cupons\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

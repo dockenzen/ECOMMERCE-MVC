@@ -1,0 +1,71 @@
+﻿@model IEnumerable<TF_Base.Models.Cupon>
+
+    @{
+        ViewBag.Title = "Index";
+        Layout = "~/Areas/Admin/Views/Shared/AdminLayout.cshtml";
+    }
+
+    <div class="col-lg-10">
+        <p>
+            @Html.ActionLink("Crear Nuevo", "Create", "Cupons", null, new { @class = "btn btn-primary" })
+        </p>
+    </div>
+
+    <div class="col-lg-10">
+        <div class="card">
+            <div class="card-header">
+                <h6 class="text-uppercase mb-0">Cupones</h6>
+            </div>
+            <div class="card-body">
+                <table class="table table-striped table-hover card-text">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.cantidad)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.codigo)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.fechaCaducidad)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.porcentajeDescuento)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.descripcion)
+                            </th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.cantidad)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.codigo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.fechaCaducidad)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.porcentajeDescuento)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.descripcion)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Editar", "Edit", new { id = item.idCupon }) |
+                                    @*@Html.ActionLink("Details", "Details", new { id = item.idCupon }) |*@
+                                    @Html.ActionLink("Eliminar", "Delete", new { id = item.idCupon })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
