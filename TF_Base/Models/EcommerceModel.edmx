@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ecommerceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ecommerceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="BlackList">
           <Key>
             <PropertyRef Name="idPenalizacion" />
@@ -92,8 +92,7 @@
           </Key>
           <Property Name="idGarantia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="descripcion" Type="varchar" MaxLength="150" Nullable="false" />
-          <Property Name="fechaInicio" Type="date" Nullable="false" />
-          <Property Name="fechaFin" Type="date" Nullable="false" />
+          <Property Name="duracion" Type="int" />
         </EntityType>
         <EntityType Name="ImagenProducto">
           <Key>
@@ -811,8 +810,7 @@
             <End Role="WishList" EntitySet="WishList" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ecommerceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -917,9 +915,8 @@
           </Key>
           <Property Name="idGarantia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="fechaInicio" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="fechaFin" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="Producto" Relationship="Self.FK_Producto_Garantia" FromRole="Garantia" ToRole="Producto" />
+          <Property Name="duracion" Type="Int32" />
         </EntityType>
         <EntityType Name="ImagenProducto">
           <Key>
@@ -1747,11 +1744,10 @@
           <EntitySetMapping Name="Garantia">
             <EntityTypeMapping TypeName="ecommerceModel.Garantia">
               <MappingFragment StoreEntitySet="Garantia">
+                <ScalarProperty Name="duracion" ColumnName="duracion" />
                 <ScalarProperty Name="idGarantia" ColumnName="idGarantia" />
                 <ScalarProperty Name="descripcion" ColumnName="descripcion" />
-                <ScalarProperty Name="fechaInicio" ColumnName="fechaInicio" />
-                <ScalarProperty Name="fechaFin" ColumnName="fechaFin" />
-              </MappingFragment>
+                </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ImagenProducto">

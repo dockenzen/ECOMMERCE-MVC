@@ -22,8 +22,7 @@ namespace TF_Base.Models
     
         public int idGarantia { get; set; }
         public string descripcion { get; set; }
-        public System.DateTime fechaInicio { get; set; }
-        public System.DateTime fechaFin { get; set; }
+        public Nullable<int> duracion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Producto> Producto { get; set; }
