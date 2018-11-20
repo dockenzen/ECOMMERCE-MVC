@@ -152,6 +152,16 @@ namespace TF_Base.Controllers
         }
 
         [HttpPost]
+        public ActionResult ShopCategory(SubCategoria subcategoria)
+        {
+            var producto = db.Producto.Where(p => p.SubCategoria == subcategoria);
+            ViewBag.Categorias = db.Categoria.ToList();
+            ViewBag.SubCategorias = db.SubCategoria.ToList();
+            ViewBag.Colores = db.Color.ToList();
+            return View(producto.ToList());
+        }
+
+        [HttpPost]
         public ActionResult ShopCategory(FormCollection form)
         {
             List<int> listaFiltro = new List<int>();
@@ -163,6 +173,7 @@ namespace TF_Base.Controllers
             }
             var productos = db.Producto.Join(listaFiltro, p => p.idColor, l => l, (p, l) => new { Prod = p, Col = l }).Where(p => p.Prod.idColor == p.Col).Select(p => p.Prod).ToList();
             ViewBag.Categorias = db.Categoria.ToList();
+            ViewBag.SubCategorias = db.SubCategoria.ToList();
             ViewBag.Colores = db.Color.ToList();
             return View(productos.ToList());
         }

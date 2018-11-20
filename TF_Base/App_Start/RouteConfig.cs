@@ -17,7 +17,14 @@ namespace TF_Base
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Shared", action = "Home", id = UrlParameter.Optional },
-                namespaces: new string [] { "TF_Base.Controllers" }
+                namespaces: new string[] { "TF_Base.Controllers" }
+            );
+
+            routes.MapRoute(
+                name: "ShopCategory",
+                url: "Producto/{action}/{subcategoria}",
+                defaults: new { action = "ShopCategory", subcategoria = UrlParameter.Optional },
+                namespaces: new string[] { "TF_Base.Controllers" }
             );
         }
     }
