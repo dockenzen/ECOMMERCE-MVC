@@ -152,9 +152,9 @@ namespace TF_Base.Controllers
         }
 
         [HttpPost]
-        public ActionResult ShopCategory(SubCategoria subcategoria)
+        public ActionResult ShopCategory(int idSubcategoria)
         {
-            var producto = db.Producto.Where(p => p.SubCategoria == subcategoria);
+            var producto = db.Producto.Where(p => p.SubCategoria.idSubCategoria == idSubcategoria);
             ViewBag.Categorias = db.Categoria.ToList();
             ViewBag.SubCategorias = db.SubCategoria.ToList();
             ViewBag.Colores = db.Color.ToList();

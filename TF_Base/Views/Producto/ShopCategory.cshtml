@@ -43,7 +43,7 @@
                                         @foreach (var subcategoria in subcategorias.Where(c => c.idCategoria == categoria.idCategoria))
                                         {
                                             <li class="nav-item"><a href="shop-category-left.html" class="nav-link">@subcategoria.descripcion</a></li>
-                                            <li class="nav-item">@Html.ActionLink(subcategoria.descripcion, "ShopCategory", "Producto", subcategoria, new { @class = "nav-link" })</li>
+                                            <li class="nav-item">@*@Html.ActionLink(subcategoria.descripcion, "ShopCategory", "Producto", new { idSubcategoria = subcategoria.idSubCategoria }, new { @class = "nav-link" })*@</li>
                                         }
                                     </ul>
                                 </li>
