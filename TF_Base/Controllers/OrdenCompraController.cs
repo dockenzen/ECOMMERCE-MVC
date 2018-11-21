@@ -18,9 +18,9 @@ namespace TF_Base.Controllers
 
         public ActionResult ShopBasket()
         {
-            /*var ordencompra = db.OrdenCompra.Include(o => o.Cupon).Include(o => o.OrdenCompraEstado).Include(o => o.Pago).Include(o => o.Sucursal).Include(o => o.Usuario);
-            */
-            return View();
+            var ordencompra = db.OrdenCompra.Include(o => o.OrdenCompraEstado).Include(o => o.Sucursal);
+            
+            return View(ordencompra.First());
         }
 
         //
@@ -96,22 +96,29 @@ namespace TF_Base.Controllers
             return RedirectToAction("Index");
         }
 
+        [ActionName("DeleteDetalle")]
+        public ActionResult DeleteDetalle(int id = 0)
+        {
+            if (id != 0)
+            {
+                OrdenCompraDetalle ordenCompraDetalle = db.OrdenCompraDetalle.Find(id);
+                db.OrdenCompraDetalle.Remove(ordenCompraDetalle);
+                db.SaveChanges();
+            }
+            return RedirectToAction("ShopBasket");
+        }
+
         protected override void Dispose(bool disposing)
         {
             db.Dispose();
             base.Dispose(disposing);
         }
 
-        public ActionResult ShopCheckoutStep1()
-        {
-            return View();
-        }
-
-        [HttpPost]
         public ActionResult ShopCheckoutStep1(int id = 0)
         {
             return View();
         }
+        
 
         public ActionResult ShopCheckoutStep2()
         {

@@ -11,6 +11,7 @@ namespace TF_Base.Controllers
 {
     public class AccountController : Controller
     {
+        ecommerceEntities db = new ecommerceEntities();
         //
         // GET: /Account/Login
         public ActionResult Login()
@@ -28,7 +29,12 @@ namespace TF_Base.Controllers
                 bool res = WebSecurity.Login(login.UserName, login.Password, login.RememberMe);
                 if (res)
                 {
-                    return RedirectToAction("ShopCategory", "Producto");
+                    String[] roles = Roles.GetRolesForUser(login.UserName);
+
+                    if (roles.FirstOrDefault(r => r.Equals("Admin")) != null)
+                        return RedirectToAction("Home", "Admin/Shared");
+                    else
+                        return RedirectToAction("ShopCategory", "Producto");
                 }
             }
 
@@ -68,10 +74,14 @@ namespace TF_Base.Controllers
                 try
                 {
                     WebSecurity.CreateUserAndAccount(registro.UserName, registro.Password, new { Email = registro.UserEmail, idEstadoUsuario = 1 });
-                    if(WebSecurity.Login(registro.UserName, registro.Password))
+
+                    if (WebSecurity.UserExists(registro.UserName))
+                        Roles.AddUserToRole(registro.UserName, "Cliente");
+
+                    if (WebSecurity.Login(registro.UserName, registro.Password))
                         return RedirectToAction("ShopCategory", "Producto");
                     else
-                    return RedirectToAction("Home", "Shared");
+                        return RedirectToAction("Home", "Shared");
                 }
                 catch (MembershipCreateUserException e)
                 {

@@ -8,12 +8,12 @@
         <div class="container">
             <div class="row d-flex align-items-center flex-wrap">
                 <div class="col-md-7">
-                    <h1 class="h2">Checkout - Address</h1>
+                    <h1 class="h2">Direccion de envio</h1>
                 </div>
                 <div class="col-md-5">
                     <ul class="breadcrumb d-flex justify-content-end">
                         <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                        <li class="breadcrumb-item active">Checkout - Address</li>
+                        <li class="breadcrumb-item active">Direccion de envio</li>
                     </ul>
                 </div>
             </div>
@@ -24,13 +24,22 @@
             <div class="row">
                 <div id="checkout" class="col-lg-9">
                     <div class="box border-bottom-0">
-                        <form method="get" action="shop-checkout2.html">
+                        @using (Html.BeginForm())
+                        {
                             <ul class="nav nav-pills nav-fill">
                                 <li class="nav-item"><a href="shop-checkout1.html" class="nav-link active"> <i class="fa fa-map-marker"></i><br>Dirección</a></li>
                                 <li class="nav-item"><a href="#" class="nav-link disabled"><i class="fa fa-truck"></i><br>Método de entrega</a></li>
                                 <li class="nav-item"><a href="#" class="nav-link disabled"><i class="fa fa-money"></i><br>Método de pago</a></li>
                                 <li class="nav-item"><a href="#" class="nav-link disabled"><i class="fa fa-eye"></i><br>Revisión del pedido</a></li>
                             </ul>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        @Html.CheckBox("usarDireccionContacto") Enviar a la direccion de contacto
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
                             <div class="content">
                                 <div class="row">
                                     <div class="col-sm-6">
@@ -47,12 +56,6 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label for="company">Empresa</label>
-                                            <input id="company" type="text" class="form-control">
-                                        </div>
-                                    </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="street">Calle</label>
@@ -100,12 +103,18 @@
                                 </div>
                             </div>
                             <div class="box-footer d-flex flex-wrap align-items-center justify-content-between">
-                                <div class="left-col"><a href="shop-basket.html" class="btn btn-secondary mt-0"><i class="fa fa-chevron-left"></i>Volver a la cesta</a></div>
+                                <div class="left-col">
+                                    <a href="@Url.Action("ShopBasket","OrdenCompra")" class="btn btn-secondary mt-0">
+                                        <i class="fa fa-chevron-left"></i>Volver a la cesta
+                                    </a>
+                                </div>
                                 <div class="right-col">
-                                    <button type="submit" class="btn btn-template-main">Continuar con el método de entrega<i class="fa fa-chevron-right"></i></button>
+                                    <a href="@Url.Action("ShopCheckoutStep2","OrdenCompra")" class="btn btn-template-main">
+                                        Continuar con el método de entrega<i class="fa fa-chevron-right"></i>
+                                    </a>
                                 </div>
                             </div>
-                        </form>
+                        }
                     </div>
                 </div>
                 <div class="col-lg-3">

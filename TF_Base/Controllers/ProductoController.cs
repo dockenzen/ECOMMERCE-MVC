@@ -202,7 +202,20 @@ namespace TF_Base.Controllers
 
         public ActionResult AgregarProductoCarrito(int id = 0)
         {
-            return View();
+            OrdenCompra ordenCompra = new OrdenCompra
+            {
+                idUsuario = WebMatrix.WebData.WebSecurity.CurrentUserId
+            };
+
+            ordenCompra.OrdenCompraDetalle.Add(new OrdenCompraDetalle
+            {
+                cantidad = 1,
+                Producto = db.Producto.Find(id),
+            });
+
+            db.OrdenCompra.Add(ordenCompra);
+            db.SaveChanges();
+            return RedirectToAction("ShopBasket","OrdenCompra");
         }
 
     }
