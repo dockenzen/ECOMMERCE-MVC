@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using TF_Base.Models;
@@ -118,21 +119,16 @@ namespace TF_Base.Controllers
         {
             return View();
         }
-        
-
-        public ActionResult ShopCheckoutStep2()
-        {
-            return View();
-        }
-
-        public ActionResult ShopCheckoutStep3()
-        {
-            return View();
-        }
 
         public ActionResult ShopCheckoutStep4()
         {
             return View();
+        }
+
+        private bool ValidarNumeroTarjetaIngresada(string numero)
+        {
+            Regex regex = new Regex("/^(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\\d{3})\\d{11})$/");
+            return regex.IsMatch(numero);
         }
     }
 }

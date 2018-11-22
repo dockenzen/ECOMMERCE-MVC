@@ -733,8 +733,6 @@
     <Content Include="Views\Usuario\CustomerOrders.cshtml" />
     <Content Include="Views\Producto\ShopCategory.cshtml" />
     <Content Include="Views\OrdenCompra\ShopCheckoutStep1.cshtml" />
-    <Content Include="Views\OrdenCompra\ShopCheckoutStep2.cshtml" />
-    <Content Include="Views\OrdenCompra\ShopCheckoutStep3.cshtml" />
     <Content Include="Views\OrdenCompra\ShopCheckoutStep4.cshtml" />
     <Content Include="Views\OrdenCompra\Create.cshtml" />
     <Content Include="Views\OrdenCompra\Delete.cshtml" />

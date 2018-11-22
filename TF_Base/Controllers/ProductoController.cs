@@ -172,7 +172,7 @@ namespace TF_Base.Controllers
         {
             var producto = db.Producto.Find(id);
 
-            ViewBag.Talles = new SelectList(db.Talle.ToList(), "idTalle", "descripcion", producto.Talle.idTalle);
+            ViewBag.Talles = new SelectList(db.Talle.Where(T => T.idTalle == producto.idTalle).ToList(), "idTalle", "descripcion", producto.Talle.idTalle);
             ViewBag.ProductosAlAzar = db.Producto.Where(p => p.SubCategoria.idCategoria == producto.idSubCategoria).Take(3).ToList();
 
             return View(producto);

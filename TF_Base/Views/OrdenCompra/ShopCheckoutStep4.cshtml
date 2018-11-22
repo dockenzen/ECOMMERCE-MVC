@@ -26,10 +26,8 @@
                     <div class="box">
                         <form method="get" action="shop-checkout4.html">
                             <ul class="nav nav-pills nav-fill">
-                                <li class="nav-item"><a href="shop-checkout1.html" class="nav-link active"> <i class="fa fa-map-marker"></i><br>Dirección</a></li>
-                                <li class="nav-item"><a href="#" class="nav-link disabled"><i class="fa fa-truck"></i><br>Método de entrega</a></li>
-                                <li class="nav-item"><a href="#" class="nav-link disabled"><i class="fa fa-money"></i><br>Método de pago</a></li>
-                                <li class="nav-item"><a href="#" class="nav-link disabled"><i class="fa fa-eye"></i><br>Revisión del pedido</a></li>
+                                <li class="nav-item"><a href="shop-checkout1.html" class="nav-link disabled"> <i class="fa fa-address-book"></i><br>Datos del pedido</a></li>
+                                <li class="nav-item"><a href="#" class="nav-link active disabled"><i class="fa fa-eye"></i><br>Revisión del pedido</a></li>
                             </ul>
                         </form>
                         <div class="content">
@@ -72,7 +70,10 @@
                             </div>
                         </div>
                         <div class="box-footer d-flex flex-wrap align-items-center justify-content-between">
-                            <div class="left-col"><a href="shop-checkout3.html" class="btn btn-secondary mt-0"><i class="fa fa-chevron-left"></i>Volver al método de pago</a></div>
+
+                            <div class="left-col">
+                                <a href="@Url.Action("ShopCheckoutStep1","OrdenCompra")" class="btn btn-secondary mt-0"><i class="fa fa-chevron-left"></i>Volver al método de pago</a>
+                            </div>
                             <div class="right-col">
                                 <button type="submit" class="btn btn-template-main">Hacer el pedido<i class="fa fa-chevron-right"></i></button>
                             </div>
