@@ -142,19 +142,11 @@ namespace TF_Base.Controllers
         }
 
         [HttpGet]
-        public ActionResult ShopCategory()
+        public ActionResult ShopCategory(int? idSubcategoria = null)
         {
             var producto = db.Producto.Include(p => p.SubCategoria).Include(p => p.Color).Include(p => p.Talle);
-            ViewBag.Categorias = db.Categoria.ToList();
-            ViewBag.SubCategorias = db.SubCategoria.ToList();
-            ViewBag.Colores = db.Color.ToList();
-            return View(producto.ToList());
-        }
-
-        [HttpPost]
-        public ActionResult ShopCategory(int idSubcategoria)
-        {
-            var producto = db.Producto.Where(p => p.SubCategoria.idSubCategoria == idSubcategoria);
+            if(idSubcategoria.HasValue)
+                producto = producto.Where(p => p.SubCategoria.idSubCategoria == idSubcategoria);
             ViewBag.Categorias = db.Categoria.ToList();
             ViewBag.SubCategorias = db.SubCategoria.ToList();
             ViewBag.Colores = db.Color.ToList();
@@ -165,17 +157,23 @@ namespace TF_Base.Controllers
         public ActionResult ShopCategory(FormCollection form)
         {
             List<int> listaFiltro = new List<int>();
+            List<Producto> productos = new List<Producto>();
             foreach (Color color in db.Color.ToList())
             {
                 var sarasa = form.GetValues(color.idColor.ToString());
                 if (sarasa.Contains("true"))
                     listaFiltro.Add(color.idColor);
             }
-            var productos = db.Producto.Join(listaFiltro, p => p.idColor, l => l, (p, l) => new { Prod = p, Col = l }).Where(p => p.Prod.idColor == p.Col).Select(p => p.Prod).ToList();
+
+            if (listaFiltro.Count > 0)
+               productos = db.Producto.Join(listaFiltro, p => p.idColor, l => l, (p, l) => new { Prod = p, Col = l }).Where(p => p.Prod.idColor == p.Col).Select(p => p.Prod).ToList();
+            else
+               productos = db.Producto.ToList();
+
             ViewBag.Categorias = db.Categoria.ToList();
             ViewBag.SubCategorias = db.SubCategoria.ToList();
             ViewBag.Colores = db.Color.ToList();
-            return View(productos.ToList());
+            return View(productos);
         }
 
         [HttpGet]

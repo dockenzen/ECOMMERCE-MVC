@@ -42,8 +42,7 @@
                                     <ul class="nav nav-pills flex-column">
                                         @foreach (var subcategoria in subcategorias.Where(c => c.idCategoria == categoria.idCategoria))
                                         {
-                                            <li class="nav-item"><a href="shop-category-left.html" class="nav-link">@subcategoria.descripcion</a></li>
-                                            <li class="nav-item">@*@Html.ActionLink(subcategoria.descripcion, "ShopCategory", "Producto", new { idSubcategoria = subcategoria.idSubCategoria }, new { @class = "nav-link" })*@</li>
+                                            <li class="nav-item">@Html.ActionLink(subcategoria.descripcion, "ShopCategory", "Producto", new { idSubcategoria = subcategoria.idSubCategoria }, new { @class = "nav-link" })</li>
                                         }
                                     </ul>
                                 </li>
@@ -87,7 +86,7 @@
                                     <h3 class="h5">
                                         <a href="@Url.Action("ShopDetail","Producto", new { id = sarasa.idProducto })">@sarasa.descripcion</a>
                                     </h3>
-                                    @*<del>$600</del>*@<p class="price">$@sarasa.precioUnitario</p>
+                                    <p class="price">$@sarasa.precioUnitario</p>
                                 </div>
                             </div>
                         </div>
