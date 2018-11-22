@@ -38,11 +38,11 @@
                             @foreach (var categoria in categorias)
                             {
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link d-flex align-items-center justify-content-between"><span>@categoria.descripcion</span><span class="badge badge-secondary">42</span></a>
+                                    <a href="#" class="nav-link d-flex align-items-center justify-content-between"><span>@categoria.descripcion</span><span class="badge badge-secondary">@Model.Where(p => p.SubCategoria.idCategoria == categoria.idCategoria).Count()</span></a>
                                     <ul class="nav nav-pills flex-column">
-                                        @foreach (var subcategoria in subcategorias.Where(c => c.idCategoria==categoria.idCategoria))
+                                        @foreach (var subcategoria in subcategorias.Where(c => c.idCategoria == categoria.idCategoria))
                                         {
-                                                <li class="nav-item"><a href="shop-category-left.html" class="nav-link">@subcategoria.descripcion</a></li>
+                                            <li class="nav-item">@Html.ActionLink(subcategoria.descripcion, "ShopCategory", "Producto", new { idSubcategoria = subcategoria.idSubCategoria }, new { @class = "nav-link" })</li>
                                         }
                                     </ul>
                                 </li>
@@ -86,7 +86,7 @@
                                     <h3 class="h5">
                                         <a href="@Url.Action("ShopDetail","Producto", new { id = sarasa.idProducto })">@sarasa.descripcion</a>
                                     </h3>
-                                    @*<del>$600</del>*@<p class="price">$@sarasa.precioUnitario</p>
+                                    <p class="price">$@sarasa.precioUnitario</p>
                                 </div>
                             </div>
                         </div>

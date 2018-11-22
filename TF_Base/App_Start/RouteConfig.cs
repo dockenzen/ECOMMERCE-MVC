@@ -17,7 +17,7 @@ namespace TF_Base
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Shared", action = "Home", id = UrlParameter.Optional },
-                namespaces: new string [] { "TF_Base.Controllers" }
+                namespaces: new string[] { "TF_Base.Controllers" }
             );
         }
     }
