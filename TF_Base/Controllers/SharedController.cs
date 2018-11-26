@@ -29,6 +29,10 @@ namespace TF_Base.Controllers
         //GET
         public ActionResult About()
         {
+            ViewData.Add("VENTAS", db.OrdenCompra.Where(e => e.OrdenCompraEstado.idEstadoOrden == 5).Count().ToString());
+            ViewData.Add("CLIENTES",db.Usuario.Count());
+            ViewData.Add("SUCURSALES",db.Sucursal.Count().ToString());
+            ViewData.Add("PRODUCTOS", db.Producto.Count().ToString());
             return View();
         }
 

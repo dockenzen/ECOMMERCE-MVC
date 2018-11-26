@@ -23,10 +23,10 @@ namespace TF_Base.Models
     
         public int idOrdenCompra { get; set; }
         public int idUsuario { get; set; }
-        public int idSucursal { get; set; }
+        public Nullable<int> idSucursal { get; set; }
         public Nullable<int> idCupon { get; set; }
-        public int idOrdenCompraEnvio { get; set; }
-        public int idPago { get; set; }
+        public Nullable<int> idOrdenCompraEnvio { get; set; }
+        public Nullable<int> idPago { get; set; }
         public int idEstadoOrden { get; set; }
         public Nullable<System.DateTime> fechaCompra { get; set; }
     

@@ -14,12 +14,10 @@ namespace TF_Base.Models
     
     public partial class ImagenProducto
     {
-        public Nullable<int> idProducto { get; set; }
-        public decimal peso { get; set; }
-        public string url { get; set; }
-        public string extension { get; set; }
-        public Nullable<bool> esCarrusel { get; set; }
         public int id { get; set; }
+        public string url { get; set; }
+        public bool esCarrusel { get; set; }
+        public int idProducto { get; set; }
     
         public virtual Producto Producto { get; set; }
     }

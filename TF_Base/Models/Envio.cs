@@ -23,7 +23,9 @@ namespace TF_Base.Models
         public int idEnvio { get; set; }
         public System.DateTime fechaEntrega { get; set; }
         public decimal costoEnvio { get; set; }
+        public Nullable<int> idDireccion { get; set; }
     
+        public virtual Direccion Direccion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrdenCompraEnvio> OrdenCompraEnvio { get; set; }
     }

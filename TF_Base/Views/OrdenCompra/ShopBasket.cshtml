@@ -32,125 +32,110 @@
                 <div id="basket" class="col-lg-9">
                     <div class="box mt-0 pb-0 no-horizontal-padding">
                         <form method="get" action="shop-checkout1.html">
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th colspan="2">Producto</th>
-                                            <th>Cantidad</th>
-                                            <th>Precio Unitario</th>
-                                            <th>Descuento</th>
-                                            <th colspan="2">Total</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach (var detalle in Model.OrdenCompraDetalle)
-                                        {
-                                            <tr>
-                                                <td>
-                                                    <a href="#">
-                                                        <img src="@Url.Content(detalle.Producto.ImagenProducto.First().url)" alt="@detalle.Producto.descripcion" class="img-fluid">
-                                                    </a>
-                                                </td>
-                                                <td>
-                                                    <a href="#">@detalle.Producto.descripcion</a>
-                                                </td>
-                                                <td>
-                                                    @Html.TextBox("cantidad", detalle.cantidad.ToString(), new { @class = "form-control" })
-                                                </td>
-                                                <td>$ @detalle.Producto.precioUnitario</td>
-                                                <td>$0.00</td>
-                                                <td>$ @(detalle.Producto.precioUnitario * detalle.cantidad)</td>
-                                                <td>
-                                                    <a href="@Url.Action("DeleteDetalle", new { id = detalle.idDetalleOrden }) ">
-                                                        <i class="fa fa-trash-o"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        }
-                                    </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th colspan="5">Total</th>
-                                            <th colspan="2">$ @Model.OrdenCompraDetalle.Sum(ocd => ocd.cantidad * ocd.Producto.precioUnitario)</th>
-                                        </tr>
-                                    </tfoot>
-                                </table>
-                            </div>
-                            <div class="box-footer d-flex justify-content-between align-items-center">
-                                <div class="left-col">
-                                    <a href="@Url.Action("ShopCategory","Producto")" class="btn btn-secondary mt-0">
-                                        <i class="fa fa-chevron-left"></i> CONTINUAR COMPRANDO
-                                    </a>
-                                </div>
-                                <div class="right-col">
-                                    <button class="btn btn-secondary">
-                                        <i class="fa fa-refresh"></i> ACTUALIZAR CARRITO
-                                    </button>
 
-                                    <a href="@Url.Action("ShopCheckoutStep1","OrdenCompra", new { id = Model.idOrdenCompra })" class="btn btn-template-outlined">
-                                        Pasar por la caja
-                                        <i class="fa fa-chevron-right"></i>
-                                    </a>
+                            @if (Model.OrdenCompraDetalle.Count == 0)
+                            {
+
+                                <h3 class="title">Tu carrito está vacío</h3>
+                                <p class="subtitle">
+                                    ¿No sabés qué comprar? ¡Decenas de productos te esperan!
+                                </p>
+
+                                <div class="box-footer d-flex justify-content-between align-items-center">
+                                    <div class="center-col">
+                                        <a href="@Url.Action("ShopCategory","Producto")" class="btn btn-secondary mt-0">
+                                            <i class="fa fa-chevron-left"></i> Elegir productos
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
+                            }
+                            else
+                            {
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th colspan="2">Producto</th>
+                                                <th>Cantidad</th>
+                                                <th>Precio Unitario</th>
+                                                <th>Descuento</th>
+                                                <th colspan="2">Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var detalle in Model.OrdenCompraDetalle)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        <a href="#">
+                                                            <img src="@Url.Content(detalle.Producto.ImagenProducto.First().url)" alt="@detalle.Producto.descripcion" class="img-fluid">
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <a href="#">@detalle.Producto.descripcion</a>
+                                                    </td>
+                                                    <td>
+                                                        @Html.TextBox("cantidad", detalle.cantidad.ToString(), new { @class = "form-control" })
+                                                    </td>
+                                                    <td>$ @detalle.Producto.precioUnitario</td>
+                                                    <td>$0.00</td>
+                                                    <td>$ @(detalle.Producto.precioUnitario * detalle.cantidad)</td>
+                                                    <td>
+                                                        <a href="@Url.Action("DeleteDetalle", new { id = detalle.idDetalleOrden }) ">
+                                                            <i class="fa fa-trash-o"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th colspan="5">Total</th>
+                                                <th colspan="2">$ @Model.OrdenCompraDetalle.Sum(ocd => ocd.cantidad * ocd.Producto.precioUnitario)</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                                <div class="box-footer d-flex justify-content-between align-items-center">
+                                    <div class="left-col">
+                                        <a href="@Url.Action("ShopCategory","Producto")" class="btn btn-secondary mt-0">
+                                            <i class="fa fa-chevron-left"></i> CONTINUAR COMPRANDO
+                                        </a>
+                                    </div>
+                                    <div class="right-col">
+                                        <button class="btn btn-secondary">
+                                            <i class="fa fa-refresh"></i> ACTUALIZAR CARRITO
+                                        </button>
+
+                                        <a href="@Url.Action("ShopCheckoutStep1","OrdenCompra", new { id = Model.idOrdenCompra })" class="btn btn-template-outlined">
+                                            Pasar por la caja
+                                            <i class="fa fa-chevron-right"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            }
                         </form>
                     </div>
                     <div class="row">
                         <div class="col-lg-3 col-md-6">
-                            <div class="box text-uppercase mt-0 mb-2">
-                                <h3>You may also like these products</h3>
+                            <div class="box text-uppercase mt-0 mb-small">
+                                <h3>Tambien pueden gustarte estos productos</h3>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="product">
-                                <div class="image">
-                                    <a href="@Url.Action("ShopDetail", "Producto")">
-                                        <img src="img/product2.jpg" alt="" class="img-fluid image1">
-                                    </a>
-                                </div>
-                                <div class="text">
-                                    <h3 class="h5">
-                                        <a href="@Url.Action("ShopDetail", "Producto")">
-                                            <img src="img/product2.jpg" alt="" class="img-fluid image1"> Fur coat
-                                        </a>
-                                    </h3>
-                                    <p class="price">$143</p>
+                        @foreach (var producto in (IList<TF_Base.Models.Producto>)ViewBag.ProductosAlAzar)
+                        {
+                            <div class="col-lg-3 col-md-6">
+                                <div class="product">
+                                    <div class="image">
+                                        <a href="@Url.Action("ShopDetail","Producto", new { id = producto.idProducto } )"><img src="@Url.Content(producto.ImagenProducto.FirstOrDefault().url)" alt="" class="img-fluid image1"></a>
+                                    </div>
+                                    <div class="text">
+                                        <h3 class="h5"><a href="shop-detail.html">@producto.descripcion</a></h3>
+                                        <p class="price">$@producto.precioUnitario</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="product">
-                                <div class="image">
-                                    <a href="@Url.Action("ShopDetail", "Producto")">
-                                        <img src="img/product3.jpg" alt="" class="img-fluid image1">
-                                    </a>
-                                </div>
-                                <div class="text">
-                                    <h3 class="h5">
-                                        <a href="@Url.Action("ShopDetail", "Producto")">
-                                            Fur coat
-                                        </a>
-                                    </h3>
-                                    <p class="price">$143</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="product">
-                                <div class="image">
-                                    <a href="@Url.Action("ShopDetail", "Producto")">
-                                        <img src="img/product1.jpg" alt="" class="img-fluid image1">
-                                    </a>
-                                </div>
-                                <div class="text">
-                                    <h3 class="h5">
-                                        <a href="@Url.Action("ShopDetail", "Producto")">Fur coat</a>
-                                    </h3>
-                                    <p class="price">$143</p>
-                                </div>
-                            </div>
-                        </div>
+                        }
                     </div>
                 </div>
                 <div class="col-lg-3">

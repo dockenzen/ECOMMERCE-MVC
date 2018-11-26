@@ -24,12 +24,12 @@ namespace TF_Base.Models
         }
     
         public int idProducto { get; set; }
+        public int idTalle { get; set; }
+        public int idColor { get; set; }
         public int idSubCategoria { get; set; }
         public string descripcion { get; set; }
-        public Nullable<int> idTalle { get; set; }
         public decimal precioUnitario { get; set; }
         public Nullable<int> idGarantia { get; set; }
-        public int idColor { get; set; }
         public Nullable<bool> esDestacado { get; set; }
     
         public virtual Color Color { get; set; }

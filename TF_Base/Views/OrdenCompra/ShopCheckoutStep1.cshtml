@@ -2,18 +2,28 @@
     ViewBag.Title = "ShopCheckoutStep1";
     Layout = "~/Views/Shared/_eCommerceLayout.cshtml";
 }
+<script type="text/javascript">
+    $("#usarDireccionContacto").change(function () {
+        if (this.checked) {
+            alert('Its checked!!');
+        } else {
+            alert('Its not checked!!');
+        }
+    });
+
+</script>
 
 <div id="all">
     <div id="heading-breadcrumbs">
         <div class="container">
             <div class="row d-flex align-items-center flex-wrap">
                 <div class="col-md-7">
-                    <h1 class="h2">Direccion de envio</h1>
+                    <h1 class="h2">Datos de envio</h1>
                 </div>
                 <div class="col-md-5">
                     <ul class="breadcrumb d-flex justify-content-end">
-                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                        <li class="breadcrumb-item active">Direccion de envio</li>
+                        <li class="breadcrumb-item"><a href="@Url.Action("Home","Shared")">Inicio</a></li>
+                        <li class="breadcrumb-item active">Datos de envio</li>
                     </ul>
                 </div>
             </div>
@@ -82,7 +92,7 @@
                                         <div class="row">
                                             <div class="col-sm-6">
                                                 <div class="form-group">
-                                                    @Html.CheckBox("usarDireccionContacto") Enviar a la direccion de contacto
+                                                    @Html.CheckBox("usarDireccionContacto", new { id = "usarDireccionContacto" }) Usar datos de contacto
                                                 </div>
                                             </div>
                                         </div>
@@ -105,38 +115,6 @@
                                             <div class="row">
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
-                                                        <label for="street">Calle</label>
-                                                        <input id="street" type="text" class="form-control">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-sm-6 col-md-3">
-                                                    <div class="form-group">
-                                                        <label for="city">Localidad</label>
-                                                        <input id="city" type="text" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-6 col-md-3">
-                                                    <div class="form-group">
-                                                        <label for="zip">Código postal</label>
-                                                        <input id="zip" type="text" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-6 col-md-3">
-                                                    <div class="form-group">
-                                                        <label for="state">Provincia</label>
-                                                        <select id="state" class="form-control"></select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-6 col-md-3">
-                                                    <div class="form-group">
-                                                        <label for="country">Pais</label>
-                                                        <select id="country" class="form-control"></select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <div class="form-group">
                                                         <label for="phone">Telefono</label>
                                                         <input id="phone" type="text" class="form-control">
                                                     </div>
@@ -148,6 +126,62 @@
                                                     </div>
                                                 </div>
                                             </div>
+
+                                            <hr />
+                                            <div class="row">
+                                                <div class="col-sm-10" id="locationField">
+                                                    <input id="autocomplete" placeholder="Ingrese su direccion de envio" class="form-control"
+                                                           onFocus="geolocate()" type="text" />
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="route">Calle</label>
+                                                        <input class="form-control" id="route"
+                                                               disabled="disabled" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="street_number">Numero</label>
+                                                        <input class="form-control" id="street_number"
+                                                               disabled="disabled" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="locality">Ciudad</label>
+                                                        <input class="form-control" id="locality"
+                                                               disabled="disabled" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="administrative_area_level_1">Provincia</label>
+                                                        <input class="form-control" id="administrative_area_level_1" disabled="disabled" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="postal_code">Zip code</label>
+                                                        <input class="form-control" id="postal_code" disabled="disabled" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="country">Pais</label>
+                                                        <input class="form-control" id="country" disabled="disabled" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -238,3 +272,76 @@
         </div>
     </div>
 </div>
+
+
+<script>
+    // This example displays an address form, using the autocomplete feature
+    // of the Google Places API to help users fill in the information.
+
+    // This example requires the Places library. Include the libraries=places
+    // parameter when you first load the API. For example:
+    // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+    var placeSearch, autocomplete;
+
+    var componentForm = {
+        street_number: 'short_name',
+        route: 'long_name',
+        locality: 'long_name',
+        administrative_area_level_1: 'short_name',
+        country: 'long_name',
+        postal_code: 'short_name'
+    };
+
+    function initAutocomplete() {
+        // Create the autocomplete object, restricting the search to geographical
+        // location types.
+        autocomplete = new google.maps.places.Autocomplete(
+            /** type {!HTMLInputElement} */(document.getElementById('autocomplete')),
+            { types: ['geocode'] });
+
+        // When the user selects an address from the dropdown, populate the address
+        // fields in the form.
+        autocomplete.addListener('place_changed', fillInAddress);
+    }
+
+    function fillInAddress() {
+        // Get the place details from the autocomplete object.
+        var place = autocomplete.getPlace();
+
+        for (var component in componentForm) {
+            document.getElementById(component).value = '';
+            document.getElementById(component).disabled = false;
+        }
+
+        // Get each component of the address from the place details
+        // and fill the corresponding field on the form.
+        for (var i = 0; i < place.address_components.length; i++) {
+            var addressType = place.address_components[i].types[0];
+            if (componentForm[addressType]) {
+                var val = place.address_components[i][componentForm[addressType]];
+                document.getElementById(addressType).value = val;
+            }
+        }
+    }
+
+    // Bias the autocomplete object to the user's geographical location,
+    // as supplied by the browser's 'navigator.geolocation' object.
+    function geolocate() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                var geolocation = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+                var circle = new google.maps.Circle({
+                    center: geolocation,
+                    radius: position.coords.accuracy
+                });
+                autocomplete.setBounds(circle.getBounds());
+            });
+        }
+    }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu5nZKbeK-WHQ70oqOWo-_4VmwOwKP9YQ&libraries=places&callback=initAutocomplete"
+        async defer></script>

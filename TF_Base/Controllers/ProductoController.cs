@@ -145,7 +145,7 @@ namespace TF_Base.Controllers
         public ActionResult ShopCategory(int? idSubcategoria = null)
         {
             var producto = db.Producto.Include(p => p.SubCategoria).Include(p => p.Color).Include(p => p.Talle);
-            if(idSubcategoria.HasValue)
+            if (idSubcategoria.HasValue)
                 producto = producto.Where(p => p.SubCategoria.idSubCategoria == idSubcategoria);
             ViewBag.Categorias = db.Categoria.ToList();
             ViewBag.SubCategorias = db.SubCategoria.ToList();
@@ -166,9 +166,9 @@ namespace TF_Base.Controllers
             }
 
             if (listaFiltro.Count > 0)
-               productos = db.Producto.Join(listaFiltro, p => p.idColor, l => l, (p, l) => new { Prod = p, Col = l }).Where(p => p.Prod.idColor == p.Col).Select(p => p.Prod).ToList();
+                productos = db.Producto.Join(listaFiltro, p => p.idColor, l => l, (p, l) => new { Prod = p, Col = l }).Where(p => p.Prod.idColor == p.Col).Select(p => p.Prod).ToList();
             else
-               productos = db.Producto.ToList();
+                productos = db.Producto.ToList();
 
             ViewBag.Categorias = db.Categoria.ToList();
             ViewBag.SubCategorias = db.SubCategoria.ToList();
@@ -182,7 +182,10 @@ namespace TF_Base.Controllers
             var producto = db.Producto.Find(id);
 
             ViewBag.Talles = new SelectList(db.Talle.Where(T => T.idTalle == producto.idTalle).ToList(), "idTalle", "descripcion", producto.Talle.idTalle);
-            ViewBag.ProductosAlAzar = db.Producto.Where(p => p.SubCategoria.idCategoria == producto.idSubCategoria).Take(3).ToList();
+            //traer los productos donde IdSubCategoria sea igual al del Producto y este contenido dentro del idCategoria 
+            int idCategoria = db.SubCategoria.FirstOrDefault(s => s.idSubCategoria == producto.idSubCategoria).idCategoria;
+            ViewBag.ProductosAlAzar = db.Producto.Where(p => p.SubCategoria.idCategoria == idCategoria).Take(3).ToList();
+
 
             return View(producto);
         }
@@ -206,25 +209,40 @@ namespace TF_Base.Controllers
                 db.WishList.Remove(wish);
                 db.SaveChanges();
             }
-            return RedirectToAction("CustomerWishlist","Usuario");
+            return RedirectToAction("CustomerWishlist", "Usuario");
         }
 
+        [Authorize(Roles = "Cliente")]
         public ActionResult AgregarProductoCarrito(int id = 0)
         {
-            OrdenCompra ordenCompra = new OrdenCompra
-            {
-                idUsuario = WebMatrix.WebData.WebSecurity.CurrentUserId
-            };
+            OrdenCompra ordenCompra = db.OrdenCompra.FirstOrDefault(oc => oc.idUsuario == WebMatrix.WebData.WebSecurity.CurrentUserId && oc.idEstadoOrden == 1);
 
-            ordenCompra.OrdenCompraDetalle.Add(new OrdenCompraDetalle
+            if (ordenCompra == null)
             {
-                cantidad = 1,
-                Producto = db.Producto.Find(id),
-            });
-
-            db.OrdenCompra.Add(ordenCompra);
+                ordenCompra = new OrdenCompra
+                {
+                    idUsuario = WebMatrix.WebData.WebSecurity.CurrentUserId,
+                    idEstadoOrden = 1
+                };
+                db.OrdenCompra.Add(ordenCompra);
+                db.SaveChanges();
+            }
+            if (ordenCompra.OrdenCompraDetalle.Any(detalle => detalle.Producto.idProducto == id))
+            {
+                ordenCompra.OrdenCompraDetalle.First(detalle => detalle.Producto.idProducto == id).cantidad += 1;
+            }
+            else
+            {
+                ordenCompra.OrdenCompraDetalle.Add(new OrdenCompraDetalle
+                {
+                    cantidad = 1,
+                    Producto = db.Producto.Find(id),
+                    OrdenCompra = ordenCompra
+                });
+            }
+            db.Entry(ordenCompra).State = EntityState.Modified;
             db.SaveChanges();
-            return RedirectToAction("ShopBasket","OrdenCompra");
+            return RedirectToAction("ShopBasket", "OrdenCompra");
         }
 
     }

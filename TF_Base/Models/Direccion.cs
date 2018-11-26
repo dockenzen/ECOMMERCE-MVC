@@ -18,6 +18,7 @@ namespace TF_Base.Models
         public Direccion()
         {
             this.DatosPersonales = new HashSet<DatosPersonales>();
+            this.Envio = new HashSet<Envio>();
             this.Sucursal = new HashSet<Sucursal>();
         }
     
@@ -29,6 +30,8 @@ namespace TF_Base.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DatosPersonales> DatosPersonales { get; set; }
         public virtual Localidad Localidad { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Envio> Envio { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Sucursal> Sucursal { get; set; }
     }

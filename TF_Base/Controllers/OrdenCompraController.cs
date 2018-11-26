@@ -16,12 +16,18 @@ namespace TF_Base.Controllers
 
         //
         // GET: /OrdenCompra/
-
+        [Authorize(Roles = "Cliente")]
         public ActionResult ShopBasket()
         {
-            var ordencompra = db.OrdenCompra.Include(o => o.OrdenCompraEstado).Include(o => o.Sucursal);
-            
-            return View(ordencompra.First());
+            OrdenCompra ordencompra = db.OrdenCompra.Include(oc => oc.OrdenCompraDetalle).FirstOrDefault(oc => oc.OrdenCompraEstado.idEstadoOrden == 1 &&
+                                                                     oc.idUsuario == WebMatrix.WebData.WebSecurity.CurrentUserId);
+
+            if (ordencompra == null)
+                ordencompra = new OrdenCompra();
+
+            ViewBag.ProductosAlAzar = db.Producto.OrderByDescending(p => p.Stock.FirstOrDefault().cantidad).ToList();
+
+            return View(ordencompra);
         }
 
         //
