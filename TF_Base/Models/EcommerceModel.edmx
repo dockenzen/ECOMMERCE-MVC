@@ -101,7 +101,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="url" Type="varchar(max)" Nullable="false" />
           <Property Name="esCarrusel" Type="bit" Nullable="false" />
-          <Property Name="idProducto" Type="int" Nullable="false" />
+          <Property Name="idProducto" Type="int" />
         </EntityType>
         <EntityType Name="Localidad">
           <Key>
@@ -373,7 +373,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ImagenProducto_Producto">
-          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+          <End Role="Producto" Type="Self.Producto" Multiplicity="0..1" />
           <End Role="ImagenProducto" Type="Self.ImagenProducto" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Producto">
@@ -949,7 +949,7 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="url" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="esCarrusel" Type="Boolean" Nullable="false" />
-          <Property Name="idProducto" Type="Int32" Nullable="false" />
+          <Property Name="idProducto" Type="Int32" />
           <NavigationProperty Name="Producto" Relationship="Self.FK_ImagenProducto_Producto" FromRole="ImagenProducto" ToRole="Producto" />
         </EntityType>
         <EntityType Name="Localidad">
@@ -1332,7 +1332,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ImagenProducto_Producto">
-          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+          <End Role="Producto" Type="Self.Producto" Multiplicity="0..1" />
           <End Role="ImagenProducto" Type="Self.ImagenProducto" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Producto">

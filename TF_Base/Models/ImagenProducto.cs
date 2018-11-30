@@ -17,7 +17,7 @@ namespace TF_Base.Models
         public int id { get; set; }
         public string url { get; set; }
         public bool esCarrusel { get; set; }
-        public int idProducto { get; set; }
+        public Nullable<int> idProducto { get; set; }
     
         public virtual Producto Producto { get; set; }
     }

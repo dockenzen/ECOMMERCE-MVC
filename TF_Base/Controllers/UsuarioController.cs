@@ -126,6 +126,7 @@ namespace TF_Base.Controllers
             base.Dispose(disposing);
         }
 
+        [Authorize(Roles = "Cliente")]
         public ActionResult CustomerAccount()
         {
             var datos = db.DatosPersonales.FirstOrDefault(d => d.idUsuario == WebMatrix.WebData.WebSecurity.CurrentUserId);
@@ -135,6 +136,7 @@ namespace TF_Base.Controllers
             return View(datos);
         }
 
+        [Authorize(Roles = "Cliente")]
         [HttpPost]
         public ActionResult CustomerAccount(DatosPersonales datos)
         {
@@ -153,7 +155,7 @@ namespace TF_Base.Controllers
             return View(datos);
         }
 
-
+        [Authorize(Roles = "Cliente")]
         public ActionResult CustomerOrder(int id = 0)
         {
             var ordenCompra = db.OrdenCompra.Find(id);
@@ -161,12 +163,14 @@ namespace TF_Base.Controllers
             return View(ordenCompra);
         }
 
+        [Authorize(Roles = "Cliente")]
         public ActionResult CustomerOrders()
         {
             var ordenesCompra = db.OrdenCompra.Where(o => o.idUsuario == WebMatrix.WebData.WebSecurity.CurrentUserId);
             return View(ordenesCompra.ToList());
         }
 
+        [Authorize(Roles = "Cliente")]
         public ActionResult CustomerWishlist()
         {
             //todo iqualitycomparer de distinct x producto.id (?

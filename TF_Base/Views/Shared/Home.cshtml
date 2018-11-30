@@ -2,6 +2,9 @@
 @{
     ViewBag.Title = "Home";
     Layout = "~/Views/Shared/_eCommerceLayout.cshtml";
+
+    IList<TF_Base.Models.ImagenProducto> carusel = (IList<TF_Base.Models.ImagenProducto>)ViewData["Carrusel"];
+    bool banderita = false;
 }
 
 <div id="all">
@@ -18,18 +21,22 @@
             </ul>
             <!-- The slideshow -->
             <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <center><div class="col-md-6"><img src="~/Content/images/bannerImg1.png" alt="" class="img-fluid" style="height: 400px; width: 800px;"></div></center>
-                </div>
-                <div class="carousel-item">
-                    <center><div class="col-md-6"><img src="~/Content/images/bannerImg2.png" alt="" class="img-fluid" style="height: 400px; width: 800px;"></div></center>
-                </div>
-                <div class="carousel-item">
-                    <center><div class="col-md-6"><img src="~/Content/images/bannerImg3.png" alt="" class="img-fluid" style="height: 400px; width: 800px;"></div></center>
-                </div>
-                <div class="carousel-item">
-                    <center><div class="col-md-10"><img src="~/Content/images/bannerImg4.png" alt="" class="img-fluid" style="height: 400px; width: 800px;"></div></center>
-                </div>
+                @foreach (TF_Base.Models.ImagenProducto img in carusel)
+                {
+                    if (!banderita)
+                    {
+                        <div class="carousel-item active">
+                            <center><div class="col-md-6"><img src="@Url.Content(img.url)" alt="" class="img-fluid" style="height: 400px; width: 800px;"></div></center>
+                        </div>
+                        banderita = true;
+                    }
+                    else
+                    {
+                        <div class="carousel-item">
+                            <center><div class="col-md-6"><img src="@Url.Content(img.url)" alt="" class="img-fluid" style="height: 400px; width: 800px;"></div></center>
+                        </div>
+                    }
+                }
             </div>
 
             <!-- Left and right controls -->
@@ -61,11 +68,11 @@
                                         <div class="overlay d-flex align-items-center justify-content-center">
                                             <div class="content">
                                                 <div class="name">
-                                                    <h3>@Html.ActionLink(producto.descripcion, "ShopDetail", "Producto", new { id = producto.idProducto }, new { @class= "color-white"})</h3>
+                                                    <h3>@Html.ActionLink(producto.descripcion, "ShopDetail", "Producto", new { id = producto.idProducto }, new { @class = "color-white" })</h3>
                                                 </div>
                                                 <div class="text">
                                                     <p class="buttons">
-                                                        @Html.ActionLink("Ver", "ShopDetail", "Producto", new { id = producto.idProducto },new { @class = "btn btn-template-outlined-white"})
+                                                        @Html.ActionLink("Ver", "ShopDetail", "Producto", new { id = producto.idProducto }, new { @class = "btn btn-template-outlined-white" })
                                                         <a href="#" class="btn btn-template-outlined-white">Agregar al carrito</a>
                                                     </p>
                                                 </div>
@@ -74,7 +81,7 @@
                                     </div>
                                 </div>
                             </div>
-                        }                        
+                        }
                     </div>
                 </div>
             </div>
