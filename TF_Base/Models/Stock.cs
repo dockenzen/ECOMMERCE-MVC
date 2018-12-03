@@ -18,6 +18,8 @@ namespace TF_Base.Models
         public int idSucursal { get; set; }
         public int idProducto { get; set; }
         public int cantidad { get; set; }
+        public int minimo { get; set; }
+        public int maximo { get; set; }
     
         public virtual Producto Producto { get; set; }
         public virtual Sucursal Sucursal { get; set; }

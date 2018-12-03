@@ -1,0 +1,48 @@
+﻿@model TF_Base.Models.Stock
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="col-lg-10">
+    <div class="card">
+        <div class="card-header">
+            <h6 class="text-uppercase mb-0">Eliminar Stock</h6>
+        </div>
+        <div class="card-body">
+            <p>Seguro que desea eliminar este registro ?</p>
+            <table class="table table-striped table-hover card-text">
+                <thead>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.cantidad)</th>
+                        <th>@Html.DisplayNameFor(model => model.minimo)</th>
+                        <th>@Html.DisplayNameFor(model => model.maximo)</th>
+                        <th>@Html.DisplayNameFor(model => model.Producto.descripcion)</th>
+                        <th>@Html.DisplayNameFor(model => model.Sucursal.descripcion)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>@Html.DisplayFor(model => model.cantidad)</td>
+                        <td>@Html.DisplayFor(model => model.minimo)</td>
+                        <td>@Html.DisplayFor(model => model.maximo)</td>
+                        <td>@Html.DisplayFor(model => model.Producto.descripcion)</td>
+                        <td>@Html.DisplayFor(model => model.Sucursal.descripcion)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="card-body text-center">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color">
+                    <input type="submit" value="Eliminar" class="btn btn-primary" /> |
+                    @Html.ActionLink("Volver a la lista", "Index")
+                </div>
+            }
+        </div>
+    </div>
+</div>

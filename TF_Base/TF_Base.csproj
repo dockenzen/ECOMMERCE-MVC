@@ -141,7 +141,9 @@
     <Compile Include="Areas\Admin\Controllers\GarantiasController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductosController.cs" />
     <Compile Include="Areas\Admin\Controllers\SharedController.cs" />
+    <Compile Include="Areas\Admin\Controllers\StocksController.cs" />
     <Compile Include="Areas\Admin\Controllers\SubCategoriasController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SucursalsController.cs" />
     <Compile Include="Areas\Admin\Controllers\TallesController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DatosPersonalesController.cs" />
@@ -669,6 +671,16 @@
     <Content Include="Models\EcommerceModel.edmx.diagram">
       <DependentUpon>EcommerceModel.edmx</DependentUpon>
     </Content>
+    <Content Include="Areas\Admin\Views\Stocks\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Stocks\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Stocks\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Stocks\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Stocks\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Sucursals\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Sucursals\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Sucursals\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Sucursals\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Sucursals\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Models\EcommerceModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

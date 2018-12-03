@@ -5,67 +5,67 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="fdcc430ceaa4402286c720c79c279cd0" Name="Diagram1">
-        <EntityTypeShape EntityType="ecommerceModel.BlackList" Width="1.5" PointX="5.25" PointY="37" IsExpanded="true" />
-        <EntityTypeShape EntityType="ecommerceModel.Categoria" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ecommerceModel.Color" Width="1.5" PointX="3" PointY="2.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ecommerceModel.Cupon" Width="1.5" PointX="3" PointY="14.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="ecommerceModel.DatosPersonales" Width="1.5" PointX="5.25" PointY="30" IsExpanded="true" />
-        <EntityTypeShape EntityType="ecommerceModel.Direccion" Width="1.5" PointX="0.75" PointY="22.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ecommerceModel.Envio" Width="1.5" PointX="3" PointY="41.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ecommerceModel.EstadoPago" Width="1.5" PointX="0.75" PointY="20.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ecommerceModel.Factura" Width="1.5" PointX="5.25" PointY="16.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ecommerceModel.Garantia" Width="1.5" PointX="3" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ecommerceModel.ImagenProducto" Width="1.5" PointX="7.5" PointY="5.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="ecommerceModel.Localidad" Width="1.5" PointX="1.5" PointY="27.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ecommerceModel.OrdenCompra" Width="1.5" PointX="5.25" PointY="20.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="ecommerceModel.OrdenCompraDetalle" Width="1.5" PointX="7.5" PointY="2.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ecommerceModel.OrdenCompraEnvio" Width="1.5" PointX="7.5" PointY="30.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ecommerceModel.OrdenCompraEstado" Width="1.5" PointX="3" PointY="17.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ecommerceModel.Pago" Width="1.5" PointX="3" PointY="19.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ecommerceModel.Pais" Width="1.5" PointX="1.5" PointY="33.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ecommerceModel.Producto" Width="1.5" PointX="5.25" PointY="4.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="ecommerceModel.Provincia" Width="1.5" PointX="1.5" PointY="30.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ecommerceModel.Stock" Width="1.5" PointX="7.5" PointY="8.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ecommerceModel.SubCategoria" Width="1.5" PointX="3" PointY="5.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="ecommerceModel.Sucursal" Width="1.5" PointX="3" PointY="22.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ecommerceModel.Talle" Width="1.5" PointX="3" PointY="11.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="ecommerceModel.Usuario" Width="1.5" PointX="3" PointY="36.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="ecommerceModel.UsuarioEstado" Width="1.5" PointX="0.75" PointY="36.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ecommerceModel.webpages_Membership" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ecommerceModel.webpages_OAuthMembership" Width="1.5" PointX="9.75" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ecommerceModel.webpages_Roles" Width="1.5" PointX="0.75" PointY="38.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ecommerceModel.WishList" Width="1.5" PointX="10.5" PointY="5.625" IsExpanded="true" />
-        <AssociationConnector Association="ecommerceModel.FK_BlackList_Usuario" ManuallyRouted="false" />
-        <AssociationConnector Association="ecommerceModel.FK__SubCatego__idCat__59904A2C" ManuallyRouted="false" />
-        <AssociationConnector Association="ecommerceModel.FK_Producto_Color" ManuallyRouted="false" />
-        <AssociationConnector Association="ecommerceModel.FK_OrdenCompra_Cupon" ManuallyRouted="false" />
-        <AssociationConnector Association="ecommerceModel.FK_DatosPersonales_Direccion" ManuallyRouted="false" />
-        <AssociationConnector Association="ecommerceModel.FK_DatosPersonales_Usuario" ManuallyRouted="false" />
-        <AssociationConnector Association="ecommerceModel.FK_Direccion_Localidad" ManuallyRouted="false" />
-        <AssociationConnector Association="ecommerceModel.FK_Envio_Direccion" ManuallyRouted="false" />
-        <AssociationConnector Association="ecommerceModel.FK_Sucursal_Direccion" ManuallyRouted="false" />
-        <AssociationConnector Association="ecommerceModel.FK_OrdenCompraEnvio_Envio" ManuallyRouted="false" />
-        <AssociationConnector Association="ecommerceModel.FK_Pago_EstadoPago" ManuallyRouted="false" />
-        <AssociationConnector Association="ecommerceModel.FK_Factura_Pago" ManuallyRouted="false" />
-        <AssociationConnector Association="ecommerceModel.FK_Producto_Garantia" ManuallyRouted="false" />
-        <AssociationConnector Association="ecommerceModel.FK_ImagenProducto_Producto" ManuallyRouted="false" />
-        <AssociationConnector Association="ecommerceModel.FK_Localidad_Provincia" ManuallyRouted="false" />
-        <AssociationConnector Association="ecommerceModel.FK_OrdenCompra_OrdenCompraEstado" ManuallyRouted="false" />
-        <AssociationConnector Association="ecommerceModel.FK_OrdenCompra_Pago" ManuallyRouted="false" />
-        <AssociationConnector Association="ecommerceModel.FK_OrdenCompra_Sucursal" ManuallyRouted="false" />
-        <AssociationConnector Association="ecommerceModel.FK_OrdenCompra_Usuario" ManuallyRouted="false" />
-        <AssociationConnector Association="ecommerceModel.FK_OrdenCompraDetalle_OrdenCompra" ManuallyRouted="false" />
-        <AssociationConnector Association="ecommerceModel.FK_OrdenCompraEnvio_OrdenCompra" ManuallyRouted="false" />
-        <AssociationConnector Association="ecommerceModel.FK_OrdenCompraDetalle_Producto" ManuallyRouted="false" />
-        <AssociationConnector Association="ecommerceModel.FK_Provincia_Pais" ManuallyRouted="false" />
-        <AssociationConnector Association="ecommerceModel.FK_Producto_Categoria" ManuallyRouted="false" />
-        <AssociationConnector Association="ecommerceModel.FK_Producto_Producto" ManuallyRouted="false" />
-        <AssociationConnector Association="ecommerceModel.FK_Stock_Producto" ManuallyRouted="false" />
-        <AssociationConnector Association="ecommerceModel.FK_WishList_Producto" ManuallyRouted="false" />
-        <AssociationConnector Association="ecommerceModel.FK_Stock_Sucursal" ManuallyRouted="false" />
-        <AssociationConnector Association="ecommerceModel.FK_Usuario_Usuario" ManuallyRouted="false" />
-        <AssociationConnector Association="ecommerceModel.FK_WishList_Usuario" ManuallyRouted="false" />
-        <AssociationConnector Association="ecommerceModel.webpages_UsersInRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ecommerceModel.BlackList" Width="1.5" PointX="7.5" PointY="0.75" />
+        <EntityTypeShape EntityType="ecommerceModel.Categoria" Width="1.5" PointX="0.75" PointY="7" />
+        <EntityTypeShape EntityType="ecommerceModel.Color" Width="1.5" PointX="3" PointY="10.125" />
+        <EntityTypeShape EntityType="ecommerceModel.Cupon" Width="1.5" PointX="6" PointY="29" />
+        <EntityTypeShape EntityType="ecommerceModel.DatosPersonales" Width="1.5" PointX="10.5" PointY="14.75" />
+        <EntityTypeShape EntityType="ecommerceModel.Direccion" Width="1.5" PointX="3.75" PointY="20.25" />
+        <EntityTypeShape EntityType="ecommerceModel.Envio" Width="1.5" PointX="6" PointY="11.5" />
+        <EntityTypeShape EntityType="ecommerceModel.EstadoPago" Width="1.5" PointX="3.75" PointY="26.25" />
+        <EntityTypeShape EntityType="ecommerceModel.Factura" Width="1.5" PointX="8.25" PointY="29.125" />
+        <EntityTypeShape EntityType="ecommerceModel.Garantia" Width="1.5" PointX="3" PointY="3.625" />
+        <EntityTypeShape EntityType="ecommerceModel.ImagenProducto" Width="1.5" PointX="7.5" PointY="15.75" />
+        <EntityTypeShape EntityType="ecommerceModel.Localidad" Width="1.5" PointX="1.5" PointY="20.5" />
+        <EntityTypeShape EntityType="ecommerceModel.OrdenCompra" Width="1.5" PointX="8.25" PointY="23.875" />
+        <EntityTypeShape EntityType="ecommerceModel.OrdenCompraDetalle" Width="1.5" PointX="10.5" PointY="6.75" />
+        <EntityTypeShape EntityType="ecommerceModel.OrdenCompraEnvio" Width="1.5" PointX="10.5" PointY="18.625" />
+        <EntityTypeShape EntityType="ecommerceModel.OrdenCompraEstado" Width="1.5" PointX="6" PointY="23.625" />
+        <EntityTypeShape EntityType="ecommerceModel.Pago" Width="1.5" PointX="6" PointY="25.875" />
+        <EntityTypeShape EntityType="ecommerceModel.Pais" Width="1.5" PointX="1.5" PointY="26.75" />
+        <EntityTypeShape EntityType="ecommerceModel.Producto" Width="1.5" PointX="5.25" PointY="5.75" />
+        <EntityTypeShape EntityType="ecommerceModel.Provincia" Width="1.5" PointX="1.5" PointY="23.5" />
+        <EntityTypeShape EntityType="ecommerceModel.Stock" Width="1.5" PointX="7.5" PointY="6.5" />
+        <EntityTypeShape EntityType="ecommerceModel.SubCategoria" Width="1.5" PointX="3" PointY="6.875" />
+        <EntityTypeShape EntityType="ecommerceModel.Sucursal" Width="1.5" PointX="6" PointY="20.25" />
+        <EntityTypeShape EntityType="ecommerceModel.Talle" Width="1.5" PointX="3" PointY="12.5" />
+        <EntityTypeShape EntityType="ecommerceModel.Usuario" Width="1.5" PointX="5.25" PointY="15.25" />
+        <EntityTypeShape EntityType="ecommerceModel.UsuarioEstado" Width="1.5" PointX="3" PointY="17.25" />
+        <EntityTypeShape EntityType="ecommerceModel.webpages_Membership" Width="1.5" PointX="9.75" PointY="1.75" />
+        <EntityTypeShape EntityType="ecommerceModel.webpages_OAuthMembership" Width="1.5" PointX="9.75" PointY="9.75" />
+        <EntityTypeShape EntityType="ecommerceModel.webpages_Roles" Width="1.5" PointX="3" PointY="14.875" />
+        <EntityTypeShape EntityType="ecommerceModel.WishList" Width="1.5" PointX="7.5" PointY="3.875" />
+        <AssociationConnector Association="ecommerceModel.FK_BlackList_Usuario" />
+        <AssociationConnector Association="ecommerceModel.FK__SubCatego__idCat__59904A2C" />
+        <AssociationConnector Association="ecommerceModel.FK_Producto_Color" />
+        <AssociationConnector Association="ecommerceModel.FK_OrdenCompra_Cupon" />
+        <AssociationConnector Association="ecommerceModel.FK_DatosPersonales_Direccion" />
+        <AssociationConnector Association="ecommerceModel.FK_DatosPersonales_Usuario" />
+        <AssociationConnector Association="ecommerceModel.FK_Direccion_Localidad" />
+        <AssociationConnector Association="ecommerceModel.FK_Envio_Direccion" />
+        <AssociationConnector Association="ecommerceModel.FK_Sucursal_Direccion" />
+        <AssociationConnector Association="ecommerceModel.FK_OrdenCompraEnvio_Envio" />
+        <AssociationConnector Association="ecommerceModel.FK_Pago_EstadoPago" />
+        <AssociationConnector Association="ecommerceModel.FK_Factura_Pago" />
+        <AssociationConnector Association="ecommerceModel.FK_Producto_Garantia" />
+        <AssociationConnector Association="ecommerceModel.FK_ImagenProducto_Producto" />
+        <AssociationConnector Association="ecommerceModel.FK_Localidad_Provincia" />
+        <AssociationConnector Association="ecommerceModel.FK_OrdenCompra_OrdenCompraEstado" />
+        <AssociationConnector Association="ecommerceModel.FK_OrdenCompra_Pago" />
+        <AssociationConnector Association="ecommerceModel.FK_OrdenCompra_Sucursal" />
+        <AssociationConnector Association="ecommerceModel.FK_OrdenCompra_Usuario" />
+        <AssociationConnector Association="ecommerceModel.FK_OrdenCompraDetalle_OrdenCompra" />
+        <AssociationConnector Association="ecommerceModel.FK_OrdenCompraEnvio_OrdenCompra" />
+        <AssociationConnector Association="ecommerceModel.FK_OrdenCompraDetalle_Producto" />
+        <AssociationConnector Association="ecommerceModel.FK_Provincia_Pais" />
+        <AssociationConnector Association="ecommerceModel.FK_Producto_Categoria" />
+        <AssociationConnector Association="ecommerceModel.FK_Producto_Producto" />
+        <AssociationConnector Association="ecommerceModel.FK_Stock_Producto" />
+        <AssociationConnector Association="ecommerceModel.FK_WishList_Producto" />
+        <AssociationConnector Association="ecommerceModel.FK_Stock_Sucursal" />
+        <AssociationConnector Association="ecommerceModel.FK_Usuario_Usuario" />
+        <AssociationConnector Association="ecommerceModel.FK_WishList_Usuario" />
+        <AssociationConnector Association="ecommerceModel.webpages_UsersInRoles" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
