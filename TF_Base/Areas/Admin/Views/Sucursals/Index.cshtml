@@ -1,0 +1,49 @@
+﻿@model IEnumerable<TF_Base.Models.Sucursal>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="col-lg-10">
+    <p>
+        @Html.ActionLink("Crear Nuevo", "Create", "Sucursals", null, new { @class = "btn btn-primary" })
+    </p>
+</div>
+
+<div class="col-lg-7">
+    <div class="card">
+        <div class="card-header">
+            <h6 class="text-uppercase mb-0">Sucursales</h6>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped table-hover card-text">
+                <thead>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.telefono)</th>
+                        <th>@Html.DisplayNameFor(model => model.email)</th>
+                        <th>@Html.DisplayNameFor(model => model.descripcion)</th>
+                        <th>@Html.DisplayNameFor(model => model.Direccion.direccion1)</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.telefono)</td>
+                            <td>@Html.DisplayFor(modelItem => item.email)</td>
+                            <td>@Html.DisplayFor(modelItem => item.descripcion)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Direccion.direccion1)</td>
+                            <td>
+                                @Html.ActionLink("Editar", "Edit", new { id = item.idSucursal }) |
+                                @*@Html.ActionLink("Details", "Details", new { id = item.idSucursal }) |*@
+                                @Html.ActionLink("Eliminar", "Delete", new { id = item.idSucursal })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

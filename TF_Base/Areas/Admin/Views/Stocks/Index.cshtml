@@ -1,0 +1,113 @@
+﻿@model IEnumerable<TF_Base.Models.Stock>
+
+    @{
+        ViewBag.Title = "Index";
+        Layout = "~/Areas/Admin/Views/Shared/AdminLayout.cshtml";
+        SelectList Sucursales = ViewBag.Sucursales as SelectList;
+    }
+
+    <div class="col-lg-3">
+        <p>
+            @Html.ActionLink("Crear Nuevo", "Create", "Stocks", null, new { @class = "btn btn-primary" })
+        </p>
+    </div>
+
+    @using (Html.BeginForm("Index", "Stocks", FormMethod.Post, new { @class = "col-lg-6" }))
+    {
+        <div class="col-md-4">
+            @Html.DropDownList("ddlSucursales", Sucursales, "Seleccione una Sucursal", new { @class = "form-control" })
+        </div>
+        <div class="col-md-4">
+            <input type="submit" value="Consultar" class="btn btn-primary" />
+        </div>
+    }
+    <div class="col-lg-10">
+        <div class="card">
+            <div class="card-header">
+                <h6 class="text-uppercase mb-0">Stocks</h6>
+            </div>
+            <div class="card-body">
+                <p>Mostrando stocks de @ViewBag.SeleccionSucursal .</p>
+                <table class="table table-striped table-hover card-text">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Producto.descripcion)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Sucursal.descripcion)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.cantidad)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.minimo)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.maximo)
+                            </th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            if (!(item.cantidad < item.minimo))
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Producto.descripcion)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Sucursal.descripcion)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.cantidad)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.minimo)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.maximo)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.idStock }) |
+                                        @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.idStock })
+                                    </td>
+                                </tr>
+                            }
+                            else
+                            {
+                                <tr style="background-color:rgba(255, 173, 173, 0.52)">
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.cantidad)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.minimo)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.maximo)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Producto.descripcion)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Sucursal.descripcion)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.idStock }) |
+                                        @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.idStock })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6" style="color:red;"> Se necesita stock </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
