@@ -44,6 +44,13 @@ namespace TF_Base.Controllers
             return View();
         }
 
+        //GET
+        public ActionResult Error(string message)
+        {
+
+            ViewBag.MensajeError = message;
+            return View();
+        }
 
     }
 }

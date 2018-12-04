@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "Error";
+    Layout = "~/Views/Shared/_eCommerceLayout.cshtml";
+}
+
+<div id="all">
+    <div id="content">
+        <div class="container">
+            <div id="error-page" class="col-md-8 mx-auto text-center">
+                <div class="box">
+                    <p class="text-center"><a href="@Url.Action("Home", "Shared")"><img src="img/logo.png" alt="Obaju template"></a></p>
+                    <h3>Lo sentimos - Error tramb&oacute;lico</h3>
+                    <h4 class="text-muted">@ViewBag.MensajeError</h4>
+                    <p class="buttons"><a href="@Url.Action("Home", "Shared")" class="btn btn-template-outlined"><i class="fa fa-home"></i> Ir al inicio</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

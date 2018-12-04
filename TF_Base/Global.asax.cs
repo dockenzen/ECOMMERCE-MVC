@@ -26,7 +26,21 @@ namespace TF_Base
 
             //MODIFICAR
             WebSecurity.InitializeDatabaseConnection("DefaultConnection", "Usuario", "idUsuario", "userName", true);
-            
+
+        }
+
+        protected void Application_Error()
+        {
+            Exception exception = Server.GetLastError();
+            Response.Clear();
+
+            if (exception != null)
+            {
+                // clear error on server
+                Server.ClearError();
+
+                Response.Redirect(String.Format("~/Shared/Error?message={0}", exception.Message));
+            }
         }
     }
 }

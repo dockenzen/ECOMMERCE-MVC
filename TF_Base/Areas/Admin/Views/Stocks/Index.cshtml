@@ -12,13 +12,15 @@
         </p>
     </div>
 
-    @using (Html.BeginForm("Index", "Stocks", FormMethod.Post, new { @class = "col-lg-6" }))
+    @using (Html.BeginForm("Index", "Stocks", FormMethod.Post, new { @class = "col-lg-7" }))
     {
-        <div class="col-md-4">
-            @Html.DropDownList("ddlSucursales", Sucursales, "Seleccione una Sucursal", new { @class = "form-control" })
-        </div>
-        <div class="col-md-4">
-            <input type="submit" value="Consultar" class="btn btn-primary" />
+        <div class="form-group">
+            <div class="input-group mb-3">
+                @Html.DropDownList("ddlSucursales", Sucursales, "Seleccione una Sucursal", new { @class = "form-control" })
+            </div>
+            <div class="input-group-append">
+                <input type="submit" value="Consultar" class="btn btn-primary" />
+            </div>
         </div>
     }
     <div class="col-lg-10">
