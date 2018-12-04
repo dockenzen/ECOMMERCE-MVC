@@ -147,6 +147,7 @@
     <Compile Include="Areas\Admin\Controllers\SubCategoriasController.cs" />
     <Compile Include="Areas\Admin\Controllers\SucursalsController.cs" />
     <Compile Include="Areas\Admin\Controllers\TallesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UsuariosController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DatosPersonalesController.cs" />
     <Compile Include="Controllers\OrdenCompraController.cs" />
@@ -696,6 +697,11 @@
     <Content Include="Areas\Admin\Views\CostoEnvios\Details.cshtml" />
     <Content Include="Areas\Admin\Views\CostoEnvios\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\CostoEnvios\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Usuarios\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Usuarios\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Usuarios\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Usuarios\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Usuarios\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Models\EcommerceModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

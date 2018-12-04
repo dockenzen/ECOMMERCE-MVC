@@ -8,9 +8,8 @@
         <EntityType Name="BlackList">
           <Key>
             <PropertyRef Name="idPenalizacion" />
-            <PropertyRef Name="idUsuario" />
           </Key>
-          <Property Name="idPenalizacion" Type="int" Nullable="false" />
+          <Property Name="idPenalizacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="idUsuario" Type="int" Nullable="false" />
           <Property Name="justificacion" Type="varchar" MaxLength="250" Nullable="false" />
           <Property Name="fechaPenalizacion" Type="date" />
@@ -1026,9 +1025,8 @@
         <EntityType Name="BlackList">
           <Key>
             <PropertyRef Name="idPenalizacion" />
-            <PropertyRef Name="idUsuario" />
           </Key>
-          <Property Name="idPenalizacion" Type="Int32" Nullable="false" />
+          <Property Name="idPenalizacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="idUsuario" Type="Int32" Nullable="false" />
           <Property Name="justificacion" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="fechaPenalizacion" Type="DateTime" Precision="0" />
