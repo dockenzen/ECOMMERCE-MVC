@@ -1,0 +1,35 @@
+﻿@model TF_Base.Models.CostoEnvio
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CostoEnvio</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Importe)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Importe)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Localidad.localidad1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Localidad.localidad1)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idCostoEnvio }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

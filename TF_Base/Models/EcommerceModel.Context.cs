@@ -27,6 +27,7 @@ public partial class ecommerceEntities : DbContext
     public virtual DbSet<BlackList> BlackList { get; set; }
     public virtual DbSet<Categoria> Categoria { get; set; }
     public virtual DbSet<Color> Color { get; set; }
+    public virtual DbSet<CostoEnvio> CostoEnvio { get; set; }
     public virtual DbSet<Cupon> Cupon { get; set; }
     public virtual DbSet<DatosPersonales> DatosPersonales { get; set; }
     public virtual DbSet<Direccion> Direccion { get; set; }

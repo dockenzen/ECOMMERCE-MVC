@@ -30,6 +30,14 @@
           <Property Name="idColor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="descripcion" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="CostoEnvio">
+          <Key>
+            <PropertyRef Name="idCostoEnvio" />
+          </Key>
+          <Property Name="idCostoEnvio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idLocalidad" Type="int" Nullable="false" />
+          <Property Name="Importe" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
         <EntityType Name="Cupon">
           <Key>
             <PropertyRef Name="idCupon" />
@@ -309,6 +317,18 @@
             </Principal>
             <Dependent Role="BlackList">
               <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CostoEnvio_Localidad">
+          <End Role="Localidad" Type="Self.Localidad" Multiplicity="1" />
+          <End Role="CostoEnvio" Type="Self.CostoEnvio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Localidad">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CostoEnvio">
+              <PropertyRef Name="idLocalidad" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -676,6 +696,7 @@
           <EntitySet Name="BlackList" EntityType="Self.BlackList" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Categoria" EntityType="Self.Categoria" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Color" EntityType="Self.Color" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CostoEnvio" EntityType="Self.CostoEnvio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cupon" EntityType="Self.Cupon" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DatosPersonales" EntityType="Self.DatosPersonales" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Direccion" EntityType="Self.Direccion" Schema="dbo" store:Type="Tables" />
@@ -711,6 +732,10 @@
           <AssociationSet Name="FK_BlackList_Usuario" Association="Self.FK_BlackList_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="BlackList" EntitySet="BlackList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CostoEnvio_Localidad" Association="Self.FK_CostoEnvio_Localidad">
+            <End Role="Localidad" EntitySet="Localidad" />
+            <End Role="CostoEnvio" EntitySet="CostoEnvio" />
           </AssociationSet>
           <AssociationSet Name="FK_DatosPersonales_Direccion" Association="Self.FK_DatosPersonales_Direccion">
             <End Role="Direccion" EntitySet="Direccion" />
@@ -841,6 +866,7 @@
           <EntitySet Name="BlackList" EntityType="ecommerceModel.BlackList" />
           <EntitySet Name="Categoria" EntityType="ecommerceModel.Categoria" />
           <EntitySet Name="Color" EntityType="ecommerceModel.Color" />
+          <EntitySet Name="CostoEnvio" EntityType="ecommerceModel.CostoEnvio" />
           <EntitySet Name="Cupon" EntityType="ecommerceModel.Cupon" />
           <EntitySet Name="DatosPersonales" EntityType="ecommerceModel.DatosPersonales" />
           <EntitySet Name="Direccion" EntityType="ecommerceModel.Direccion" />
@@ -879,6 +905,10 @@
           <AssociationSet Name="FK_Producto_Color" Association="ecommerceModel.FK_Producto_Color">
             <End Role="Color" EntitySet="Color" />
             <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CostoEnvio_Localidad" Association="ecommerceModel.FK_CostoEnvio_Localidad">
+            <End Role="Localidad" EntitySet="Localidad" />
+            <End Role="CostoEnvio" EntitySet="CostoEnvio" />
           </AssociationSet>
           <AssociationSet Name="FK_OrdenCompra_Cupon" Association="ecommerceModel.FK_OrdenCompra_Cupon">
             <End Role="Cupon" EntitySet="Cupon" />
@@ -1021,6 +1051,15 @@
           <Property Name="descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Producto" Relationship="ecommerceModel.FK_Producto_Color" FromRole="Color" ToRole="Producto" />
         </EntityType>
+        <EntityType Name="CostoEnvio">
+          <Key>
+            <PropertyRef Name="idCostoEnvio" />
+          </Key>
+          <Property Name="idCostoEnvio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idLocalidad" Type="Int32" Nullable="false" />
+          <Property Name="Importe" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <NavigationProperty Name="Localidad" Relationship="ecommerceModel.FK_CostoEnvio_Localidad" FromRole="CostoEnvio" ToRole="Localidad" />
+        </EntityType>
         <EntityType Name="Cupon">
           <Key>
             <PropertyRef Name="idCupon" />
@@ -1114,6 +1153,7 @@
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="localidad1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="idProvincia" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CostoEnvio" Relationship="ecommerceModel.FK_CostoEnvio_Localidad" FromRole="Localidad" ToRole="CostoEnvio" />
           <NavigationProperty Name="Direccion" Relationship="ecommerceModel.FK_Direccion_Localidad" FromRole="Localidad" ToRole="Direccion" />
           <NavigationProperty Name="Provincia" Relationship="ecommerceModel.FK_Localidad_Provincia" FromRole="Localidad" ToRole="Provincia" />
         </EntityType>
@@ -1363,6 +1403,18 @@
             </Principal>
             <Dependent Role="Producto">
               <PropertyRef Name="idColor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CostoEnvio_Localidad">
+          <End Type="ecommerceModel.Localidad" Role="Localidad" Multiplicity="1" />
+          <End Type="ecommerceModel.CostoEnvio" Role="CostoEnvio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Localidad">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CostoEnvio">
+              <PropertyRef Name="idLocalidad" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1724,6 +1776,15 @@
               <MappingFragment StoreEntitySet="Color">
                 <ScalarProperty Name="descripcion" ColumnName="descripcion" />
                 <ScalarProperty Name="idColor" ColumnName="idColor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CostoEnvio">
+            <EntityTypeMapping TypeName="ecommerceModel.CostoEnvio">
+              <MappingFragment StoreEntitySet="CostoEnvio">
+                <ScalarProperty Name="Importe" ColumnName="Importe" />
+                <ScalarProperty Name="idLocalidad" ColumnName="idLocalidad" />
+                <ScalarProperty Name="idCostoEnvio" ColumnName="idCostoEnvio" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -136,7 +136,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\CategoriasController.cs" />
     <Compile Include="Areas\Admin\Controllers\ColorsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CostoEnviosController.cs" />
     <Compile Include="Areas\Admin\Controllers\CuponsController.cs" />
     <Compile Include="Areas\Admin\Controllers\GarantiasController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductosController.cs" />
@@ -162,6 +164,9 @@
       <DependentUpon>EcommerceModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Color.cs">
+      <DependentUpon>EcommerceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CostoEnvio.cs">
       <DependentUpon>EcommerceModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Cupon.cs">
@@ -681,6 +686,16 @@
     <Content Include="Areas\Admin\Views\Sucursals\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Sucursals\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Sucursals\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Categorias\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Categorias\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Categorias\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Categorias\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Categorias\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\CostoEnvios\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\CostoEnvios\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\CostoEnvios\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\CostoEnvios\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\CostoEnvios\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Models\EcommerceModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

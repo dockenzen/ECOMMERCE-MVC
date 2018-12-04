@@ -17,6 +17,7 @@ namespace TF_Base.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Localidad()
         {
+            this.CostoEnvio = new HashSet<CostoEnvio>();
             this.Direccion = new HashSet<Direccion>();
         }
     
@@ -24,6 +25,8 @@ namespace TF_Base.Models
         public string localidad1 { get; set; }
         public int idProvincia { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CostoEnvio> CostoEnvio { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Direccion> Direccion { get; set; }
         public virtual Provincia Provincia { get; set; }
