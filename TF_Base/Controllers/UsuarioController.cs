@@ -129,7 +129,7 @@ namespace TF_Base.Controllers
         [Authorize(Roles = "Cliente")]
         public ActionResult CustomerAccount()
         {
-            var datos = db.DatosPersonales.FirstOrDefault(d => d.idUsuario == WebMatrix.WebData.WebSecurity.CurrentUserId);
+            var datos = db.Usuario.FirstOrDefault(u => u.idUsuario == WebMatrix.WebData.WebSecurity.CurrentUserId).DatosPersonales;
 
             ViewBag.Localidades = new SelectList(db.Localidad, "id", "localidad1", datos.Direccion.idLocalidad);
             

@@ -136,6 +136,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\BancosController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoriasController.cs" />
     <Compile Include="Areas\Admin\Controllers\ColorsController.cs" />
     <Compile Include="Areas\Admin\Controllers\CostoEnviosController.cs" />
@@ -147,6 +148,7 @@
     <Compile Include="Areas\Admin\Controllers\SubCategoriasController.cs" />
     <Compile Include="Areas\Admin\Controllers\SucursalsController.cs" />
     <Compile Include="Areas\Admin\Controllers\TallesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\TarjetasController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsuariosController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DatosPersonalesController.cs" />
@@ -158,6 +160,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\Banco.cs">
+      <DependentUpon>EcommerceModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\BlackList.cs">
       <DependentUpon>EcommerceModel.tt</DependentUpon>
     </Compile>
@@ -246,6 +251,12 @@
       <DependentUpon>EcommerceModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Talle.cs">
+      <DependentUpon>EcommerceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Tarjeta.cs">
+      <DependentUpon>EcommerceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TarjetaUsuario.cs">
       <DependentUpon>EcommerceModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Usuario.cs">
@@ -702,6 +713,16 @@
     <Content Include="Areas\Admin\Views\Usuarios\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Usuarios\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Usuarios\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Bancos\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Bancos\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Bancos\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Bancos\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Bancos\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Tarjetas\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Tarjetas\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Tarjetas\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Tarjetas\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Tarjetas\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Models\EcommerceModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

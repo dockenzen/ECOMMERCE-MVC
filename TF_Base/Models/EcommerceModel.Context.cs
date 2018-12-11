@@ -24,6 +24,7 @@ public partial class ecommerceEntities : DbContext
         throw new UnintentionalCodeFirstException();
     }
 
+    public virtual DbSet<Banco> Banco { get; set; }
     public virtual DbSet<BlackList> BlackList { get; set; }
     public virtual DbSet<Categoria> Categoria { get; set; }
     public virtual DbSet<Color> Color { get; set; }
@@ -49,6 +50,8 @@ public partial class ecommerceEntities : DbContext
     public virtual DbSet<SubCategoria> SubCategoria { get; set; }
     public virtual DbSet<Sucursal> Sucursal { get; set; }
     public virtual DbSet<Talle> Talle { get; set; }
+    public virtual DbSet<Tarjeta> Tarjeta { get; set; }
+    public virtual DbSet<TarjetaUsuario> TarjetaUsuario { get; set; }
     public virtual DbSet<Usuario> Usuario { get; set; }
     public virtual DbSet<UsuarioEstado> UsuarioEstado { get; set; }
     public virtual DbSet<webpages_Membership> webpages_Membership { get; set; }

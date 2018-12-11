@@ -5,6 +5,13 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="ecommerceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Banco">
+          <Key>
+            <PropertyRef Name="idBanco" />
+          </Key>
+          <Property Name="idBanco" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="BlackList">
           <Key>
             <PropertyRef Name="idPenalizacion" />
@@ -57,7 +64,7 @@
           <Property Name="apellido" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="dni" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="idDireccion" Type="int" Nullable="false" />
-          <Property Name="idUsuario" Type="int" Nullable="false" />
+          <Property Name="telefono" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Direccion">
           <Key>
@@ -229,6 +236,25 @@
           <Property Name="idTalle" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="descripcion" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="Tarjeta">
+          <Key>
+            <PropertyRef Name="idTarjeta" />
+          </Key>
+          <Property Name="idTarjeta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idBanco" Type="int" Nullable="false" />
+          <Property Name="numero" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="vencimiento" Type="date" Nullable="false" />
+          <Property Name="codigo" Type="int" Nullable="false" />
+          <Property Name="saldo" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="TarjetaUsuario">
+          <Key>
+            <PropertyRef Name="idTarjetaUsuario" />
+          </Key>
+          <Property Name="idTarjetaUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idTarjeta" Type="int" Nullable="false" />
+          <Property Name="idUsuario" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Usuario">
           <Key>
             <PropertyRef Name="idUsuario" />
@@ -238,6 +264,7 @@
           <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="cantidadPenalizacion" Type="int" />
           <Property Name="idEstadoUsuario" Type="int" Nullable="false" />
+          <Property Name="idDatosPersonales" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="UsuarioEstado">
           <Key>
@@ -340,18 +367,6 @@
             </Principal>
             <Dependent Role="DatosPersonales">
               <PropertyRef Name="idDireccion" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DatosPersonales_Usuario">
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
-          <End Role="DatosPersonales" Type="Self.DatosPersonales" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="idUsuario" />
-            </Principal>
-            <Dependent Role="DatosPersonales">
-              <PropertyRef Name="idUsuario" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -643,6 +658,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Tarjeta_Banco">
+          <End Role="Banco" Type="Self.Banco" Multiplicity="1" />
+          <End Role="Tarjeta" Type="Self.Tarjeta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Banco">
+              <PropertyRef Name="idBanco" />
+            </Principal>
+            <Dependent Role="Tarjeta">
+              <PropertyRef Name="idBanco" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tarjeta_TarjetaUsuario">
+          <End Role="Tarjeta" Type="Self.Tarjeta" Multiplicity="1" />
+          <End Role="TarjetaUsuario" Type="Self.TarjetaUsuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tarjeta">
+              <PropertyRef Name="idTarjeta" />
+            </Principal>
+            <Dependent Role="TarjetaUsuario">
+              <PropertyRef Name="idTarjeta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_UserId">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
           <End Role="webpages_UsersInRoles" Type="Self.webpages_UsersInRoles" Multiplicity="*" />
@@ -652,6 +691,30 @@
             </Principal>
             <Dependent Role="webpages_UsersInRoles">
               <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_DatosPersonales">
+          <End Role="DatosPersonales" Type="Self.DatosPersonales" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DatosPersonales">
+              <PropertyRef Name="datosPersonalesId" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="idDatosPersonales" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_TarjetaUsuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="TarjetaUsuario" Type="Self.TarjetaUsuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="TarjetaUsuario">
+              <PropertyRef Name="idUsuario" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -692,6 +755,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="ecommerceModelStoreContainer">
+          <EntitySet Name="Banco" EntityType="Self.Banco" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BlackList" EntityType="Self.BlackList" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Categoria" EntityType="Self.Categoria" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Color" EntityType="Self.Color" Schema="dbo" store:Type="Tables" />
@@ -717,6 +781,8 @@
           <EntitySet Name="SubCategoria" EntityType="Self.SubCategoria" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sucursal" EntityType="Self.Sucursal" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Talle" EntityType="Self.Talle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tarjeta" EntityType="Self.Tarjeta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TarjetaUsuario" EntityType="Self.TarjetaUsuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UsuarioEstado" EntityType="Self.UsuarioEstado" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="webpages_Membership" EntityType="Self.webpages_Membership" Schema="dbo" store:Type="Tables" />
@@ -738,10 +804,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_DatosPersonales_Direccion" Association="Self.FK_DatosPersonales_Direccion">
             <End Role="Direccion" EntitySet="Direccion" />
-            <End Role="DatosPersonales" EntitySet="DatosPersonales" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DatosPersonales_Usuario" Association="Self.FK_DatosPersonales_Usuario">
-            <End Role="Usuario" EntitySet="Usuario" />
             <End Role="DatosPersonales" EntitySet="DatosPersonales" />
           </AssociationSet>
           <AssociationSet Name="FK_Direccion_Localidad" Association="Self.FK_Direccion_Localidad">
@@ -840,9 +902,25 @@
             <End Role="Direccion" EntitySet="Direccion" />
             <End Role="Sucursal" EntitySet="Sucursal" />
           </AssociationSet>
+          <AssociationSet Name="FK_Tarjeta_Banco" Association="Self.FK_Tarjeta_Banco">
+            <End Role="Banco" EntitySet="Banco" />
+            <End Role="Tarjeta" EntitySet="Tarjeta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tarjeta_TarjetaUsuario" Association="Self.FK_Tarjeta_TarjetaUsuario">
+            <End Role="Tarjeta" EntitySet="Tarjeta" />
+            <End Role="TarjetaUsuario" EntitySet="TarjetaUsuario" />
+          </AssociationSet>
           <AssociationSet Name="fk_UserId" Association="Self.fk_UserId">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="webpages_UsersInRoles" EntitySet="webpages_UsersInRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_DatosPersonales" Association="Self.FK_Usuario_DatosPersonales">
+            <End Role="DatosPersonales" EntitySet="DatosPersonales" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_TarjetaUsuario" Association="Self.FK_Usuario_TarjetaUsuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="TarjetaUsuario" EntitySet="TarjetaUsuario" />
           </AssociationSet>
           <AssociationSet Name="FK_Usuario_Usuario" Association="Self.FK_Usuario_Usuario">
             <End Role="UsuarioEstado" EntitySet="UsuarioEstado" />
@@ -862,6 +940,7 @@
     <edmx:ConceptualModels>
       <Schema Namespace="ecommerceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="ecommerceEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Banco" EntityType="ecommerceModel.Banco" />
           <EntitySet Name="BlackList" EntityType="ecommerceModel.BlackList" />
           <EntitySet Name="Categoria" EntityType="ecommerceModel.Categoria" />
           <EntitySet Name="Color" EntityType="ecommerceModel.Color" />
@@ -887,12 +966,18 @@
           <EntitySet Name="SubCategoria" EntityType="ecommerceModel.SubCategoria" />
           <EntitySet Name="Sucursal" EntityType="ecommerceModel.Sucursal" />
           <EntitySet Name="Talle" EntityType="ecommerceModel.Talle" />
+          <EntitySet Name="Tarjeta" EntityType="ecommerceModel.Tarjeta" />
+          <EntitySet Name="TarjetaUsuario" EntityType="ecommerceModel.TarjetaUsuario" />
           <EntitySet Name="Usuario" EntityType="ecommerceModel.Usuario" />
           <EntitySet Name="UsuarioEstado" EntityType="ecommerceModel.UsuarioEstado" />
           <EntitySet Name="webpages_Membership" EntityType="ecommerceModel.webpages_Membership" />
           <EntitySet Name="webpages_OAuthMembership" EntityType="ecommerceModel.webpages_OAuthMembership" />
           <EntitySet Name="webpages_Roles" EntityType="ecommerceModel.webpages_Roles" />
           <EntitySet Name="WishList" EntityType="ecommerceModel.WishList" />
+          <AssociationSet Name="FK_Tarjeta_Banco" Association="ecommerceModel.FK_Tarjeta_Banco">
+            <End Role="Banco" EntitySet="Banco" />
+            <End Role="Tarjeta" EntitySet="Tarjeta" />
+          </AssociationSet>
           <AssociationSet Name="FK_BlackList_Usuario" Association="ecommerceModel.FK_BlackList_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="BlackList" EntitySet="BlackList" />
@@ -917,9 +1002,9 @@
             <End Role="Direccion" EntitySet="Direccion" />
             <End Role="DatosPersonales" EntitySet="DatosPersonales" />
           </AssociationSet>
-          <AssociationSet Name="FK_DatosPersonales_Usuario" Association="ecommerceModel.FK_DatosPersonales_Usuario">
-            <End Role="Usuario" EntitySet="Usuario" />
+          <AssociationSet Name="FK_Usuario_DatosPersonales" Association="ecommerceModel.FK_Usuario_DatosPersonales">
             <End Role="DatosPersonales" EntitySet="DatosPersonales" />
+            <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
           <AssociationSet Name="FK_Direccion_Localidad" Association="ecommerceModel.FK_Direccion_Localidad">
             <End Role="Localidad" EntitySet="Localidad" />
@@ -1009,6 +1094,14 @@
             <End Role="Sucursal" EntitySet="Sucursal" />
             <End Role="Stock" EntitySet="Stock" />
           </AssociationSet>
+          <AssociationSet Name="FK_Tarjeta_TarjetaUsuario" Association="ecommerceModel.FK_Tarjeta_TarjetaUsuario">
+            <End Role="Tarjeta" EntitySet="Tarjeta" />
+            <End Role="TarjetaUsuario" EntitySet="TarjetaUsuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_TarjetaUsuario" Association="ecommerceModel.FK_Usuario_TarjetaUsuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="TarjetaUsuario" EntitySet="TarjetaUsuario" />
+          </AssociationSet>
           <AssociationSet Name="FK_Usuario_Usuario" Association="ecommerceModel.FK_Usuario_Usuario">
             <End Role="UsuarioEstado" EntitySet="UsuarioEstado" />
             <End Role="Usuario" EntitySet="Usuario" />
@@ -1022,6 +1115,14 @@
             <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Banco">
+          <Key>
+            <PropertyRef Name="idBanco" />
+          </Key>
+          <Property Name="idBanco" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Tarjeta" Relationship="ecommerceModel.FK_Tarjeta_Banco" FromRole="Banco" ToRole="Tarjeta" />
+        </EntityType>
         <EntityType Name="BlackList">
           <Key>
             <PropertyRef Name="idPenalizacion" />
@@ -1079,9 +1180,9 @@
           <Property Name="apellido" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="dni" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="idDireccion" Type="Int32" Nullable="false" />
-          <Property Name="idUsuario" Type="Int32" Nullable="false" />
+          <Property Name="telefono" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Direccion" Relationship="ecommerceModel.FK_DatosPersonales_Direccion" FromRole="DatosPersonales" ToRole="Direccion" />
-          <NavigationProperty Name="Usuario" Relationship="ecommerceModel.FK_DatosPersonales_Usuario" FromRole="DatosPersonales" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario" Relationship="ecommerceModel.FK_Usuario_DatosPersonales" FromRole="DatosPersonales" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="Direccion">
           <Key>
@@ -1300,6 +1401,29 @@
           <Property Name="descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Producto" Relationship="ecommerceModel.FK_Producto_Producto" FromRole="Talle" ToRole="Producto" />
         </EntityType>
+        <EntityType Name="Tarjeta">
+          <Key>
+            <PropertyRef Name="idTarjeta" />
+          </Key>
+          <Property Name="idTarjeta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idBanco" Type="Int32" Nullable="false" />
+          <Property Name="numero" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="vencimiento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="codigo" Type="Int32" Nullable="false" />
+          <Property Name="saldo" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Banco" Relationship="ecommerceModel.FK_Tarjeta_Banco" FromRole="Tarjeta" ToRole="Banco" />
+          <NavigationProperty Name="TarjetaUsuario" Relationship="ecommerceModel.FK_Tarjeta_TarjetaUsuario" FromRole="Tarjeta" ToRole="TarjetaUsuario" />
+        </EntityType>
+        <EntityType Name="TarjetaUsuario">
+          <Key>
+            <PropertyRef Name="idTarjetaUsuario" />
+          </Key>
+          <Property Name="idTarjetaUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idTarjeta" Type="Int32" Nullable="false" />
+          <Property Name="idUsuario" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Tarjeta" Relationship="ecommerceModel.FK_Tarjeta_TarjetaUsuario" FromRole="TarjetaUsuario" ToRole="Tarjeta" />
+          <NavigationProperty Name="Usuario" Relationship="ecommerceModel.FK_Usuario_TarjetaUsuario" FromRole="TarjetaUsuario" ToRole="Usuario" />
+        </EntityType>
         <EntityType Name="Usuario">
           <Key>
             <PropertyRef Name="idUsuario" />
@@ -1309,9 +1433,11 @@
           <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="cantidadPenalizacion" Type="Int32" />
           <Property Name="idEstadoUsuario" Type="Int32" Nullable="false" />
+          <Property Name="idDatosPersonales" Type="Int32" Nullable="false" />
           <NavigationProperty Name="BlackList" Relationship="ecommerceModel.FK_BlackList_Usuario" FromRole="Usuario" ToRole="BlackList" />
-          <NavigationProperty Name="DatosPersonales" Relationship="ecommerceModel.FK_DatosPersonales_Usuario" FromRole="Usuario" ToRole="DatosPersonales" />
+          <NavigationProperty Name="DatosPersonales" Relationship="ecommerceModel.FK_Usuario_DatosPersonales" FromRole="Usuario" ToRole="DatosPersonales" />
           <NavigationProperty Name="OrdenCompra" Relationship="ecommerceModel.FK_OrdenCompra_Usuario" FromRole="Usuario" ToRole="OrdenCompra" />
+          <NavigationProperty Name="TarjetaUsuario" Relationship="ecommerceModel.FK_Usuario_TarjetaUsuario" FromRole="Usuario" ToRole="TarjetaUsuario" />
           <NavigationProperty Name="UsuarioEstado" Relationship="ecommerceModel.FK_Usuario_Usuario" FromRole="Usuario" ToRole="UsuarioEstado" />
           <NavigationProperty Name="WishList" Relationship="ecommerceModel.FK_WishList_Usuario" FromRole="Usuario" ToRole="WishList" />
           <NavigationProperty Name="webpages_Roles" Relationship="ecommerceModel.webpages_UsersInRoles" FromRole="Usuario" ToRole="webpages_Roles" />
@@ -1368,6 +1494,18 @@
           <NavigationProperty Name="Producto" Relationship="ecommerceModel.FK_WishList_Producto" FromRole="WishList" ToRole="Producto" />
           <NavigationProperty Name="Usuario" Relationship="ecommerceModel.FK_WishList_Usuario" FromRole="WishList" ToRole="Usuario" />
         </EntityType>
+        <Association Name="FK_Tarjeta_Banco">
+          <End Type="ecommerceModel.Banco" Role="Banco" Multiplicity="1" />
+          <End Type="ecommerceModel.Tarjeta" Role="Tarjeta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Banco">
+              <PropertyRef Name="idBanco" />
+            </Principal>
+            <Dependent Role="Tarjeta">
+              <PropertyRef Name="idBanco" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_BlackList_Usuario">
           <End Type="ecommerceModel.Usuario" Role="Usuario" Multiplicity="1" />
           <End Type="ecommerceModel.BlackList" Role="BlackList" Multiplicity="*" />
@@ -1440,15 +1578,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DatosPersonales_Usuario">
-          <End Type="ecommerceModel.Usuario" Role="Usuario" Multiplicity="1" />
-          <End Type="ecommerceModel.DatosPersonales" Role="DatosPersonales" Multiplicity="*" />
+        <Association Name="FK_Usuario_DatosPersonales">
+          <End Type="ecommerceModel.DatosPersonales" Role="DatosPersonales" Multiplicity="1" />
+          <End Type="ecommerceModel.Usuario" Role="Usuario" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="idUsuario" />
+            <Principal Role="DatosPersonales">
+              <PropertyRef Name="datosPersonalesId" />
             </Principal>
-            <Dependent Role="DatosPersonales">
-              <PropertyRef Name="idUsuario" />
+            <Dependent Role="Usuario">
+              <PropertyRef Name="idDatosPersonales" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1716,6 +1854,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Tarjeta_TarjetaUsuario">
+          <End Type="ecommerceModel.Tarjeta" Role="Tarjeta" Multiplicity="1" />
+          <End Type="ecommerceModel.TarjetaUsuario" Role="TarjetaUsuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tarjeta">
+              <PropertyRef Name="idTarjeta" />
+            </Principal>
+            <Dependent Role="TarjetaUsuario">
+              <PropertyRef Name="idTarjeta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_TarjetaUsuario">
+          <End Type="ecommerceModel.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="ecommerceModel.TarjetaUsuario" Role="TarjetaUsuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="TarjetaUsuario">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Usuario_Usuario">
           <End Type="ecommerceModel.UsuarioEstado" Role="UsuarioEstado" Multiplicity="1" />
           <End Type="ecommerceModel.Usuario" Role="Usuario" Multiplicity="*" />
@@ -1750,6 +1912,14 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="ecommerceModelStoreContainer" CdmEntityContainer="ecommerceEntities">
+          <EntitySetMapping Name="Banco">
+            <EntityTypeMapping TypeName="ecommerceModel.Banco">
+              <MappingFragment StoreEntitySet="Banco">
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="idBanco" ColumnName="idBanco" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="BlackList">
             <EntityTypeMapping TypeName="ecommerceModel.BlackList">
               <MappingFragment StoreEntitySet="BlackList">
@@ -1801,7 +1971,7 @@
           <EntitySetMapping Name="DatosPersonales">
             <EntityTypeMapping TypeName="ecommerceModel.DatosPersonales">
               <MappingFragment StoreEntitySet="DatosPersonales">
-                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
                 <ScalarProperty Name="idDireccion" ColumnName="idDireccion" />
                 <ScalarProperty Name="dni" ColumnName="dni" />
                 <ScalarProperty Name="apellido" ColumnName="apellido" />
@@ -1998,9 +2168,31 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Tarjeta">
+            <EntityTypeMapping TypeName="ecommerceModel.Tarjeta">
+              <MappingFragment StoreEntitySet="Tarjeta">
+                <ScalarProperty Name="saldo" ColumnName="saldo" />
+                <ScalarProperty Name="codigo" ColumnName="codigo" />
+                <ScalarProperty Name="vencimiento" ColumnName="vencimiento" />
+                <ScalarProperty Name="numero" ColumnName="numero" />
+                <ScalarProperty Name="idBanco" ColumnName="idBanco" />
+                <ScalarProperty Name="idTarjeta" ColumnName="idTarjeta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TarjetaUsuario">
+            <EntityTypeMapping TypeName="ecommerceModel.TarjetaUsuario">
+              <MappingFragment StoreEntitySet="TarjetaUsuario">
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="idTarjeta" ColumnName="idTarjeta" />
+                <ScalarProperty Name="idTarjetaUsuario" ColumnName="idTarjetaUsuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Usuario">
             <EntityTypeMapping TypeName="ecommerceModel.Usuario">
               <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="idDatosPersonales" ColumnName="idDatosPersonales" />
                 <ScalarProperty Name="idEstadoUsuario" ColumnName="idEstadoUsuario" />
                 <ScalarProperty Name="cantidadPenalizacion" ColumnName="cantidadPenalizacion" />
                 <ScalarProperty Name="email" ColumnName="email" />
