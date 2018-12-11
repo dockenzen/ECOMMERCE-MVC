@@ -52,13 +52,7 @@ namespace TF_Base.Controllers
 
         //
         // GET: /Account/Register
-
         public ActionResult Register()
-        {
-            return View();
-        }
-
-        public ActionResult CustomerRegister()
         {
             return View();
         }
@@ -88,8 +82,51 @@ namespace TF_Base.Controllers
                     ModelState.AddModelError("", e.StatusCode.ToString());
                 }
             }
+
+            ViewBag.idLocalidad = new SelectList(db.Localidad, "id", "localidad1", registro.idLocalidad);
             return View();
         }
 
+        public ActionResult CustomerRegister()
+        {
+            ViewBag.idLocalidad = new SelectList(db.Localidad, "id", "localidad1");
+
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CustomerRegister(Registro registro)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    Direccion dir = new Direccion() { direccion1 = registro.Direccion, codigoPostal = registro.CodigoPostal, idLocalidad = registro.idLocalidad };
+                    db.Direccion.Add(dir);
+                    db.SaveChanges();
+
+                    DatosPersonales dp = new DatosPersonales() {  nombre = registro.Nombre, apellido = registro.Apellido, dni = registro.DNI, telefono = registro.Telefono, idDireccion = dir.idDireccion};
+                    db.DatosPersonales.Add(dp);
+                    db.SaveChanges();
+
+                    WebSecurity.CreateUserAndAccount(registro.UserName, registro.Password, new { Email = registro.UserEmail, idEstadoUsuario = 1, idDatosPersonales = dp.datosPersonalesId });
+
+                    if (WebSecurity.UserExists(registro.UserName))
+                        Roles.AddUserToRole(registro.UserName, "Cliente");
+
+                    if (WebSecurity.Login(registro.UserName, registro.Password))
+                        return RedirectToAction("ShopCategory", "Producto");
+                    else
+                        return RedirectToAction("Home", "Shared");
+                }
+                catch (MembershipCreateUserException e)
+                {
+                    ModelState.AddModelError("", e.StatusCode.ToString());
+                }
+            }
+            ViewBag.idLocalidad = new SelectList(db.Localidad, "id", "localidad1", registro.idLocalidad);
+            return View(registro);
+        }
     }
 }

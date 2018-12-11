@@ -1,6 +1,8 @@
-﻿
+﻿@model TF_Base.Models.Registro
+
 @{
     ViewBag.Title = "CustomerRegister";
+
     Layout = "~/Views/Shared/_eCommerceLayout.cshtml";
 }
 
@@ -37,54 +39,131 @@
                             , nuestro servicio de atención al cliente funciona 24/7.
                         </p>
                         <hr>
-                        <form action="customer-orders.html" method="get">
+                        @*<form action="customer-orders.html" method="get">
+                                <div class="form-group">
+                                    <label for="name-login">Nombre</label>
+                                    <input id="name-login" type="text" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="email-login">Email</label>
+                                    <input id="email-login" type="text" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="password-login">Contraseña</label>
+                                    <input id="password-login" type="password" class="form-control">
+                                </div>
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-template-outlined">
+                                        <i class="fa fa-user-md"></i> Registrarse
+                                    </button>
+                                </div>
+                            </form>*@
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true)
+
                             <div class="form-group">
-                                <label for="name-login">Nombre</label>
-                                <input id="name-login" type="text" class="form-control">
+                                @Html.LabelFor(f => f.UserName, new { @class = "control-label" })
+
+                                @Html.TextBoxFor(f => f.UserName, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(f => f.UserName)
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(f => f.Nombre, new { @class = "control-label" })
+
+                                @Html.TextBoxFor(f => f.Nombre, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(f => f.Nombre)
                             </div>
                             <div class="form-group">
-                                <label for="email-login">Email</label>
-                                <input id="email-login" type="text" class="form-control">
+                                @Html.LabelFor(f => f.Apellido, new { @class = "control-label" })
+
+                                @Html.TextBoxFor(f => f.Apellido, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(f => f.Apellido)
                             </div>
                             <div class="form-group">
-                                <label for="password-login">Contraseña</label>
-                                <input id="password-login" type="password" class="form-control">
+                                @Html.LabelFor(f => f.DNI, new { @class = "control-label" })
+
+                                @Html.TextBoxFor(f => f.DNI, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(f => f.DNI)
                             </div>
+                            <div class="form-group">
+                                @Html.LabelFor(f => f.Telefono, new { @class = "control-label" })
+
+                                @Html.TextBoxFor(f => f.Telefono, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(f => f.Telefono)
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(f => f.UserEmail, new { @class = "control-label" })
+
+                                @Html.TextBoxFor(f => f.UserEmail, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(f => f.UserEmail)
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(f => f.Password, new { @class = "control-label" })
+
+                                @Html.PasswordFor(f => f.Password, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(f => f.Password)
+                            </div>
+                            <div class="editor-field">
+                                @Html.PasswordFor(f => f.PasswordConfirmation, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(f => f.PasswordConfirmation)
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(f => f.Direccion, new { @class = "control-label" })
+
+                                @Html.TextBoxFor(f => f.Direccion, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(f => f.Direccion)
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(f => f.CodigoPostal, new { @class = "control-label" })
+
+                                @Html.TextBoxFor(f => f.CodigoPostal, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(f => f.CodigoPostal)
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(f => f.idLocalidad, "Localidad", htmlAttributes: new { @class = "control-label" })
+
+                                @Html.DropDownList("idLocalidad", null, htmlAttributes: new { @class = "form -control" })
+                                @Html.ValidationMessageFor(f => f.idLocalidad)
+                            </div>
+
+
+
                             <div class="text-center">
-                                <button type="submit" class="btn btn-template-outlined">
-                                    <i class="fa fa-user-md"></i> Registrarse
-                                </button>
+                                <input type="submit" value="Registrarse" formaction="@Url.Action("CustomerRegister", "Account")" class="btn btn-template-outlined">
                             </div>
-                        </form>
+                        }
                     </div>
                 </div>
-                <div class="col-lg-6">
-                    <div class="box">
-                        <h2 class="text-uppercase">Login</h2>
-                        <p class="lead">Ya tienes una cuenta ?</p>
-                        <p class="text-muted">
-                            Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor
-                            quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.
-                            Aenean ultricies mi vitae est. Mauris placerat eleifend leo.
-                        </p>
-                        <hr>
-                        <form action="customer-orders.html" method="get">
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input id="email" type="text" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="password">Contraseña</label>
-                                <input id="password" type="password" class="form-control">
-                            </div>
-                            <div class="text-center">
-                                <button type="submit" class="btn btn-template-outlined">
-                                    <i class="fa fa-sign-in"></i> Login
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+                @*<div class="col-lg-6">
+                        <div class="box">
+                            <h2 class="text-uppercase">Login</h2>
+                            <p class="lead">Ya tienes una cuenta ?</p>
+                            <p class="text-muted">
+                                Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor
+                                quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.
+                                Aenean ultricies mi vitae est. Mauris placerat eleifend leo.
+                            </p>
+                            <hr>
+                            <form action="customer-orders.html" method="get">
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input id="email" type="text" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">Contraseña</label>
+                                    <input id="password" type="password" class="form-control">
+                                </div>
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-template-outlined">
+                                        <i class="fa fa-sign-in"></i> Login
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>*@
             </div>
         </div>
     </div>
