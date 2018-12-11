@@ -12,13 +12,36 @@ namespace TF_Base.Models
         [Required]
         public string UserName { get; set; }
 
-        [Display(Name = "Nombre completo")]
+        [Display(Name = "Nombre de pila")]
         [Required]
-        public string UserFullName { get; set; }
+        public string Nombre { get; set; }
+
+        [Display(Name = "Apellido")]
+        [Required]
+        public string Apellido { get; set; }
+
+        [Display(Name = "DNI")]
+        [Required]
+        public string DNI { get; set; }
+
+        [Display(Name = "Telefono")]
+        [Required]
+        public string Telefono { get; set; }
 
         [Display(Name = "Email")]
         [Required]
         public string UserEmail { get; set; }
+
+        [Display(Name = "Direccion")]
+        [Required]
+        public string Direccion { get; set; }
+
+        [Display(Name = "CodigoPostal")]
+        [Required]
+        public string CodigoPostal { get; set; }
+
+        [Required]
+        public int idLocalidad { get; set; }
 
         [DataType(DataType.Password)]
         [Display(Name = "Contraseña")]
