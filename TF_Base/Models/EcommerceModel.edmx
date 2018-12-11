@@ -15,8 +15,9 @@
         <EntityType Name="BlackList">
           <Key>
             <PropertyRef Name="idPenalizacion" />
+            <PropertyRef Name="idUsuario" />
           </Key>
-          <Property Name="idPenalizacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idPenalizacion" Type="int" Nullable="false" />
           <Property Name="idUsuario" Type="int" Nullable="false" />
           <Property Name="justificacion" Type="varchar" MaxLength="250" Nullable="false" />
           <Property Name="fechaPenalizacion" Type="date" />
@@ -83,6 +84,10 @@
           <Property Name="fechaEntrega" Type="date" Nullable="false" />
           <Property Name="costoEnvio" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="idDireccion" Type="int" />
+          <Property Name="nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="apellido" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="telefono" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="mail" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="EstadoPago">
           <Key>
@@ -935,7 +940,8 @@
             <End Role="WishList" EntitySet="WishList" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ecommerceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1123,32 +1129,34 @@
           <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Tarjeta" Relationship="ecommerceModel.FK_Tarjeta_Banco" FromRole="Banco" ToRole="Tarjeta" />
         </EntityType>
+
         <EntityType Name="BlackList">
           <Key>
             <PropertyRef Name="idPenalizacion" />
+            <PropertyRef Name="idUsuario" />
           </Key>
-          <Property Name="idPenalizacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idPenalizacion" Type="Int32" Nullable="false" />
           <Property Name="idUsuario" Type="Int32" Nullable="false" />
-          <Property Name="justificacion" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="justificacion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="fechaPenalizacion" Type="DateTime" Precision="0" />
           <Property Name="fechaDespenalizacion" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="Usuario" Relationship="ecommerceModel.FK_BlackList_Usuario" FromRole="BlackList" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_BlackList_Usuario" FromRole="BlackList" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="Categoria">
           <Key>
             <PropertyRef Name="idCategoria" />
           </Key>
           <Property Name="idCategoria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="SubCategoria" Relationship="ecommerceModel.FK__SubCatego__idCat__59904A2C" FromRole="Categoria" ToRole="SubCategoria" />
+          <Property Name="descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="SubCategoria" Relationship="Self.FK__SubCatego__idCat__59904A2C" FromRole="Categoria" ToRole="SubCategoria" />
         </EntityType>
         <EntityType Name="Color">
           <Key>
             <PropertyRef Name="idColor" />
           </Key>
           <Property Name="idColor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Producto" Relationship="ecommerceModel.FK_Producto_Color" FromRole="Color" ToRole="Producto" />
+          <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Producto" Relationship="Self.FK_Producto_Color" FromRole="Color" ToRole="Producto" />
         </EntityType>
         <EntityType Name="CostoEnvio">
           <Key>
@@ -1156,8 +1164,8 @@
           </Key>
           <Property Name="idCostoEnvio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="idLocalidad" Type="Int32" Nullable="false" />
-          <Property Name="Importe" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <NavigationProperty Name="Localidad" Relationship="ecommerceModel.FK_CostoEnvio_Localidad" FromRole="CostoEnvio" ToRole="Localidad" />
+          <Property Name="Importe" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Localidad" Relationship="Self.FK_CostoEnvio_Localidad" FromRole="CostoEnvio" ToRole="Localidad" />
         </EntityType>
         <EntityType Name="Cupon">
           <Key>
@@ -1165,20 +1173,20 @@
           </Key>
           <Property Name="idCupon" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="cantidad" Type="Int32" Nullable="false" />
-          <Property Name="codigo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="fechaCaducidad" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="porcentajeDescuento" Type="Int32" Nullable="false" />
-          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="OrdenCompra" Relationship="ecommerceModel.FK_OrdenCompra_Cupon" FromRole="Cupon" ToRole="OrdenCompra" />
+          <Property Name="descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="OrdenCompra" Relationship="Self.FK_OrdenCompra_Cupon" FromRole="Cupon" ToRole="OrdenCompra" />
         </EntityType>
         <EntityType Name="DatosPersonales">
           <Key>
             <PropertyRef Name="datosPersonalesId" />
           </Key>
           <Property Name="datosPersonalesId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="apellido" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="dni" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="dni" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="idDireccion" Type="Int32" Nullable="false" />
           <Property Name="telefono" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Direccion" Relationship="ecommerceModel.FK_DatosPersonales_Direccion" FromRole="DatosPersonales" ToRole="Direccion" />
@@ -1189,13 +1197,13 @@
             <PropertyRef Name="idDireccion" />
           </Key>
           <Property Name="idDireccion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="direccion1" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="codigoPostal" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="direccion1" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="codigoPostal" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="idLocalidad" Type="Int32" />
-          <NavigationProperty Name="DatosPersonales" Relationship="ecommerceModel.FK_DatosPersonales_Direccion" FromRole="Direccion" ToRole="DatosPersonales" />
-          <NavigationProperty Name="Localidad" Relationship="ecommerceModel.FK_Direccion_Localidad" FromRole="Direccion" ToRole="Localidad" />
-          <NavigationProperty Name="Envio" Relationship="ecommerceModel.FK_Envio_Direccion" FromRole="Direccion" ToRole="Envio" />
-          <NavigationProperty Name="Sucursal" Relationship="ecommerceModel.FK_Sucursal_Direccion" FromRole="Direccion" ToRole="Sucursal" />
+          <NavigationProperty Name="DatosPersonales" Relationship="Self.FK_DatosPersonales_Direccion" FromRole="Direccion" ToRole="DatosPersonales" />
+          <NavigationProperty Name="Localidad" Relationship="Self.FK_Direccion_Localidad" FromRole="Direccion" ToRole="Localidad" />
+          <NavigationProperty Name="Envio" Relationship="Self.FK_Envio_Direccion" FromRole="Direccion" ToRole="Envio" />
+          <NavigationProperty Name="Sucursal" Relationship="Self.FK_Sucursal_Direccion" FromRole="Direccion" ToRole="Sucursal" />
         </EntityType>
         <EntityType Name="Envio">
           <Key>
@@ -1203,18 +1211,22 @@
           </Key>
           <Property Name="idEnvio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="fechaEntrega" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="costoEnvio" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="costoEnvio" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="idDireccion" Type="Int32" />
-          <NavigationProperty Name="Direccion" Relationship="ecommerceModel.FK_Envio_Direccion" FromRole="Envio" ToRole="Direccion" />
-          <NavigationProperty Name="OrdenCompraEnvio" Relationship="ecommerceModel.FK_OrdenCompraEnvio_Envio" FromRole="Envio" ToRole="OrdenCompraEnvio" />
+          <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="telefono" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="mail" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Direccion" Relationship="Self.FK_Envio_Direccion" FromRole="Envio" ToRole="Direccion" />
+          <NavigationProperty Name="OrdenCompraEnvio" Relationship="Self.FK_OrdenCompraEnvio_Envio" FromRole="Envio" ToRole="OrdenCompraEnvio" />
         </EntityType>
         <EntityType Name="EstadoPago">
           <Key>
             <PropertyRef Name="idEstadoPago" />
           </Key>
           <Property Name="idEstadoPago" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Pago" Relationship="ecommerceModel.FK_Pago_EstadoPago" FromRole="EstadoPago" ToRole="Pago" />
+          <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Pago" Relationship="Self.FK_Pago_EstadoPago" FromRole="EstadoPago" ToRole="Pago" />
         </EntityType>
         <EntityType Name="Factura">
           <Key>
@@ -1222,39 +1234,39 @@
           </Key>
           <Property Name="facturaId" Type="Int32" Nullable="false" />
           <Property Name="idPago" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="tipo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="cuit" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Pago" Relationship="ecommerceModel.FK_Factura_Pago" FromRole="Factura" ToRole="Pago" />
+          <Property Name="tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cuit" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Pago" Relationship="Self.FK_Factura_Pago" FromRole="Factura" ToRole="Pago" />
         </EntityType>
         <EntityType Name="Garantia">
           <Key>
             <PropertyRef Name="idGarantia" />
           </Key>
           <Property Name="idGarantia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="duracion" Type="Int32" />
-          <NavigationProperty Name="Producto" Relationship="ecommerceModel.FK_Producto_Garantia" FromRole="Garantia" ToRole="Producto" />
+          <NavigationProperty Name="Producto" Relationship="Self.FK_Producto_Garantia" FromRole="Garantia" ToRole="Producto" />
         </EntityType>
         <EntityType Name="ImagenProducto">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="url" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="url" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="esCarrusel" Type="Boolean" Nullable="false" />
           <Property Name="idProducto" Type="Int32" />
-          <NavigationProperty Name="Producto" Relationship="ecommerceModel.FK_ImagenProducto_Producto" FromRole="ImagenProducto" ToRole="Producto" />
+          <NavigationProperty Name="Producto" Relationship="Self.FK_ImagenProducto_Producto" FromRole="ImagenProducto" ToRole="Producto" />
         </EntityType>
         <EntityType Name="Localidad">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="localidad1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="localidad1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="idProvincia" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="CostoEnvio" Relationship="ecommerceModel.FK_CostoEnvio_Localidad" FromRole="Localidad" ToRole="CostoEnvio" />
-          <NavigationProperty Name="Direccion" Relationship="ecommerceModel.FK_Direccion_Localidad" FromRole="Localidad" ToRole="Direccion" />
-          <NavigationProperty Name="Provincia" Relationship="ecommerceModel.FK_Localidad_Provincia" FromRole="Localidad" ToRole="Provincia" />
+          <NavigationProperty Name="CostoEnvio" Relationship="Self.FK_CostoEnvio_Localidad" FromRole="Localidad" ToRole="CostoEnvio" />
+          <NavigationProperty Name="Direccion" Relationship="Self.FK_Direccion_Localidad" FromRole="Localidad" ToRole="Direccion" />
+          <NavigationProperty Name="Provincia" Relationship="Self.FK_Localidad_Provincia" FromRole="Localidad" ToRole="Provincia" />
         </EntityType>
         <EntityType Name="OrdenCompra">
           <Key>
@@ -1268,13 +1280,13 @@
           <Property Name="idPago" Type="Int32" />
           <Property Name="idEstadoOrden" Type="Int32" Nullable="false" />
           <Property Name="fechaCompra" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="Cupon" Relationship="ecommerceModel.FK_OrdenCompra_Cupon" FromRole="OrdenCompra" ToRole="Cupon" />
-          <NavigationProperty Name="OrdenCompraEstado" Relationship="ecommerceModel.FK_OrdenCompra_OrdenCompraEstado" FromRole="OrdenCompra" ToRole="OrdenCompraEstado" />
-          <NavigationProperty Name="Pago" Relationship="ecommerceModel.FK_OrdenCompra_Pago" FromRole="OrdenCompra" ToRole="Pago" />
-          <NavigationProperty Name="Sucursal" Relationship="ecommerceModel.FK_OrdenCompra_Sucursal" FromRole="OrdenCompra" ToRole="Sucursal" />
-          <NavigationProperty Name="Usuario" Relationship="ecommerceModel.FK_OrdenCompra_Usuario" FromRole="OrdenCompra" ToRole="Usuario" />
-          <NavigationProperty Name="OrdenCompraDetalle" Relationship="ecommerceModel.FK_OrdenCompraDetalle_OrdenCompra" FromRole="OrdenCompra" ToRole="OrdenCompraDetalle" />
-          <NavigationProperty Name="OrdenCompraEnvio" Relationship="ecommerceModel.FK_OrdenCompraEnvio_OrdenCompra" FromRole="OrdenCompra" ToRole="OrdenCompraEnvio" />
+          <NavigationProperty Name="Cupon" Relationship="Self.FK_OrdenCompra_Cupon" FromRole="OrdenCompra" ToRole="Cupon" />
+          <NavigationProperty Name="OrdenCompraEstado" Relationship="Self.FK_OrdenCompra_OrdenCompraEstado" FromRole="OrdenCompra" ToRole="OrdenCompraEstado" />
+          <NavigationProperty Name="Pago" Relationship="Self.FK_OrdenCompra_Pago" FromRole="OrdenCompra" ToRole="Pago" />
+          <NavigationProperty Name="Sucursal" Relationship="Self.FK_OrdenCompra_Sucursal" FromRole="OrdenCompra" ToRole="Sucursal" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_OrdenCompra_Usuario" FromRole="OrdenCompra" ToRole="Usuario" />
+          <NavigationProperty Name="OrdenCompraDetalle" Relationship="Self.FK_OrdenCompraDetalle_OrdenCompra" FromRole="OrdenCompra" ToRole="OrdenCompraDetalle" />
+          <NavigationProperty Name="OrdenCompraEnvio" Relationship="Self.FK_OrdenCompraEnvio_OrdenCompra" FromRole="OrdenCompra" ToRole="OrdenCompraEnvio" />
         </EntityType>
         <EntityType Name="OrdenCompraDetalle">
           <Key>
@@ -1284,8 +1296,8 @@
           <Property Name="idOrdenCompra" Type="Int32" Nullable="false" />
           <Property Name="idProducto" Type="Int32" Nullable="false" />
           <Property Name="cantidad" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="OrdenCompra" Relationship="ecommerceModel.FK_OrdenCompraDetalle_OrdenCompra" FromRole="OrdenCompraDetalle" ToRole="OrdenCompra" />
-          <NavigationProperty Name="Producto" Relationship="ecommerceModel.FK_OrdenCompraDetalle_Producto" FromRole="OrdenCompraDetalle" ToRole="Producto" />
+          <NavigationProperty Name="OrdenCompra" Relationship="Self.FK_OrdenCompraDetalle_OrdenCompra" FromRole="OrdenCompraDetalle" ToRole="OrdenCompra" />
+          <NavigationProperty Name="Producto" Relationship="Self.FK_OrdenCompraDetalle_Producto" FromRole="OrdenCompraDetalle" ToRole="Producto" />
         </EntityType>
         <EntityType Name="OrdenCompraEnvio">
           <Key>
@@ -1295,16 +1307,16 @@
           <Property Name="idOrdenCompraEnvio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="idOrdenCompra" Type="Int32" Nullable="false" />
           <Property Name="idEnvio" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Envio" Relationship="ecommerceModel.FK_OrdenCompraEnvio_Envio" FromRole="OrdenCompraEnvio" ToRole="Envio" />
-          <NavigationProperty Name="OrdenCompra" Relationship="ecommerceModel.FK_OrdenCompraEnvio_OrdenCompra" FromRole="OrdenCompraEnvio" ToRole="OrdenCompra" />
+          <NavigationProperty Name="Envio" Relationship="Self.FK_OrdenCompraEnvio_Envio" FromRole="OrdenCompraEnvio" ToRole="Envio" />
+          <NavigationProperty Name="OrdenCompra" Relationship="Self.FK_OrdenCompraEnvio_OrdenCompra" FromRole="OrdenCompraEnvio" ToRole="OrdenCompra" />
         </EntityType>
         <EntityType Name="OrdenCompraEstado">
           <Key>
             <PropertyRef Name="idEstadoOrden" />
           </Key>
           <Property Name="idEstadoOrden" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="OrdenCompra" Relationship="ecommerceModel.FK_OrdenCompra_OrdenCompraEstado" FromRole="OrdenCompraEstado" ToRole="OrdenCompra" />
+          <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="OrdenCompra" Relationship="Self.FK_OrdenCompra_OrdenCompraEstado" FromRole="OrdenCompraEstado" ToRole="OrdenCompra" />
         </EntityType>
         <EntityType Name="Pago">
           <Key>
@@ -1312,19 +1324,19 @@
           </Key>
           <Property Name="idPago" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="tipoPago" Type="Int32" Nullable="false" />
-          <Property Name="total" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="total" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="idEstadoPago" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="EstadoPago" Relationship="ecommerceModel.FK_Pago_EstadoPago" FromRole="Pago" ToRole="EstadoPago" />
-          <NavigationProperty Name="Factura" Relationship="ecommerceModel.FK_Factura_Pago" FromRole="Pago" ToRole="Factura" />
-          <NavigationProperty Name="OrdenCompra" Relationship="ecommerceModel.FK_OrdenCompra_Pago" FromRole="Pago" ToRole="OrdenCompra" />
+          <NavigationProperty Name="EstadoPago" Relationship="Self.FK_Pago_EstadoPago" FromRole="Pago" ToRole="EstadoPago" />
+          <NavigationProperty Name="Factura" Relationship="Self.FK_Factura_Pago" FromRole="Pago" ToRole="Factura" />
+          <NavigationProperty Name="OrdenCompra" Relationship="Self.FK_OrdenCompra_Pago" FromRole="Pago" ToRole="OrdenCompra" />
         </EntityType>
         <EntityType Name="Pais">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="pais1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Provincia" Relationship="ecommerceModel.FK_Provincia_Pais" FromRole="Pais" ToRole="Provincia" />
+          <Property Name="pais1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Provincia" Relationship="Self.FK_Provincia_Pais" FromRole="Pais" ToRole="Provincia" />
         </EntityType>
         <EntityType Name="Producto">
           <Key>
@@ -1334,28 +1346,28 @@
           <Property Name="idTalle" Type="Int32" Nullable="false" />
           <Property Name="idColor" Type="Int32" Nullable="false" />
           <Property Name="idSubCategoria" Type="Int32" Nullable="false" />
-          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="precioUnitario" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="precioUnitario" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="idGarantia" Type="Int32" />
           <Property Name="esDestacado" Type="Boolean" />
-          <NavigationProperty Name="Color" Relationship="ecommerceModel.FK_Producto_Color" FromRole="Producto" ToRole="Color" />
-          <NavigationProperty Name="Garantia" Relationship="ecommerceModel.FK_Producto_Garantia" FromRole="Producto" ToRole="Garantia" />
-          <NavigationProperty Name="ImagenProducto" Relationship="ecommerceModel.FK_ImagenProducto_Producto" FromRole="Producto" ToRole="ImagenProducto" />
-          <NavigationProperty Name="OrdenCompraDetalle" Relationship="ecommerceModel.FK_OrdenCompraDetalle_Producto" FromRole="Producto" ToRole="OrdenCompraDetalle" />
-          <NavigationProperty Name="SubCategoria" Relationship="ecommerceModel.FK_Producto_Categoria" FromRole="Producto" ToRole="SubCategoria" />
-          <NavigationProperty Name="Talle" Relationship="ecommerceModel.FK_Producto_Producto" FromRole="Producto" ToRole="Talle" />
-          <NavigationProperty Name="Stock" Relationship="ecommerceModel.FK_Stock_Producto" FromRole="Producto" ToRole="Stock" />
-          <NavigationProperty Name="WishList" Relationship="ecommerceModel.FK_WishList_Producto" FromRole="Producto" ToRole="WishList" />
+          <NavigationProperty Name="Color" Relationship="Self.FK_Producto_Color" FromRole="Producto" ToRole="Color" />
+          <NavigationProperty Name="Garantia" Relationship="Self.FK_Producto_Garantia" FromRole="Producto" ToRole="Garantia" />
+          <NavigationProperty Name="ImagenProducto" Relationship="Self.FK_ImagenProducto_Producto" FromRole="Producto" ToRole="ImagenProducto" />
+          <NavigationProperty Name="OrdenCompraDetalle" Relationship="Self.FK_OrdenCompraDetalle_Producto" FromRole="Producto" ToRole="OrdenCompraDetalle" />
+          <NavigationProperty Name="SubCategoria" Relationship="Self.FK_Producto_Categoria" FromRole="Producto" ToRole="SubCategoria" />
+          <NavigationProperty Name="Talle" Relationship="Self.FK_Producto_Producto" FromRole="Producto" ToRole="Talle" />
+          <NavigationProperty Name="Stock" Relationship="Self.FK_Stock_Producto" FromRole="Producto" ToRole="Stock" />
+          <NavigationProperty Name="WishList" Relationship="Self.FK_WishList_Producto" FromRole="Producto" ToRole="WishList" />
         </EntityType>
         <EntityType Name="Provincia">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="provincia1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="provincia1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="idPais" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Localidad" Relationship="ecommerceModel.FK_Localidad_Provincia" FromRole="Provincia" ToRole="Localidad" />
-          <NavigationProperty Name="Pais" Relationship="ecommerceModel.FK_Provincia_Pais" FromRole="Provincia" ToRole="Pais" />
+          <NavigationProperty Name="Localidad" Relationship="Self.FK_Localidad_Provincia" FromRole="Provincia" ToRole="Localidad" />
+          <NavigationProperty Name="Pais" Relationship="Self.FK_Provincia_Pais" FromRole="Provincia" ToRole="Pais" />
         </EntityType>
         <EntityType Name="Stock">
           <Key>
@@ -1367,8 +1379,8 @@
           <Property Name="cantidad" Type="Int32" Nullable="false" />
           <Property Name="minimo" Type="Int32" Nullable="false" />
           <Property Name="maximo" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Producto" Relationship="ecommerceModel.FK_Stock_Producto" FromRole="Stock" ToRole="Producto" />
-          <NavigationProperty Name="Sucursal" Relationship="ecommerceModel.FK_Stock_Sucursal" FromRole="Stock" ToRole="Sucursal" />
+          <NavigationProperty Name="Producto" Relationship="Self.FK_Stock_Producto" FromRole="Stock" ToRole="Producto" />
+          <NavigationProperty Name="Sucursal" Relationship="Self.FK_Stock_Sucursal" FromRole="Stock" ToRole="Sucursal" />
         </EntityType>
         <EntityType Name="SubCategoria">
           <Key>
@@ -1377,8 +1389,8 @@
           <Property Name="idSubCategoria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="idCategoria" Type="Int32" Nullable="false" />
           <Property Name="descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Categoria" Relationship="ecommerceModel.FK__SubCatego__idCat__59904A2C" FromRole="SubCategoria" ToRole="Categoria" />
-          <NavigationProperty Name="Producto" Relationship="ecommerceModel.FK_Producto_Categoria" FromRole="SubCategoria" ToRole="Producto" />
+          <NavigationProperty Name="Categoria" Relationship="Self.FK__SubCatego__idCat__59904A2C" FromRole="SubCategoria" ToRole="Categoria" />
+          <NavigationProperty Name="Producto" Relationship="Self.FK_Producto_Categoria" FromRole="SubCategoria" ToRole="Producto" />
         </EntityType>
         <EntityType Name="Sucursal">
           <Key>
@@ -1386,20 +1398,20 @@
           </Key>
           <Property Name="idSucursal" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="idDireccion" Type="Int32" Nullable="false" />
-          <Property Name="telefono" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Direccion" Relationship="ecommerceModel.FK_Sucursal_Direccion" FromRole="Sucursal" ToRole="Direccion" />
-          <NavigationProperty Name="OrdenCompra" Relationship="ecommerceModel.FK_OrdenCompra_Sucursal" FromRole="Sucursal" ToRole="OrdenCompra" />
-          <NavigationProperty Name="Stock" Relationship="ecommerceModel.FK_Stock_Sucursal" FromRole="Sucursal" ToRole="Stock" />
+          <Property Name="telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Direccion" Relationship="Self.FK_Sucursal_Direccion" FromRole="Sucursal" ToRole="Direccion" />
+          <NavigationProperty Name="OrdenCompra" Relationship="Self.FK_OrdenCompra_Sucursal" FromRole="Sucursal" ToRole="OrdenCompra" />
+          <NavigationProperty Name="Stock" Relationship="Self.FK_Stock_Sucursal" FromRole="Sucursal" ToRole="Stock" />
         </EntityType>
         <EntityType Name="Talle">
           <Key>
             <PropertyRef Name="idTalle" />
           </Key>
           <Property Name="idTalle" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Producto" Relationship="ecommerceModel.FK_Producto_Producto" FromRole="Talle" ToRole="Producto" />
+          <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Producto" Relationship="Self.FK_Producto_Producto" FromRole="Talle" ToRole="Producto" />
         </EntityType>
         <EntityType Name="Tarjeta">
           <Key>
@@ -1429,8 +1441,8 @@
             <PropertyRef Name="idUsuario" />
           </Key>
           <Property Name="idUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="userName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="userName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="cantidadPenalizacion" Type="Int32" />
           <Property Name="idEstadoUsuario" Type="Int32" Nullable="false" />
           <Property Name="idDatosPersonales" Type="Int32" Nullable="false" />
@@ -1447,8 +1459,8 @@
             <PropertyRef Name="idEstado" />
           </Key>
           <Property Name="idEstado" Type="Int32" Nullable="false" />
-          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Usuario" Relationship="ecommerceModel.FK_Usuario_Usuario" FromRole="UsuarioEstado" ToRole="Usuario" />
+          <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_Usuario_Usuario" FromRole="UsuarioEstado" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="webpages_Membership">
           <Key>
@@ -1460,9 +1472,9 @@
           <Property Name="IsConfirmed" Type="Boolean" />
           <Property Name="LastPasswordFailureDate" Type="DateTime" Precision="3" />
           <Property Name="PasswordFailuresSinceLastSuccess" Type="Int32" Nullable="false" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="PasswordChangedDate" Type="DateTime" Precision="3" />
-          <Property Name="PasswordSalt" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordSalt" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="PasswordVerificationToken" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="PasswordVerificationTokenExpirationDate" Type="DateTime" Precision="3" />
         </EntityType>
@@ -1471,8 +1483,8 @@
             <PropertyRef Name="Provider" />
             <PropertyRef Name="ProviderUserId" />
           </Key>
-          <Property Name="Provider" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="ProviderUserId" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Provider" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProviderUserId" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="webpages_Roles">
@@ -1480,8 +1492,8 @@
             <PropertyRef Name="RoleId" />
           </Key>
           <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Usuario" Relationship="ecommerceModel.webpages_UsersInRoles" FromRole="webpages_Roles" ToRole="Usuario" />
+          <Property Name="RoleName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Usuario" Relationship="Self.webpages_UsersInRoles" FromRole="webpages_Roles" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="WishList">
           <Key>
@@ -1491,8 +1503,8 @@
           <Property Name="idUsuario" Type="Int32" Nullable="false" />
           <Property Name="idProducto" Type="Int32" Nullable="false" />
           <Property Name="idWishlist" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Producto" Relationship="ecommerceModel.FK_WishList_Producto" FromRole="WishList" ToRole="Producto" />
-          <NavigationProperty Name="Usuario" Relationship="ecommerceModel.FK_WishList_Usuario" FromRole="WishList" ToRole="Usuario" />
+          <NavigationProperty Name="Producto" Relationship="Self.FK_WishList_Producto" FromRole="WishList" ToRole="Producto" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_WishList_Usuario" FromRole="WishList" ToRole="Usuario" />
         </EntityType>
         <Association Name="FK_Tarjeta_Banco">
           <End Type="ecommerceModel.Banco" Role="Banco" Multiplicity="1" />
@@ -1507,8 +1519,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_BlackList_Usuario">
-          <End Type="ecommerceModel.Usuario" Role="Usuario" Multiplicity="1" />
-          <End Type="ecommerceModel.BlackList" Role="BlackList" Multiplicity="*" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="BlackList" Type="Self.BlackList" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Usuario">
               <PropertyRef Name="idUsuario" />
@@ -1519,8 +1531,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__SubCatego__idCat__59904A2C">
-          <End Type="ecommerceModel.Categoria" Role="Categoria" Multiplicity="1" />
-          <End Type="ecommerceModel.SubCategoria" Role="SubCategoria" Multiplicity="*" />
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="1" />
+          <End Role="SubCategoria" Type="Self.SubCategoria" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Categoria">
               <PropertyRef Name="idCategoria" />
@@ -1531,8 +1543,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Producto_Color">
-          <End Type="ecommerceModel.Color" Role="Color" Multiplicity="1" />
-          <End Type="ecommerceModel.Producto" Role="Producto" Multiplicity="*" />
+          <End Role="Color" Type="Self.Color" Multiplicity="1" />
+          <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Color">
               <PropertyRef Name="idColor" />
@@ -1543,8 +1555,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CostoEnvio_Localidad">
-          <End Type="ecommerceModel.Localidad" Role="Localidad" Multiplicity="1" />
-          <End Type="ecommerceModel.CostoEnvio" Role="CostoEnvio" Multiplicity="*" />
+          <End Role="Localidad" Type="Self.Localidad" Multiplicity="1" />
+          <End Role="CostoEnvio" Type="Self.CostoEnvio" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Localidad">
               <PropertyRef Name="id" />
@@ -1555,8 +1567,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrdenCompra_Cupon">
-          <End Type="ecommerceModel.Cupon" Role="Cupon" Multiplicity="0..1" />
-          <End Type="ecommerceModel.OrdenCompra" Role="OrdenCompra" Multiplicity="*" />
+          <End Role="Cupon" Type="Self.Cupon" Multiplicity="0..1" />
+          <End Role="OrdenCompra" Type="Self.OrdenCompra" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Cupon">
               <PropertyRef Name="idCupon" />
@@ -1567,8 +1579,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_DatosPersonales_Direccion">
-          <End Type="ecommerceModel.Direccion" Role="Direccion" Multiplicity="1" />
-          <End Type="ecommerceModel.DatosPersonales" Role="DatosPersonales" Multiplicity="*" />
+          <End Role="Direccion" Type="Self.Direccion" Multiplicity="1" />
+          <End Role="DatosPersonales" Type="Self.DatosPersonales" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Direccion">
               <PropertyRef Name="idDireccion" />
@@ -1591,8 +1603,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Direccion_Localidad">
-          <End Type="ecommerceModel.Localidad" Role="Localidad" Multiplicity="0..1" />
-          <End Type="ecommerceModel.Direccion" Role="Direccion" Multiplicity="*" />
+          <End Role="Localidad" Type="Self.Localidad" Multiplicity="0..1" />
+          <End Role="Direccion" Type="Self.Direccion" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Localidad">
               <PropertyRef Name="id" />
@@ -1603,8 +1615,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Envio_Direccion">
-          <End Type="ecommerceModel.Direccion" Role="Direccion" Multiplicity="0..1" />
-          <End Type="ecommerceModel.Envio" Role="Envio" Multiplicity="*" />
+          <End Role="Direccion" Type="Self.Direccion" Multiplicity="0..1" />
+          <End Role="Envio" Type="Self.Envio" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Direccion">
               <PropertyRef Name="idDireccion" />
@@ -1615,8 +1627,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Sucursal_Direccion">
-          <End Type="ecommerceModel.Direccion" Role="Direccion" Multiplicity="1" />
-          <End Type="ecommerceModel.Sucursal" Role="Sucursal" Multiplicity="*" />
+          <End Role="Direccion" Type="Self.Direccion" Multiplicity="1" />
+          <End Role="Sucursal" Type="Self.Sucursal" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Direccion">
               <PropertyRef Name="idDireccion" />
@@ -1627,8 +1639,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrdenCompraEnvio_Envio">
-          <End Type="ecommerceModel.Envio" Role="Envio" Multiplicity="1" />
-          <End Type="ecommerceModel.OrdenCompraEnvio" Role="OrdenCompraEnvio" Multiplicity="*" />
+          <End Role="Envio" Type="Self.Envio" Multiplicity="1" />
+          <End Role="OrdenCompraEnvio" Type="Self.OrdenCompraEnvio" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Envio">
               <PropertyRef Name="idEnvio" />
@@ -1639,8 +1651,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Pago_EstadoPago">
-          <End Type="ecommerceModel.EstadoPago" Role="EstadoPago" Multiplicity="1" />
-          <End Type="ecommerceModel.Pago" Role="Pago" Multiplicity="*" />
+          <End Role="EstadoPago" Type="Self.EstadoPago" Multiplicity="1" />
+          <End Role="Pago" Type="Self.Pago" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="EstadoPago">
               <PropertyRef Name="idEstadoPago" />
@@ -1651,8 +1663,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Factura_Pago">
-          <End Type="ecommerceModel.Pago" Role="Pago" Multiplicity="1" />
-          <End Type="ecommerceModel.Factura" Role="Factura" Multiplicity="*" />
+          <End Role="Pago" Type="Self.Pago" Multiplicity="1" />
+          <End Role="Factura" Type="Self.Factura" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Pago">
               <PropertyRef Name="idPago" />
@@ -1663,8 +1675,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Producto_Garantia">
-          <End Type="ecommerceModel.Garantia" Role="Garantia" Multiplicity="0..1" />
-          <End Type="ecommerceModel.Producto" Role="Producto" Multiplicity="*" />
+          <End Role="Garantia" Type="Self.Garantia" Multiplicity="0..1" />
+          <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Garantia">
               <PropertyRef Name="idGarantia" />
@@ -1675,8 +1687,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ImagenProducto_Producto">
-          <End Type="ecommerceModel.Producto" Role="Producto" Multiplicity="0..1" />
-          <End Type="ecommerceModel.ImagenProducto" Role="ImagenProducto" Multiplicity="*" />
+          <End Role="Producto" Type="Self.Producto" Multiplicity="0..1" />
+          <End Role="ImagenProducto" Type="Self.ImagenProducto" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Producto">
               <PropertyRef Name="idProducto" />
@@ -1687,8 +1699,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Localidad_Provincia">
-          <End Type="ecommerceModel.Provincia" Role="Provincia" Multiplicity="1" />
-          <End Type="ecommerceModel.Localidad" Role="Localidad" Multiplicity="*" />
+          <End Role="Provincia" Type="Self.Provincia" Multiplicity="1" />
+          <End Role="Localidad" Type="Self.Localidad" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Provincia">
               <PropertyRef Name="id" />
@@ -1699,8 +1711,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrdenCompra_OrdenCompraEstado">
-          <End Type="ecommerceModel.OrdenCompraEstado" Role="OrdenCompraEstado" Multiplicity="1" />
-          <End Type="ecommerceModel.OrdenCompra" Role="OrdenCompra" Multiplicity="*" />
+          <End Role="OrdenCompraEstado" Type="Self.OrdenCompraEstado" Multiplicity="1" />
+          <End Role="OrdenCompra" Type="Self.OrdenCompra" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="OrdenCompraEstado">
               <PropertyRef Name="idEstadoOrden" />
@@ -1711,8 +1723,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrdenCompra_Pago">
-          <End Type="ecommerceModel.Pago" Role="Pago" Multiplicity="0..1" />
-          <End Type="ecommerceModel.OrdenCompra" Role="OrdenCompra" Multiplicity="*" />
+          <End Role="Pago" Type="Self.Pago" Multiplicity="0..1" />
+          <End Role="OrdenCompra" Type="Self.OrdenCompra" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Pago">
               <PropertyRef Name="idPago" />
@@ -1723,8 +1735,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrdenCompra_Sucursal">
-          <End Type="ecommerceModel.Sucursal" Role="Sucursal" Multiplicity="0..1" />
-          <End Type="ecommerceModel.OrdenCompra" Role="OrdenCompra" Multiplicity="*" />
+          <End Role="Sucursal" Type="Self.Sucursal" Multiplicity="0..1" />
+          <End Role="OrdenCompra" Type="Self.OrdenCompra" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Sucursal">
               <PropertyRef Name="idSucursal" />
@@ -1735,8 +1747,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrdenCompra_Usuario">
-          <End Type="ecommerceModel.Usuario" Role="Usuario" Multiplicity="1" />
-          <End Type="ecommerceModel.OrdenCompra" Role="OrdenCompra" Multiplicity="*" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="OrdenCompra" Type="Self.OrdenCompra" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Usuario">
               <PropertyRef Name="idUsuario" />
@@ -1747,8 +1759,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrdenCompraDetalle_OrdenCompra">
-          <End Type="ecommerceModel.OrdenCompra" Role="OrdenCompra" Multiplicity="1" />
-          <End Type="ecommerceModel.OrdenCompraDetalle" Role="OrdenCompraDetalle" Multiplicity="*" />
+          <End Role="OrdenCompra" Type="Self.OrdenCompra" Multiplicity="1" />
+          <End Role="OrdenCompraDetalle" Type="Self.OrdenCompraDetalle" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="OrdenCompra">
               <PropertyRef Name="idOrdenCompra" />
@@ -1759,8 +1771,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrdenCompraEnvio_OrdenCompra">
-          <End Type="ecommerceModel.OrdenCompra" Role="OrdenCompra" Multiplicity="1" />
-          <End Type="ecommerceModel.OrdenCompraEnvio" Role="OrdenCompraEnvio" Multiplicity="*" />
+          <End Role="OrdenCompra" Type="Self.OrdenCompra" Multiplicity="1" />
+          <End Role="OrdenCompraEnvio" Type="Self.OrdenCompraEnvio" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="OrdenCompra">
               <PropertyRef Name="idOrdenCompra" />
@@ -1771,8 +1783,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrdenCompraDetalle_Producto">
-          <End Type="ecommerceModel.Producto" Role="Producto" Multiplicity="1" />
-          <End Type="ecommerceModel.OrdenCompraDetalle" Role="OrdenCompraDetalle" Multiplicity="*" />
+          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+          <End Role="OrdenCompraDetalle" Type="Self.OrdenCompraDetalle" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Producto">
               <PropertyRef Name="idProducto" />
@@ -1783,8 +1795,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Provincia_Pais">
-          <End Type="ecommerceModel.Pais" Role="Pais" Multiplicity="1" />
-          <End Type="ecommerceModel.Provincia" Role="Provincia" Multiplicity="*" />
+          <End Role="Pais" Type="Self.Pais" Multiplicity="1" />
+          <End Role="Provincia" Type="Self.Provincia" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Pais">
               <PropertyRef Name="id" />
@@ -1795,8 +1807,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Producto_Categoria">
-          <End Type="ecommerceModel.SubCategoria" Role="SubCategoria" Multiplicity="1" />
-          <End Type="ecommerceModel.Producto" Role="Producto" Multiplicity="*" />
+          <End Role="SubCategoria" Type="Self.SubCategoria" Multiplicity="1" />
+          <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="SubCategoria">
               <PropertyRef Name="idSubCategoria" />
@@ -1807,8 +1819,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Producto_Producto">
-          <End Type="ecommerceModel.Talle" Role="Talle" Multiplicity="1" />
-          <End Type="ecommerceModel.Producto" Role="Producto" Multiplicity="*" />
+          <End Role="Talle" Type="Self.Talle" Multiplicity="1" />
+          <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Talle">
               <PropertyRef Name="idTalle" />
@@ -1819,8 +1831,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Stock_Producto">
-          <End Type="ecommerceModel.Producto" Role="Producto" Multiplicity="1" />
-          <End Type="ecommerceModel.Stock" Role="Stock" Multiplicity="*" />
+          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+          <End Role="Stock" Type="Self.Stock" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Producto">
               <PropertyRef Name="idProducto" />
@@ -1831,8 +1843,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_WishList_Producto">
-          <End Type="ecommerceModel.Producto" Role="Producto" Multiplicity="1" />
-          <End Type="ecommerceModel.WishList" Role="WishList" Multiplicity="*" />
+          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+          <End Role="WishList" Type="Self.WishList" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Producto">
               <PropertyRef Name="idProducto" />
@@ -1843,8 +1855,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Stock_Sucursal">
-          <End Type="ecommerceModel.Sucursal" Role="Sucursal" Multiplicity="1" />
-          <End Type="ecommerceModel.Stock" Role="Stock" Multiplicity="*" />
+          <End Role="Sucursal" Type="Self.Sucursal" Multiplicity="1" />
+          <End Role="Stock" Type="Self.Stock" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Sucursal">
               <PropertyRef Name="idSucursal" />
@@ -1879,8 +1891,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Usuario_Usuario">
-          <End Type="ecommerceModel.UsuarioEstado" Role="UsuarioEstado" Multiplicity="1" />
-          <End Type="ecommerceModel.Usuario" Role="Usuario" Multiplicity="*" />
+          <End Role="UsuarioEstado" Type="Self.UsuarioEstado" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="UsuarioEstado">
               <PropertyRef Name="idEstado" />
@@ -1891,8 +1903,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_WishList_Usuario">
-          <End Type="ecommerceModel.Usuario" Role="Usuario" Multiplicity="1" />
-          <End Type="ecommerceModel.WishList" Role="WishList" Multiplicity="*" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="WishList" Type="Self.WishList" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Usuario">
               <PropertyRef Name="idUsuario" />
@@ -1903,10 +1915,171 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="webpages_UsersInRoles">
-          <End Type="ecommerceModel.webpages_Roles" Role="webpages_Roles" Multiplicity="*" />
-          <End Type="ecommerceModel.Usuario" Role="Usuario" Multiplicity="*" />
+          <End Role="webpages_Roles" Type="Self.webpages_Roles" Multiplicity="*" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
         </Association>
-        </Schema>
+        <EntityContainer Name="ecommerceEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BlackList" EntityType="Self.BlackList" />
+          <EntitySet Name="Categoria" EntityType="Self.Categoria" />
+          <EntitySet Name="Color" EntityType="Self.Color" />
+          <EntitySet Name="CostoEnvio" EntityType="Self.CostoEnvio" />
+          <EntitySet Name="Cupon" EntityType="Self.Cupon" />
+          <EntitySet Name="DatosPersonales" EntityType="Self.DatosPersonales" />
+          <EntitySet Name="Direccion" EntityType="Self.Direccion" />
+          <EntitySet Name="Envio" EntityType="Self.Envio" />
+          <EntitySet Name="EstadoPago" EntityType="Self.EstadoPago" />
+          <EntitySet Name="Factura" EntityType="Self.Factura" />
+          <EntitySet Name="Garantia" EntityType="Self.Garantia" />
+          <EntitySet Name="ImagenProducto" EntityType="Self.ImagenProducto" />
+          <EntitySet Name="Localidad" EntityType="Self.Localidad" />
+          <EntitySet Name="OrdenCompra" EntityType="Self.OrdenCompra" />
+          <EntitySet Name="OrdenCompraDetalle" EntityType="Self.OrdenCompraDetalle" />
+          <EntitySet Name="OrdenCompraEnvio" EntityType="Self.OrdenCompraEnvio" />
+          <EntitySet Name="OrdenCompraEstado" EntityType="Self.OrdenCompraEstado" />
+          <EntitySet Name="Pago" EntityType="Self.Pago" />
+          <EntitySet Name="Pais" EntityType="Self.Pais" />
+          <EntitySet Name="Producto" EntityType="Self.Producto" />
+          <EntitySet Name="Provincia" EntityType="Self.Provincia" />
+          <EntitySet Name="Stock" EntityType="Self.Stock" />
+          <EntitySet Name="SubCategoria" EntityType="Self.SubCategoria" />
+          <EntitySet Name="Sucursal" EntityType="Self.Sucursal" />
+          <EntitySet Name="Talle" EntityType="Self.Talle" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+          <EntitySet Name="UsuarioEstado" EntityType="Self.UsuarioEstado" />
+          <EntitySet Name="webpages_Membership" EntityType="Self.webpages_Membership" />
+          <EntitySet Name="webpages_OAuthMembership" EntityType="Self.webpages_OAuthMembership" />
+          <EntitySet Name="webpages_Roles" EntityType="Self.webpages_Roles" />
+          <EntitySet Name="WishList" EntityType="Self.WishList" />
+          <AssociationSet Name="FK_BlackList_Usuario" Association="Self.FK_BlackList_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="BlackList" EntitySet="BlackList" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SubCatego__idCat__59904A2C" Association="Self.FK__SubCatego__idCat__59904A2C">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="SubCategoria" EntitySet="SubCategoria" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Producto_Color" Association="Self.FK_Producto_Color">
+            <End Role="Color" EntitySet="Color" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CostoEnvio_Localidad" Association="Self.FK_CostoEnvio_Localidad">
+            <End Role="Localidad" EntitySet="Localidad" />
+            <End Role="CostoEnvio" EntitySet="CostoEnvio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrdenCompra_Cupon" Association="Self.FK_OrdenCompra_Cupon">
+            <End Role="Cupon" EntitySet="Cupon" />
+            <End Role="OrdenCompra" EntitySet="OrdenCompra" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DatosPersonales_Direccion" Association="Self.FK_DatosPersonales_Direccion">
+            <End Role="Direccion" EntitySet="Direccion" />
+            <End Role="DatosPersonales" EntitySet="DatosPersonales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DatosPersonales_Usuario" Association="Self.FK_DatosPersonales_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="DatosPersonales" EntitySet="DatosPersonales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Direccion_Localidad" Association="Self.FK_Direccion_Localidad">
+            <End Role="Localidad" EntitySet="Localidad" />
+            <End Role="Direccion" EntitySet="Direccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Envio_Direccion" Association="Self.FK_Envio_Direccion">
+            <End Role="Direccion" EntitySet="Direccion" />
+            <End Role="Envio" EntitySet="Envio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sucursal_Direccion" Association="Self.FK_Sucursal_Direccion">
+            <End Role="Direccion" EntitySet="Direccion" />
+            <End Role="Sucursal" EntitySet="Sucursal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrdenCompraEnvio_Envio" Association="Self.FK_OrdenCompraEnvio_Envio">
+            <End Role="Envio" EntitySet="Envio" />
+            <End Role="OrdenCompraEnvio" EntitySet="OrdenCompraEnvio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pago_EstadoPago" Association="Self.FK_Pago_EstadoPago">
+            <End Role="EstadoPago" EntitySet="EstadoPago" />
+            <End Role="Pago" EntitySet="Pago" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Factura_Pago" Association="Self.FK_Factura_Pago">
+            <End Role="Pago" EntitySet="Pago" />
+            <End Role="Factura" EntitySet="Factura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Producto_Garantia" Association="Self.FK_Producto_Garantia">
+            <End Role="Garantia" EntitySet="Garantia" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ImagenProducto_Producto" Association="Self.FK_ImagenProducto_Producto">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="ImagenProducto" EntitySet="ImagenProducto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Localidad_Provincia" Association="Self.FK_Localidad_Provincia">
+            <End Role="Provincia" EntitySet="Provincia" />
+            <End Role="Localidad" EntitySet="Localidad" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrdenCompra_OrdenCompraEstado" Association="Self.FK_OrdenCompra_OrdenCompraEstado">
+            <End Role="OrdenCompraEstado" EntitySet="OrdenCompraEstado" />
+            <End Role="OrdenCompra" EntitySet="OrdenCompra" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrdenCompra_Pago" Association="Self.FK_OrdenCompra_Pago">
+            <End Role="Pago" EntitySet="Pago" />
+            <End Role="OrdenCompra" EntitySet="OrdenCompra" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrdenCompra_Sucursal" Association="Self.FK_OrdenCompra_Sucursal">
+            <End Role="Sucursal" EntitySet="Sucursal" />
+            <End Role="OrdenCompra" EntitySet="OrdenCompra" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrdenCompra_Usuario" Association="Self.FK_OrdenCompra_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="OrdenCompra" EntitySet="OrdenCompra" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrdenCompraDetalle_OrdenCompra" Association="Self.FK_OrdenCompraDetalle_OrdenCompra">
+            <End Role="OrdenCompra" EntitySet="OrdenCompra" />
+            <End Role="OrdenCompraDetalle" EntitySet="OrdenCompraDetalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrdenCompraEnvio_OrdenCompra" Association="Self.FK_OrdenCompraEnvio_OrdenCompra">
+            <End Role="OrdenCompra" EntitySet="OrdenCompra" />
+            <End Role="OrdenCompraEnvio" EntitySet="OrdenCompraEnvio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrdenCompraDetalle_Producto" Association="Self.FK_OrdenCompraDetalle_Producto">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="OrdenCompraDetalle" EntitySet="OrdenCompraDetalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Provincia_Pais" Association="Self.FK_Provincia_Pais">
+            <End Role="Pais" EntitySet="Pais" />
+            <End Role="Provincia" EntitySet="Provincia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Producto_Categoria" Association="Self.FK_Producto_Categoria">
+            <End Role="SubCategoria" EntitySet="SubCategoria" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Producto_Producto" Association="Self.FK_Producto_Producto">
+            <End Role="Talle" EntitySet="Talle" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stock_Producto" Association="Self.FK_Stock_Producto">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="Stock" EntitySet="Stock" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WishList_Producto" Association="Self.FK_WishList_Producto">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="WishList" EntitySet="WishList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stock_Sucursal" Association="Self.FK_Stock_Sucursal">
+            <End Role="Sucursal" EntitySet="Sucursal" />
+            <End Role="Stock" EntitySet="Stock" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Usuario" Association="Self.FK_Usuario_Usuario">
+            <End Role="UsuarioEstado" EntitySet="UsuarioEstado" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WishList_Usuario" Association="Self.FK_WishList_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="WishList" EntitySet="WishList" />
+          </AssociationSet>
+          <AssociationSet Name="webpages_UsersInRoles" Association="Self.webpages_UsersInRoles">
+            <End Role="webpages_Roles" EntitySet="webpages_Roles" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1923,48 +2096,48 @@
           <EntitySetMapping Name="BlackList">
             <EntityTypeMapping TypeName="ecommerceModel.BlackList">
               <MappingFragment StoreEntitySet="BlackList">
-                <ScalarProperty Name="fechaDespenalizacion" ColumnName="fechaDespenalizacion" />
-                <ScalarProperty Name="fechaPenalizacion" ColumnName="fechaPenalizacion" />
-                <ScalarProperty Name="justificacion" ColumnName="justificacion" />
-                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
                 <ScalarProperty Name="idPenalizacion" ColumnName="idPenalizacion" />
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="justificacion" ColumnName="justificacion" />
+                <ScalarProperty Name="fechaPenalizacion" ColumnName="fechaPenalizacion" />
+                <ScalarProperty Name="fechaDespenalizacion" ColumnName="fechaDespenalizacion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Categoria">
             <EntityTypeMapping TypeName="ecommerceModel.Categoria">
               <MappingFragment StoreEntitySet="Categoria">
-                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
                 <ScalarProperty Name="idCategoria" ColumnName="idCategoria" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Color">
             <EntityTypeMapping TypeName="ecommerceModel.Color">
               <MappingFragment StoreEntitySet="Color">
-                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
                 <ScalarProperty Name="idColor" ColumnName="idColor" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CostoEnvio">
             <EntityTypeMapping TypeName="ecommerceModel.CostoEnvio">
               <MappingFragment StoreEntitySet="CostoEnvio">
-                <ScalarProperty Name="Importe" ColumnName="Importe" />
-                <ScalarProperty Name="idLocalidad" ColumnName="idLocalidad" />
                 <ScalarProperty Name="idCostoEnvio" ColumnName="idCostoEnvio" />
+                <ScalarProperty Name="idLocalidad" ColumnName="idLocalidad" />
+                <ScalarProperty Name="Importe" ColumnName="Importe" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Cupon">
             <EntityTypeMapping TypeName="ecommerceModel.Cupon">
               <MappingFragment StoreEntitySet="Cupon">
-                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
-                <ScalarProperty Name="porcentajeDescuento" ColumnName="porcentajeDescuento" />
-                <ScalarProperty Name="fechaCaducidad" ColumnName="fechaCaducidad" />
-                <ScalarProperty Name="codigo" ColumnName="codigo" />
-                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
                 <ScalarProperty Name="idCupon" ColumnName="idCupon" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="codigo" ColumnName="codigo" />
+                <ScalarProperty Name="fechaCaducidad" ColumnName="fechaCaducidad" />
+                <ScalarProperty Name="porcentajeDescuento" ColumnName="porcentajeDescuento" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1977,194 +2150,203 @@
                 <ScalarProperty Name="apellido" ColumnName="apellido" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
                 <ScalarProperty Name="datosPersonalesId" ColumnName="datosPersonalesId" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="apellido" ColumnName="apellido" />
+                <ScalarProperty Name="dni" ColumnName="dni" />
+                <ScalarProperty Name="idDireccion" ColumnName="idDireccion" />
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Direccion">
             <EntityTypeMapping TypeName="ecommerceModel.Direccion">
               <MappingFragment StoreEntitySet="Direccion">
-                <ScalarProperty Name="idLocalidad" ColumnName="idLocalidad" />
-                <ScalarProperty Name="codigoPostal" ColumnName="codigoPostal" />
-                <ScalarProperty Name="direccion1" ColumnName="direccion" />
                 <ScalarProperty Name="idDireccion" ColumnName="idDireccion" />
+                <ScalarProperty Name="direccion1" ColumnName="direccion" />
+                <ScalarProperty Name="codigoPostal" ColumnName="codigoPostal" />
+                <ScalarProperty Name="idLocalidad" ColumnName="idLocalidad" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Envio">
             <EntityTypeMapping TypeName="ecommerceModel.Envio">
               <MappingFragment StoreEntitySet="Envio">
-                <ScalarProperty Name="idDireccion" ColumnName="idDireccion" />
-                <ScalarProperty Name="costoEnvio" ColumnName="costoEnvio" />
-                <ScalarProperty Name="fechaEntrega" ColumnName="fechaEntrega" />
                 <ScalarProperty Name="idEnvio" ColumnName="idEnvio" />
+                <ScalarProperty Name="fechaEntrega" ColumnName="fechaEntrega" />
+                <ScalarProperty Name="costoEnvio" ColumnName="costoEnvio" />
+                <ScalarProperty Name="idDireccion" ColumnName="idDireccion" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="apellido" ColumnName="apellido" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="mail" ColumnName="mail" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EstadoPago">
             <EntityTypeMapping TypeName="ecommerceModel.EstadoPago">
               <MappingFragment StoreEntitySet="EstadoPago">
-                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
                 <ScalarProperty Name="idEstadoPago" ColumnName="idEstadoPago" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Factura">
             <EntityTypeMapping TypeName="ecommerceModel.Factura">
               <MappingFragment StoreEntitySet="Factura">
-                <ScalarProperty Name="cuit" ColumnName="cuit" />
-                <ScalarProperty Name="tipo" ColumnName="tipo" />
-                <ScalarProperty Name="idPago" ColumnName="idPago" />
                 <ScalarProperty Name="facturaId" ColumnName="facturaId" />
+                <ScalarProperty Name="idPago" ColumnName="idPago" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="cuit" ColumnName="cuit" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Garantia">
             <EntityTypeMapping TypeName="ecommerceModel.Garantia">
               <MappingFragment StoreEntitySet="Garantia">
-                <ScalarProperty Name="duracion" ColumnName="duracion" />
-                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
                 <ScalarProperty Name="idGarantia" ColumnName="idGarantia" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="duracion" ColumnName="duracion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ImagenProducto">
             <EntityTypeMapping TypeName="ecommerceModel.ImagenProducto">
               <MappingFragment StoreEntitySet="ImagenProducto">
-                <ScalarProperty Name="idProducto" ColumnName="idProducto" />
-                <ScalarProperty Name="esCarrusel" ColumnName="esCarrusel" />
-                <ScalarProperty Name="url" ColumnName="url" />
                 <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="esCarrusel" ColumnName="esCarrusel" />
+                <ScalarProperty Name="idProducto" ColumnName="idProducto" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Localidad">
             <EntityTypeMapping TypeName="ecommerceModel.Localidad">
               <MappingFragment StoreEntitySet="Localidad">
-                <ScalarProperty Name="idProvincia" ColumnName="idProvincia" />
-                <ScalarProperty Name="localidad1" ColumnName="localidad" />
                 <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="localidad1" ColumnName="localidad" />
+                <ScalarProperty Name="idProvincia" ColumnName="idProvincia" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="OrdenCompra">
             <EntityTypeMapping TypeName="ecommerceModel.OrdenCompra">
               <MappingFragment StoreEntitySet="OrdenCompra">
-                <ScalarProperty Name="fechaCompra" ColumnName="fechaCompra" />
-                <ScalarProperty Name="idEstadoOrden" ColumnName="idEstadoOrden" />
-                <ScalarProperty Name="idPago" ColumnName="idPago" />
-                <ScalarProperty Name="idOrdenCompraEnvio" ColumnName="idOrdenCompraEnvio" />
-                <ScalarProperty Name="idCupon" ColumnName="idCupon" />
-                <ScalarProperty Name="idSucursal" ColumnName="idSucursal" />
-                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
                 <ScalarProperty Name="idOrdenCompra" ColumnName="idOrdenCompra" />
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="idSucursal" ColumnName="idSucursal" />
+                <ScalarProperty Name="idCupon" ColumnName="idCupon" />
+                <ScalarProperty Name="idOrdenCompraEnvio" ColumnName="idOrdenCompraEnvio" />
+                <ScalarProperty Name="idPago" ColumnName="idPago" />
+                <ScalarProperty Name="idEstadoOrden" ColumnName="idEstadoOrden" />
+                <ScalarProperty Name="fechaCompra" ColumnName="fechaCompra" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="OrdenCompraDetalle">
             <EntityTypeMapping TypeName="ecommerceModel.OrdenCompraDetalle">
               <MappingFragment StoreEntitySet="OrdenCompraDetalle">
-                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
-                <ScalarProperty Name="idProducto" ColumnName="idProducto" />
-                <ScalarProperty Name="idOrdenCompra" ColumnName="idOrdenCompra" />
                 <ScalarProperty Name="idDetalleOrden" ColumnName="idDetalleOrden" />
+                <ScalarProperty Name="idOrdenCompra" ColumnName="idOrdenCompra" />
+                <ScalarProperty Name="idProducto" ColumnName="idProducto" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="OrdenCompraEnvio">
             <EntityTypeMapping TypeName="ecommerceModel.OrdenCompraEnvio">
               <MappingFragment StoreEntitySet="OrdenCompraEnvio">
-                <ScalarProperty Name="idEnvio" ColumnName="idEnvio" />
-                <ScalarProperty Name="idOrdenCompra" ColumnName="idOrdenCompra" />
                 <ScalarProperty Name="idOrdenCompraEnvio" ColumnName="idOrdenCompraEnvio" />
+                <ScalarProperty Name="idOrdenCompra" ColumnName="idOrdenCompra" />
+                <ScalarProperty Name="idEnvio" ColumnName="idEnvio" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="OrdenCompraEstado">
             <EntityTypeMapping TypeName="ecommerceModel.OrdenCompraEstado">
               <MappingFragment StoreEntitySet="OrdenCompraEstado">
-                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
                 <ScalarProperty Name="idEstadoOrden" ColumnName="idEstadoOrden" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Pago">
             <EntityTypeMapping TypeName="ecommerceModel.Pago">
               <MappingFragment StoreEntitySet="Pago">
-                <ScalarProperty Name="idEstadoPago" ColumnName="idEstadoPago" />
-                <ScalarProperty Name="total" ColumnName="total" />
-                <ScalarProperty Name="tipoPago" ColumnName="tipoPago" />
                 <ScalarProperty Name="idPago" ColumnName="idPago" />
+                <ScalarProperty Name="tipoPago" ColumnName="tipoPago" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="idEstadoPago" ColumnName="idEstadoPago" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Pais">
             <EntityTypeMapping TypeName="ecommerceModel.Pais">
               <MappingFragment StoreEntitySet="Pais">
-                <ScalarProperty Name="pais1" ColumnName="pais" />
                 <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="pais1" ColumnName="pais" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Producto">
             <EntityTypeMapping TypeName="ecommerceModel.Producto">
               <MappingFragment StoreEntitySet="Producto">
-                <ScalarProperty Name="esDestacado" ColumnName="esDestacado" />
-                <ScalarProperty Name="idGarantia" ColumnName="idGarantia" />
-                <ScalarProperty Name="precioUnitario" ColumnName="precioUnitario" />
-                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
-                <ScalarProperty Name="idSubCategoria" ColumnName="idSubCategoria" />
-                <ScalarProperty Name="idColor" ColumnName="idColor" />
-                <ScalarProperty Name="idTalle" ColumnName="idTalle" />
                 <ScalarProperty Name="idProducto" ColumnName="idProducto" />
+                <ScalarProperty Name="idTalle" ColumnName="idTalle" />
+                <ScalarProperty Name="idColor" ColumnName="idColor" />
+                <ScalarProperty Name="idSubCategoria" ColumnName="idSubCategoria" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="precioUnitario" ColumnName="precioUnitario" />
+                <ScalarProperty Name="idGarantia" ColumnName="idGarantia" />
+                <ScalarProperty Name="esDestacado" ColumnName="esDestacado" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Provincia">
             <EntityTypeMapping TypeName="ecommerceModel.Provincia">
               <MappingFragment StoreEntitySet="Provincia">
-                <ScalarProperty Name="idPais" ColumnName="idPais" />
-                <ScalarProperty Name="provincia1" ColumnName="provincia" />
                 <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="provincia1" ColumnName="provincia" />
+                <ScalarProperty Name="idPais" ColumnName="idPais" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Stock">
             <EntityTypeMapping TypeName="ecommerceModel.Stock">
               <MappingFragment StoreEntitySet="Stock">
-                <ScalarProperty Name="maximo" ColumnName="maximo" />
-                <ScalarProperty Name="minimo" ColumnName="minimo" />
-                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
-                <ScalarProperty Name="idProducto" ColumnName="idProducto" />
-                <ScalarProperty Name="idSucursal" ColumnName="idSucursal" />
                 <ScalarProperty Name="idStock" ColumnName="idStock" />
+                <ScalarProperty Name="idSucursal" ColumnName="idSucursal" />
+                <ScalarProperty Name="idProducto" ColumnName="idProducto" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="minimo" ColumnName="minimo" />
+                <ScalarProperty Name="maximo" ColumnName="maximo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SubCategoria">
             <EntityTypeMapping TypeName="ecommerceModel.SubCategoria">
               <MappingFragment StoreEntitySet="SubCategoria">
-                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
-                <ScalarProperty Name="idCategoria" ColumnName="idCategoria" />
                 <ScalarProperty Name="idSubCategoria" ColumnName="idSubCategoria" />
+                <ScalarProperty Name="idCategoria" ColumnName="idCategoria" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Sucursal">
             <EntityTypeMapping TypeName="ecommerceModel.Sucursal">
               <MappingFragment StoreEntitySet="Sucursal">
-                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="telefono" ColumnName="telefono" />
-                <ScalarProperty Name="idDireccion" ColumnName="idDireccion" />
                 <ScalarProperty Name="idSucursal" ColumnName="idSucursal" />
+                <ScalarProperty Name="idDireccion" ColumnName="idDireccion" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Talle">
             <EntityTypeMapping TypeName="ecommerceModel.Talle">
               <MappingFragment StoreEntitySet="Talle">
-                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
                 <ScalarProperty Name="idTalle" ColumnName="idTalle" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2198,66 +2380,70 @@
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="userName" ColumnName="userName" />
                 <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="cantidadPenalizacion" ColumnName="cantidadPenalizacion" />
+                <ScalarProperty Name="idEstadoUsuario" ColumnName="idEstadoUsuario" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UsuarioEstado">
             <EntityTypeMapping TypeName="ecommerceModel.UsuarioEstado">
               <MappingFragment StoreEntitySet="UsuarioEstado">
-                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
                 <ScalarProperty Name="idEstado" ColumnName="idEstado" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="webpages_Membership">
             <EntityTypeMapping TypeName="ecommerceModel.webpages_Membership">
               <MappingFragment StoreEntitySet="webpages_Membership">
-                <ScalarProperty Name="PasswordVerificationTokenExpirationDate" ColumnName="PasswordVerificationTokenExpirationDate" />
-                <ScalarProperty Name="PasswordVerificationToken" ColumnName="PasswordVerificationToken" />
-                <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
-                <ScalarProperty Name="PasswordChangedDate" ColumnName="PasswordChangedDate" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="PasswordFailuresSinceLastSuccess" ColumnName="PasswordFailuresSinceLastSuccess" />
-                <ScalarProperty Name="LastPasswordFailureDate" ColumnName="LastPasswordFailureDate" />
-                <ScalarProperty Name="IsConfirmed" ColumnName="IsConfirmed" />
-                <ScalarProperty Name="ConfirmationToken" ColumnName="ConfirmationToken" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ConfirmationToken" ColumnName="ConfirmationToken" />
+                <ScalarProperty Name="IsConfirmed" ColumnName="IsConfirmed" />
+                <ScalarProperty Name="LastPasswordFailureDate" ColumnName="LastPasswordFailureDate" />
+                <ScalarProperty Name="PasswordFailuresSinceLastSuccess" ColumnName="PasswordFailuresSinceLastSuccess" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="PasswordChangedDate" ColumnName="PasswordChangedDate" />
+                <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+                <ScalarProperty Name="PasswordVerificationToken" ColumnName="PasswordVerificationToken" />
+                <ScalarProperty Name="PasswordVerificationTokenExpirationDate" ColumnName="PasswordVerificationTokenExpirationDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="webpages_OAuthMembership">
             <EntityTypeMapping TypeName="ecommerceModel.webpages_OAuthMembership">
               <MappingFragment StoreEntitySet="webpages_OAuthMembership">
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="ProviderUserId" ColumnName="ProviderUserId" />
                 <ScalarProperty Name="Provider" ColumnName="Provider" />
+                <ScalarProperty Name="ProviderUserId" ColumnName="ProviderUserId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="webpages_Roles">
             <EntityTypeMapping TypeName="ecommerceModel.webpages_Roles">
               <MappingFragment StoreEntitySet="webpages_Roles">
-                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
                 <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="WishList">
             <EntityTypeMapping TypeName="ecommerceModel.WishList">
               <MappingFragment StoreEntitySet="WishList">
-                <ScalarProperty Name="idWishlist" ColumnName="idWishlist" />
-                <ScalarProperty Name="idProducto" ColumnName="idProducto" />
                 <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="idProducto" ColumnName="idProducto" />
+                <ScalarProperty Name="idWishlist" ColumnName="idWishlist" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <AssociationSetMapping Name="webpages_UsersInRoles" TypeName="ecommerceModel.webpages_UsersInRoles" StoreEntitySet="webpages_UsersInRoles">
-            <EndProperty Name="Usuario">
-              <ScalarProperty Name="idUsuario" ColumnName="UserId" />
-            </EndProperty>
             <EndProperty Name="webpages_Roles">
               <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="Usuario">
+              <ScalarProperty Name="idUsuario" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>

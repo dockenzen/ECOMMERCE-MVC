@@ -74,6 +74,7 @@
         <AssociationConnector Association="ecommerceModel.FK_Usuario_Usuario" />
         <AssociationConnector Association="ecommerceModel.FK_WishList_Usuario" />
         <AssociationConnector Association="ecommerceModel.webpages_UsersInRoles" />
+
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
