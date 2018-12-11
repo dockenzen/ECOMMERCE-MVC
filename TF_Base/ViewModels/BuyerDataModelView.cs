@@ -10,6 +10,7 @@ namespace TF_Base.ViewModels
     {
         public MetodoEntrega MetodoEntrega { get; set; }
         public bool UsarDireccionDeContacto { get; set; }
+        public bool UsarDatosDeContacto { get; set; }
 
         public MetodoPago MetodoDePago { get; set; }
 

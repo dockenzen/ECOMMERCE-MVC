@@ -1,17 +1,12 @@
-﻿@{
+﻿@model TF_Base.ViewModels.BuyerDataModelView
+
+@{
     ViewBag.Title = "ShopCheckoutStep1";
     Layout = "~/Views/Shared/_eCommerceLayout.cshtml";
-}
-<script type="text/javascript">
-    $("#usarDireccionContacto").change(function () {
-        if (this.checked) {
-            alert('Its checked!!');
-        } else {
-            alert('Its not checked!!');
-        }
-    });
+    IList<TF_Base.Models.Sucursal> sucursales = (IList<TF_Base.Models.Sucursal>)ViewData["sc"];
+    TF_Base.Models.DatosPersonales dp = (TF_Base.Models.DatosPersonales)ViewData["dp"];
 
-</script>
+}
 
 <div id="all">
     <div id="heading-breadcrumbs">
@@ -32,160 +27,17 @@
     <div id="content">
         <div class="container">
             <div class="row">
-                <div id="checkout" class="col-lg-9">
+                <div id="checkout" class="col-lg-12">
                     <div class="box border-bottom-0">
                         @using (Html.BeginForm())
                         {
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                             <ul class="nav nav-pills nav-fill">
                                 <li class="nav-item"><a href="shop-checkout1.html" class="nav-link active"> <i class="fa fa-address-book"></i><br>Datos del pedido</a></li>
 
                                 <li class="nav-item"><a href="#" class="nav-link disabled"><i class="fa fa-eye"></i><br>Revisión del pedido</a></li>
                             </ul>
                             <div class="container">
-                                <br />
-                                <!--Metodo de entrega-->
-                                <div class="panel panel">
-                                    <div class="panel-heading">
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <h3><i class="fa fa-truck"></i> Método de entrega</h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="panel-body">
-                                        <div class="content">
-                                            <div class="row">
-                                                <div class="col-sm-6">
-                                                    <div class="box shipping-method">
-                                                        <h4>Retira en sucursal</h4>
-                                                        <p>La sucursal mas cercana.</p>
-                                                        <div class="box-footer text-center">
-                                                            <input type="radio" name="delivery" value="delivery1">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <div class="box shipping-method">
-                                                        <h4>Envio a domicilio</h4>
-                                                        <p>Se cobraran cargos de envio.</p>
-                                                        <div class="box-footer text-center">
-                                                            <input type="radio" name="delivery" value="delivery2">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <br />
-                                <!--Direccion-->
-                                <div class="panel panel" id="panelDireccion">
-                                    <div class="panel-heading">
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <h3><i class="fa fa-map-marker"></i> Direccion</h3>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="panel-body">
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <div class="form-group">
-                                                    @Html.CheckBox("usarDireccionContacto", new { id = "usarDireccionContacto" }) Usar datos de contacto
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr />
-                                        <div class="content">
-                                            <div class="row">
-                                                <div class="col-sm-6">
-                                                    <div class="form-group">
-                                                        <label for="firstname">Nombre</label>
-                                                        <input id="firstname" type="text" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <div class="form-group">
-                                                        <label for="lastname">Apellido</label>
-                                                        <input id="lastname" type="text" class="form-control">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-sm-6">
-                                                    <div class="form-group">
-                                                        <label for="phone">Telefono</label>
-                                                        <input id="phone" type="text" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <div class="form-group">
-                                                        <label for="email">Email</label>
-                                                        <input id="email" type="text" class="form-control">
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <hr />
-                                            <div class="row">
-                                                <div class="col-sm-10" id="locationField">
-                                                    <input id="autocomplete" placeholder="Ingrese su direccion de envio" class="form-control"
-                                                           onFocus="geolocate()" type="text" />
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-sm-6">
-                                                    <div class="form-group">
-                                                        <label for="route">Calle</label>
-                                                        <input class="form-control" id="route"
-                                                               disabled="disabled" />
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <div class="form-group">
-                                                        <label for="street_number">Numero</label>
-                                                        <input class="form-control" id="street_number"
-                                                               disabled="disabled" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-sm-6">
-                                                    <div class="form-group">
-                                                        <label for="locality">Ciudad</label>
-                                                        <input class="form-control" id="locality"
-                                                               disabled="disabled" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-sm-6">
-                                                    <div class="form-group">
-                                                        <label for="administrative_area_level_1">Provincia</label>
-                                                        <input class="form-control" id="administrative_area_level_1" disabled="disabled" />
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <div class="form-group">
-                                                        <label for="postal_code">Zip code</label>
-                                                        <input class="form-control" id="postal_code" disabled="disabled" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-sm-6">
-                                                    <div class="form-group">
-                                                        <label for="country">Pais</label>
-                                                        <input class="form-control" id="country" disabled="disabled" />
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <br />
                                 <!--Metodo de pago-->
                                 <div class="panel panel">
                                     <div class="panel-heading">
@@ -203,8 +55,8 @@
                                                     <div class="box payment-method">
                                                         <h4>Efectivo</h4>
                                                         <p>Usted paga cuando lo obtiene.</p>
-                                                        <div class="box-footer text-center">
-                                                            <input type="radio" name="payment" value="payment1">
+                                                        <div class="box-footer text-center" onclick="Efectivo();">
+                                                            @Html.RadioButtonFor(m => m.MetodoDePago, TF_Base.ViewModels.MetodoPago.Efectivo.ToString(), new {  } )
                                                         </div>
                                                     </div>
                                                 </div>
@@ -212,8 +64,8 @@
                                                     <div class="box payment-method">
                                                         <h4>Tarjeta de crédito</h4>
                                                         <p>VISA and Mastercard only.</p>
-                                                        <div class="box-footer text-center">
-                                                            <input type="radio" name="payment" value="payment2">
+                                                        <div class="box-footer text-center" onclick="Tarjeta();">
+                                                            @Html.RadioButtonFor(m => m.MetodoDePago, TF_Base.ViewModels.MetodoPago.Credito.ToString())
                                                         </div>
                                                     </div>
                                                 </div>
@@ -222,50 +74,207 @@
                                     </div>
                                 </div>
 
+                                <br />
+                                <!--Metodo de entrega-->
+                                <div class="panel panel">
+                                    <div class="panel-heading">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <h3><i class="fa fa-truck"></i> Método de entrega</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="content">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="box shipping-method">
+                                                        <h4>Retira en sucursal</h4>
+                                                        <p>La sucursal mas cercana.</p>
+                                                        <div class="box-footer text-center" onclick="RetiroSucursal();">
+                                                            @Html.RadioButtonFor(m => m.MetodoEntrega, TF_Base.ViewModels.MetodoEntrega.RetiroEnSucursal)
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="box shipping-method">
+                                                        <h4>Envio a domicilio</h4>
+                                                        <p>Se cobraran cargos de envio.</p>
+                                                        <div class="box-footer text-center" onclick="EnvioDomicilio();">
+                                                            @Html.RadioButtonFor(m => m.MetodoEntrega, TF_Base.ViewModels.MetodoEntrega.EnvioDomicilio)
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row" id="divSucursales">
+                                                <div class="col-md-12"><p><h3>Puntos de entrega</h3></p></div>
+                                                @foreach (var sucursal in sucursales)
+                                                {
+                                                    <div class="box shipping-method col-sm-3">
+                                                        <div class="float-left">
+                                                            @Html.RadioButton("idSucursal", sucursal.idSucursal)
+                                                            &nbsp;&nbsp;&nbsp;
+                                                        </div>
+                                                        <div class="float-left">
+                                                            <h4>@sucursal.descripcion</h4>
+                                                            <p>@sucursal.Direccion.direccion1.</p>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--Direccion-->
+                                <div class="panel panel" id="div">
+                                    <div class="panel-heading">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <h3><i class="fa fa-user"></i> Quien recibe</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                @Html.CheckBoxFor(m => m.UsarDatosDeContacto) Usar datos de contacto
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr />
+                                    UsarDatosDeContacto
+                                    <div class="panel-body">
+                                        <div class="content">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                        <div class="col-md-12">
+                                                            @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
+                                                            @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Apellido, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                        <div class="col-md-12">
+                                                            @Html.EditorFor(model => model.Apellido, new { htmlAttributes = new { @class = "form-control" } })
+                                                            @Html.ValidationMessageFor(model => model.Apellido, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Telefono, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                        <div class="col-md-12">
+                                                            @Html.EditorFor(model => model.Telefono, new { htmlAttributes = new { @class = "form-control" } })
+                                                            @Html.ValidationMessageFor(model => model.Telefono, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Mail, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                        <div class="col-md-12">
+                                                            @Html.EditorFor(model => model.Mail, new { htmlAttributes = new { @class = "form-control" } })
+                                                            @Html.ValidationMessageFor(model => model.Mail, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <hr />
+
+                                    <div class="panel panel" id="divDireccion">
+                                        <div class="panel-heading">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <h3><i class="fa fa-map-marker"></i> Direccion</h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    @Html.CheckBoxFor(m => m.UsarDireccionDeContacto) Usar direccion de contacto
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-sm-12" id="locationField">
+                                                    @Html.EditorFor(m => m.Direccion.Autocomplete, new { htmlAttributes = new { id = "autocomplete", placeholder = "Ingrese su direccion de envio", @class = "form-control" } })
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="route">Calle</label>
+                                                        @Html.EditorFor(m => m.Direccion.Calle, new { htmlAttributes = new { id = "route", disabled = "disabled", @class = "form-control" } })
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="street_number">Numero</label>
+                                                        @Html.EditorFor(m => m.Direccion.Numero, new { htmlAttributes = new { id = "street_number", disabled = "disabled", @class = "form-control" } })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="locality">Ciudad</label>
+                                                        @Html.EditorFor(m => m.Direccion.Ciudad, new { htmlAttributes = new { id = "locality", disabled = "disabled", @class = "form-control" } })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="administrative_area_level_1">Provincia</label>
+                                                        @Html.EditorFor(m => m.Direccion.Provincia, new { htmlAttributes = new { id = "administrative_area_level_1", disabled = "disabled", @class = "form-control" } })
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="postal_code">Zip code</label>
+                                                        @Html.EditorFor(m => m.Direccion.CodigoPostal, new { htmlAttributes = new { id = "postal_code", disabled = "disabled", @class = "form-control" } })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="country">Pais</label>
+                                                        @Html.EditorFor(m => m.Direccion.Pais, new { htmlAttributes = new { id = "country", disabled = "disabled", @class = "form-control" } })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+
                                 <div class="box-footer d-flex flex-wrap align-items-center justify-content-between">
                                     <div class="left-col">
                                         <a href="@Url.Action("ShopBasket","OrdenCompra")" class="btn btn-secondary mt-0">
-                                            <i class="fa fa-chevron-left"></i>Volver a la cesta
+                                            <i class="fa fa-chevron-left"></i>Volver al carrito
                                         </a>
                                     </div>
                                     <div class="right-col">
-                                        <a href="@Url.Action("ShopCheckoutStep4","OrdenCompra")" class="btn btn-template-main">
-                                            Revisión del pedido<i class="fa fa-chevron-right"></i>
-                                        </a>
+                                        <button type="submit" class="btn btn-template-main">
+                                            Revisión del pedido <i class="fa fa-chevron-right"></i>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
                         }
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div id="order-summary" class="box mb-4 p-0">
-                        <div class="box-header mt-0">
-                            <h3>Resúmen de la orden</h3>
-                        </div>
-                        <p class="text-muted text-small">El envío y los costos adicionales se calculan en función de los valores que ingresó.</p>
-                        <div class="table-responsive">
-                            <table class="table">
-                                <tbody>
-                                    <tr>
-                                        <td>Orden subtotal</td>
-                                        <th>$446.00</th>
-                                    </tr>
-                                    <tr>
-                                        <td>Envío y traslado</td>
-                                        <th>$10.00</th>
-                                    </tr>
-                                    <tr>
-                                        <td>Impuestos</td>
-                                        <th>$0.00</th>
-                                    </tr>
-                                    <tr class="total">
-                                        <td>Total</td>
-                                        <th>$456.00</th>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -327,7 +336,7 @@
 
     // Bias the autocomplete object to the user's geographical location,
     // as supplied by the browser's 'navigator.geolocation' object.
-    function geolocate() {
+    $('#autocomplete').focus(function () {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function (position) {
                 var geolocation = {
@@ -341,7 +350,79 @@
                 autocomplete.setBounds(circle.getBounds());
             });
         }
+    });
+    function RetiroSucursal() {
+        document.getElementById("divSucursales").style.display = '';
+        document.getElementById("autocomplete").disabled = true;
+        document.getElementById("UsarDireccionDeContacto").disabled = true;
+        document.getElementById("UsarDireccionDeContacto").checked = false;
+        document.getElementById("autocomplete").value = '';
     }
+
+    function EnvioDomicilio() {
+        document.getElementById("divSucursales").style.display = 'none';
+        document.getElementById("autocomplete").disabled = false;
+        document.getElementById("UsarDireccionDeContacto").disabled = false;
+    }
+
+    function Efectivo() {
+    }
+
+    function Tarjeta() {
+    }
+
+    $("input[name='UsarDireccionDeContacto']").change(function () {
+        if (this.checked) {
+            document.getElementById("autocomplete").disabled = true;
+            document.getElementById("autocomplete").value = '';
+
+            document.getElementById("street_number").value = '';
+            document.getElementById("street_number").disabled = true;
+
+            document.getElementById("route").value = '';
+            document.getElementById("route").disabled = true;
+
+            document.getElementById("locality").value = '';
+            document.getElementById("locality").disabled = true;
+
+            document.getElementById("administrative_area_level_1").value = '';
+            document.getElementById("administrative_area_level_1").disabled = true;
+
+            document.getElementById("country").value = '';
+            document.getElementById("country").disabled = true;
+
+            document.getElementById("postal_code").value = '';
+            document.getElementById("postal_code").disabled = true;
+        } else {
+            document.getElementById("autocomplete").disabled = false;
+        }
+    });
+
+    $("input[name='UsarDatosDeContacto']").change(function () {
+        if (this.checked) {
+            document.getElementById("Nombre").value = '';
+            document.getElementById("Nombre").disabled = true;
+
+            document.getElementById("Apellido").value = '';
+            document.getElementById("Apellido").disabled = true;
+
+            document.getElementById("Telefono").value = '';
+            document.getElementById("Telefono").disabled = true;
+
+            document.getElementById("Mail").value = '';
+            document.getElementById("Mail").disabled = true;
+        } else {
+            document.getElementById("Nombre").disabled = false;
+
+            document.getElementById("Apellido").disabled = false;
+
+            document.getElementById("Telefono").disabled = false;
+
+            document.getElementById("Mail").disabled = false;
+        }
+    });
+
+
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu5nZKbeK-WHQ70oqOWo-_4VmwOwKP9YQ&libraries=places&callback=initAutocomplete"
         async defer></script>
