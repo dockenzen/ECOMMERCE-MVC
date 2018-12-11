@@ -21,6 +21,9 @@ namespace TF_Base.Controllers
         [Authorize(Roles = "Cliente")]
         public ActionResult ShopBasket()
         {
+            if (db.OrdenCompra.Where(oc => oc.idEstadoOrden == 2).Count() > 0)
+                return RedirectToAction("ShopCheckoutStep1", new { id = db.OrdenCompra.FirstOrDefault(oc => oc.idEstadoOrden == 2).idOrdenCompra });
+
             OrdenCompra ordencompra = db.OrdenCompra.FirstOrDefault(oc => oc.OrdenCompraEstado.idEstadoOrden == 1
                                                      && oc.idUsuario == WebMatrix.WebData.WebSecurity.CurrentUserId);
 
@@ -28,7 +31,6 @@ namespace TF_Base.Controllers
                 ordencompra = new OrdenCompra();
 
             ViewBag.ProductosAlAzar = db.Producto.OrderByDescending(p => p.Stock.FirstOrDefault().cantidad).ToList();
-
             return View(ordencompra.OrdenCompraDetalle);
         }
 
@@ -74,34 +76,38 @@ namespace TF_Base.Controllers
             base.Dispose(disposing);
         }
 
+        [Authorize(Roles = "Cliente")]
         public ActionResult ShopCheckoutStep1(int id = 0)
         {
-            BuyerDataModelView data = new BuyerDataModelView();
+            db.OrdenCompra.Find(id).idEstadoOrden = 2;
+            db.SaveChanges();
 
+            BuyerDataModelView data = new BuyerDataModelView();
             ViewData.Add("sc", db.Sucursal.ToList());
-            ViewData.Add("dp", db.DatosPersonales.FirstOrDefault(d => d.idUsuario == WebMatrix.WebData.WebSecurity.CurrentUserId));
+            ViewData.Add("dp", db.Usuario.FirstOrDefault(d => d.idUsuario == WebSecurity.CurrentUserId).DatosPersonales);
 
             return View(data);
         }
 
         [HttpPost]
-        public ActionResult ShopCheckoutStep1(BuyerDataModelView data, int idSucursal = 0)
+        [Authorize(Roles = "Cliente")]
+        public ActionResult ShopCheckoutStep1(BuyerDataModelView data, FormCollection collection)
         {
-            //if (ModelState.IsValid)
-            //{
+            if (ModelState.IsValid)
+            {
 
-            OrdenCompra ordencompra = db.OrdenCompra.FirstOrDefault(oc => oc.OrdenCompraEstado.idEstadoOrden == 1
-                                                     && oc.idUsuario == WebSecurity.CurrentUserId);
+                OrdenCompra ordencompra = db.OrdenCompra.FirstOrDefault(oc => oc.OrdenCompraEstado.idEstadoOrden == 2
+                                                         && oc.idUsuario == WebSecurity.CurrentUserId);
 
-            CargarPago(data, ordencompra);
-            CargarEnvio(ordencompra, data, idSucursal);
-
-            return RedirectToAction("ShopCheckoutStep4", "OrdenCompra", new { id = ordencompra.idOrdenCompra });
-            //un par de save y creacion de otros objetos, se le cambia el estado a la orden de compra y se pasa a chackout4
-            //}
+                CargarPago(data, ordencompra);
+                CargarEnvio(ordencompra, data, Convert.ToInt32(collection["idSucursal"]));
+                return RedirectToAction("ShopCheckoutStep4", "OrdenCompra", new { id = ordencompra.idOrdenCompra });
+            }
 
             ModelState.AddModelError("", "Se produjo un error cuando se procesaba la solicitud");
 
+            ViewData.Add("sc", db.Sucursal.ToList());
+            ViewData.Add("dp", db.Usuario.FirstOrDefault(d => d.idUsuario == WebSecurity.CurrentUserId).DatosPersonales);
             return View(data);
         }
 
@@ -117,7 +123,7 @@ namespace TF_Base.Controllers
         private void CargarEnvio(OrdenCompra ordencompra, BuyerDataModelView data, int idSucursal = 0)
         {
             Envio e = new Envio();
-            DatosPersonales dp = db.DatosPersonales.FirstOrDefault(d => d.idUsuario == WebSecurity.CurrentUserId);
+            DatosPersonales dp = db.Usuario.FirstOrDefault(d => d.idUsuario == WebSecurity.CurrentUserId).DatosPersonales;
 
             if (data.MetodoEntrega == MetodoEntrega.RetiroEnSucursal)
             {
@@ -148,8 +154,8 @@ namespace TF_Base.Controllers
             {
                 e.nombre = dp.nombre;
                 e.apellido = dp.apellido;
-                e.telefono = "21132123"; //todo cambiar x dp.telefono
-                e.mail = dp.Usuario.email;
+                e.telefono = dp.telefono;
+                e.mail = dp.Usuario.First(u => u.idUsuario == WebSecurity.CurrentUserId).email;
             }
             else
             {
@@ -164,7 +170,14 @@ namespace TF_Base.Controllers
             oce.OrdenCompra = ordencompra;
 
             db.OrdenCompraEnvio.Add(oce);
-            db.SaveChanges();
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
             //cambiar estado a la vaina
 
         }

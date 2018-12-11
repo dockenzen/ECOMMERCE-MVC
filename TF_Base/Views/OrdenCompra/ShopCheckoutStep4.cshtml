@@ -45,27 +45,22 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td><a href="#"><img src="img/detailsquare.jpg" alt="Remera blanca"></a></td>
-                                            <td><a href="#">Remera blanca</a></td>
-                                            <td>2</td>
-                                            <td>$123.00</td>
-                                            <td>$0.00</td>
-                                            <td>$246.00</td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#"><img src="img/pantalon-chupin.jpg" alt="Pantalon Chupin"></a></td>
-                                            <td><a href="#">Pantalon Chupin Negro</a></td>
-                                            <td>1</td>
-                                            <td>$200.00</td>
-                                            <td>$0.00</td>
-                                            <td>$200.00</td>
-                                        </tr>
+                                        @foreach (var detalle in Model.OrdenCompraDetalle)
+                                        {
+                                            <tr>
+                                                <td><img src="@Url.Content(detalle.Producto.ImagenProducto.First().url)" alt="@detalle.Producto.descripcion"></td>
+                                                <td>@detalle.Producto.descripcion</td>
+                                                <td>@detalle.cantidad</td>
+                                                <td>$@detalle.Producto.precioUnitario</td>
+                                                <td>$0.00</td>
+                                                <td>$@(detalle.Producto.precioUnitario * detalle.cantidad)</td>
+                                            </tr>
+                                        }
                                     </tbody>
                                     <tfoot>
                                         <tr>
                                             <th colspan="5">Total</th>
-                                            <th>$446.00</th>
+                                            <th>$@Model.OrdenCompraDetalle.Sum(detalle => detalle.cantidad * detalle.Producto.precioUnitario)</th>
                                         </tr>
                                     </tfoot>
                                 </table>
@@ -93,7 +88,7 @@
                                 <tbody>
                                     <tr>
                                         <td>Orden subtotal</td>
-                                        <th>$ @(Model.OrdenCompraDetalle.Sum( ocd => ocd.Producto.precioUnitario * ocd.cantidad))</th>
+                                        <th>$ @(Model.OrdenCompraDetalle.Sum(ocd => ocd.Producto.precioUnitario * ocd.cantidad))</th>
                                     </tr>
                                     <tr>
                                         <td>Envío y traslado</td>
@@ -101,8 +96,15 @@
                                     </tr>
                                     <tr>
                                         <td>Impuestos</td>
-                                        <th>$@((Model.OrdenCompraDetalle.Sum(ocd => ocd.Producto.precioUnitario * ocd.cantidad) * 1.21m))</th>
+                                        <th>$@((Model.OrdenCompraDetalle.Sum(ocd => ocd.Producto.precioUnitario * ocd.cantidad) * 0.21m))</th>
                                     </tr>
+                                    @if (Model.Cupon != null)
+                                    {
+                                        <tr>
+                                            <td>Descuento</td>
+                                            <th>$@((Model.OrdenCompraDetalle.Sum(ocd => ocd.Producto.precioUnitario * ocd.cantidad) * Model.Cupon.porcentajeDescuento))</th>
+                                        </tr>
+                                    }
                                     <tr class="total">
                                         <td>Total</td>
                                         <th>$@((Model.OrdenCompraDetalle.Sum(ocd => ocd.Producto.precioUnitario * ocd.cantidad) * 1.21m + Model.OrdenCompraEnvio.OrderByDescending(o => o.idOrdenCompraEnvio).FirstOrDefault().Envio.costoEnvio))</th>
@@ -111,6 +113,22 @@
                             </table>
                         </div>
                     </div>
+                </div>
+                <div class="box box mt-0 mb-4 p-0">
+                    <div class="box-header mt-0">
+                        <h4>Código Promocional</h4>
+                    </div>
+                    <p class="text-muted">Si tenés un cupón de descuento, ingresalo en el siguiente cuadro.</p>
+                    <form>
+                        <div class="input-group">
+                            <input type="text" class="form-control">
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-template-main">
+                                    <i class="fa fa-gift"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
