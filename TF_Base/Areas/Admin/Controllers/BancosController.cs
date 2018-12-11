@@ -8,114 +8,109 @@ using System.Web;
 using System.Web.Mvc;
 using TF_Base.Models;
 
-namespace TF_Base.Controllers
+namespace TF_Base.Areas.Admin.Controllers
 {
-    public class DatosPersonalesController : Controller
+    public class BancosController : Controller
     {
         private ecommerceEntities db = new ecommerceEntities();
 
-        // GET: DatosPersonales
+        // GET: Admin/Bancos
         public ActionResult Index()
         {
-            var datosPersonales = db.DatosPersonales.Include(d => d.Direccion);
-            return View(datosPersonales.ToList());
+            return View(db.Banco.ToList());
         }
 
-        // GET: DatosPersonales/Details/5
+        // GET: Admin/Bancos/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DatosPersonales datosPersonales = db.DatosPersonales.Find(id);
-            if (datosPersonales == null)
+            Banco banco = db.Banco.Find(id);
+            if (banco == null)
             {
                 return HttpNotFound();
             }
-            return View(datosPersonales);
+            return View(banco);
         }
 
-        // GET: DatosPersonales/Create
+        // GET: Admin/Bancos/Create
         public ActionResult Create()
         {
-            ViewBag.idDireccion = new SelectList(db.Direccion, "idDireccion", "direccion1");
             return View();
         }
 
-        // POST: DatosPersonales/Create
+        // POST: Admin/Bancos/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "datosPersonalesId,nombre,apellido,dni,idDireccion")] DatosPersonales datosPersonales)
+        public ActionResult Create([Bind(Include = "idBanco,nombre")] Banco banco)
         {
             if (ModelState.IsValid)
             {
-                db.DatosPersonales.Add(datosPersonales);
+                db.Banco.Add(banco);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.idDireccion = new SelectList(db.Direccion, "idDireccion", "direccion1", datosPersonales.idDireccion);
-            return View(datosPersonales);
+            return View(banco);
         }
 
-        // GET: DatosPersonales/Edit/5
+        // GET: Admin/Bancos/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DatosPersonales datosPersonales = db.DatosPersonales.Find(id);
-            if (datosPersonales == null)
+            Banco banco = db.Banco.Find(id);
+            if (banco == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.idDireccion = new SelectList(db.Direccion, "idDireccion", "direccion1", datosPersonales.idDireccion);
-            return View(datosPersonales);
+            return View(banco);
         }
 
-        // POST: DatosPersonales/Edit/5
+        // POST: Admin/Bancos/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "datosPersonalesId,nombre,apellido,dni,idDireccion")] DatosPersonales datosPersonales)
+        public ActionResult Edit([Bind(Include = "idBanco,nombre")] Banco banco)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(datosPersonales).State = EntityState.Modified;
+                db.Entry(banco).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.idDireccion = new SelectList(db.Direccion, "idDireccion", "direccion1", datosPersonales.idDireccion);
-            return View(datosPersonales);
+            return View(banco);
         }
 
-        // GET: DatosPersonales/Delete/5
+        // GET: Admin/Bancos/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DatosPersonales datosPersonales = db.DatosPersonales.Find(id);
-            if (datosPersonales == null)
+            Banco banco = db.Banco.Find(id);
+            if (banco == null)
             {
                 return HttpNotFound();
             }
-            return View(datosPersonales);
+            return View(banco);
         }
 
-        // POST: DatosPersonales/Delete/5
+        // POST: Admin/Bancos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            DatosPersonales datosPersonales = db.DatosPersonales.Find(id);
-            db.DatosPersonales.Remove(datosPersonales);
+            Banco banco = db.Banco.Find(id);
+            db.Banco.Remove(banco);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

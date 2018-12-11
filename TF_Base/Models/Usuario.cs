@@ -18,8 +18,8 @@ namespace TF_Base.Models
         public Usuario()
         {
             this.BlackList = new HashSet<BlackList>();
-            this.DatosPersonales = new HashSet<DatosPersonales>();
             this.OrdenCompra = new HashSet<OrdenCompra>();
+            this.TarjetaUsuario = new HashSet<TarjetaUsuario>();
             this.WishList = new HashSet<WishList>();
             this.webpages_Roles = new HashSet<webpages_Roles>();
         }
@@ -29,13 +29,15 @@ namespace TF_Base.Models
         public string email { get; set; }
         public Nullable<int> cantidadPenalizacion { get; set; }
         public int idEstadoUsuario { get; set; }
+        public int idDatosPersonales { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BlackList> BlackList { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DatosPersonales> DatosPersonales { get; set; }
+        public virtual DatosPersonales DatosPersonales { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrdenCompra> OrdenCompra { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TarjetaUsuario> TarjetaUsuario { get; set; }
         public virtual UsuarioEstado UsuarioEstado { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WishList> WishList { get; set; }

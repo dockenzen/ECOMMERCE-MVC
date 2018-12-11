@@ -12,23 +12,23 @@ namespace TF_Base.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class DatosPersonales
+    public partial class Tarjeta
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public DatosPersonales()
+        public Tarjeta()
         {
-            this.Usuario = new HashSet<Usuario>();
+            this.TarjetaUsuario = new HashSet<TarjetaUsuario>();
         }
     
-        public int datosPersonalesId { get; set; }
-        public string nombre { get; set; }
-        public string apellido { get; set; }
-        public string dni { get; set; }
-        public int idDireccion { get; set; }
-        public string telefono { get; set; }
+        public int idTarjeta { get; set; }
+        public int idBanco { get; set; }
+        public string numero { get; set; }
+        public System.DateTime vencimiento { get; set; }
+        public int codigo { get; set; }
+        public Nullable<decimal> saldo { get; set; }
     
-        public virtual Direccion Direccion { get; set; }
+        public virtual Banco Banco { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Usuario> Usuario { get; set; }
+        public virtual ICollection<TarjetaUsuario> TarjetaUsuario { get; set; }
     }
 }
