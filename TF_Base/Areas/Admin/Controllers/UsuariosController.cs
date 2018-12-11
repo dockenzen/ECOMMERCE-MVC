@@ -82,7 +82,7 @@ namespace TF_Base.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idUsuario,userName,email,idEstadoUsuario")] Usuario usuario)
+        public ActionResult Edit([Bind(Include = "idUsuario,userName,email,idEstadoUsuario,idDatosPersonales")] Usuario usuario)
         {
             if (ModelState.IsValid)
             {

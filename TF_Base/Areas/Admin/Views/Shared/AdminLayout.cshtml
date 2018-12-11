@@ -94,24 +94,39 @@
             <div class="text-gray-400 text-uppercase px-3 px-lg-4 py-4 font-weight-bold small headings-font-family">MAIN</div>
             <ul class="sidebar-menu list-unstyled">
                 <li class="sidebar-list-item"><a href="@Url.Action("Home", "Shared")" class="sidebar-link text-muted"><i class="o-home-1 mr-3 text-gray"></i><span>Home</span></a></li>
-                <li class="sidebar-list-item"><a href="@Url.Action("Index", "Usuarios")" class="sidebar-link text-muted"><i class="o-survey-1 mr-3 text-gray"></i><span>Usuarios</span></a></li>
-                <li class="sidebar-list-item"><a href="@Url.Action("Index", "Colors")" class="sidebar-link text-muted"><i class="o-survey-1 mr-3 text-gray"></i><span>Colores</span></a></li>
-                <li class="sidebar-list-item"><a href="@Url.Action("Index", "Talles")" class="sidebar-link text-muted"><i class="o-survey-1 mr-3 text-gray"></i><span>Talles</span></a></li>
-                <li class="sidebar-list-item"><a href="@Url.Action("Index", "Garantias")" class="sidebar-link text-muted"><i class="o-survey-1 mr-3 text-gray"></i><span>Garantias</span></a></li>
                 <li class="sidebar-list-item">
-                    <a href="#" data-toggle="collapse" data-target="#pages" aria-expanded="false" aria-controls="pages" class="sidebar-link text-muted"><i class="o-wireframe-1 mr-3 text-gray"></i><span>Categorias</span></a>
-                    <div id="pages" class="collapse">
+                    <a href="#" data-toggle="collapse" data-target="#categorias" aria-expanded="false" aria-controls="categorias" class="sidebar-link text-muted"><i class="o-wireframe-1 mr-3 text-gray"></i><span>Categorias</span></a>
+                    <div id="categorias" class="collapse">
                         <ul class="sidebar-menu list-unstyled border-left border-primary border-thick">
                             <li class="sidebar-list-item"><a href="@Url.Action("Index", "Categorias")" class="sidebar-link text-muted pl-lg-5">Categorias</a></li>
                             <li class="sidebar-list-item"><a href="@Url.Action("Index", "SubCategorias")" class="sidebar-link text-muted pl-lg-5">SubCategorias</a></li>
                         </ul>
                     </div>
                 </li>
-                <li class="sidebar-list-item"><a href="@Url.Action("Index", "Productos")" class="sidebar-link text-muted"><i class="o-survey-1 mr-3 text-gray"></i><span>Productos</span></a></li>
-                <li class="sidebar-list-item"><a href="@Url.Action("Index", "Sucursals")" class="sidebar-link text-muted"><i class="o-survey-1 mr-3 text-gray"></i><span>Sucursales</span></a></li>
-                <li class="sidebar-list-item"><a href="@Url.Action("Index", "Stocks")" class="sidebar-link text-muted"><i class="o-survey-1 mr-3 text-gray"></i><span>Stock</span></a></li>
-                <li class="sidebar-list-item"><a href="@Url.Action("Index", "Cupons")" class="sidebar-link text-muted"><i class="o-survey-1 mr-3 text-gray"></i><span>Cupones</span></a></li>
-                <li class="sidebar-list-item"><a href="@Url.Action("Index", "CostoEnvios")" class="sidebar-link text-muted"><i class="o-survey-1 mr-3 text-gray"></i><span>Costos de Envio</span></a></li>
+                <li class="sidebar-list-item">
+                    <a href="#" data-toggle="collapse" data-target="#productos" aria-expanded="false" aria-controls="productos" class="sidebar-link text-muted"><i class="o-wireframe-1 mr-3 text-gray"></i><span>Productos</span></a>
+                    <div id="productos" class="collapse">
+                        <ul class="sidebar-menu list-unstyled border-left border-primary border-thick">
+                            <li class="sidebar-list-item"><a href="@Url.Action("Index", "Productos")" class="sidebar-link text-muted pl-lg-5"><span>Productos</span></a></li>
+                            <li class="sidebar-list-item"><a href="@Url.Action("Index", "Colors")" class="sidebar-link text-muted pl-lg-5"><span>Colores</span></a></li>
+                            <li class="sidebar-list-item"><a href="@Url.Action("Index", "Talles")" class="sidebar-link text-muted pl-lg-5"><span>Talles</span></a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="sidebar-list-item">
+                    <a href="#" data-toggle="collapse" data-target="#promos" aria-expanded="false" aria-controls="promos" class="sidebar-link text-muted"><i class="o-wireframe-1 mr-3 text-gray"></i><span>Promos</span></a>
+                    <div id="promos" class="collapse">
+                        <ul class="sidebar-menu list-unstyled border-left border-primary border-thick">
+                            <li class="sidebar-list-item"><a href="@Url.Action("Index", "Garantias")" class="sidebar-link text-muted pl-lg-5">Garantias</a></li>
+                            <li class="sidebar-list-item"><a href="@Url.Action("Index", "Cupons")" class="sidebar-link text-muted pl-lg-5"><span>Cupones</span></a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="sidebar-list-item"><a href="@Url.Action("Index", "Usuarios")" class="sidebar-link text-muted"><span>Usuarios</span></a></li>
+                <li class="sidebar-list-item"><a href="@Url.Action("Index", "Sucursals")" class="sidebar-link text-muted"><span>Sucursales</span></a></li>
+                <li class="sidebar-list-item"><a href="@Url.Action("Index", "Stocks")" class="sidebar-link text-muted"><span>Stock</span></a></li>
+                <li class="sidebar-list-item"><a href="@Url.Action("Index", "CostoEnvios")" class="sidebar-link text-muted"><span>Costos de Envio</span></a></li>
+                <li class="sidebar-list-item"><a href="@Url.Action("Index", "Bancos")" class="sidebar-link text-muted"><span>Bancos</span></a></li>
                 @*
             <li class="sidebar-list-item"><a href="charts.html" class="sidebar-link text-muted"><i class="o-sales-up-1 mr-3 text-gray"></i><span>Charts</span></a></li>
             <li class="sidebar-list-item"><a href="tables.html" class="sidebar-link text-muted"><i class="o-table-content-1 mr-3 text-gray"></i><span>Tables</span></a></li>
