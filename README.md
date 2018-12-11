@@ -1,7 +1,5 @@
 # ECOMMERCE-MVC
 
-
-
 Restante
 
 Agregar a stock maximo y minimo. Ivan
@@ -37,3 +35,15 @@ Manejo de usuarios
 ABM nuevos productos.
 
 Estadisticas de pedidos pendientes, usuarios clientes on, listar ordenes según estado, stock que faltan. Ivan.
+
+
+ShopCheckoutStep1
+	Si selecciona metodo de entrega Retira en sucursal, muestra las sucursales disponibles para seleccionar.
+	Si selecciona metodo de entrega Envio a domicilio, muestra los campos de direccion a completar.
+
+	Si checkea Usar datos de contacto se completa con la data del usuario actual
+	Si no checkea Usar datos de contacto se completa y valida que ingrese los datos
+	
+	Metodo de pago
+		Si es efectivo, genera una factura codigo de barra sarasa
+		Si es tarjeta, muestra los campos de la tarjeta a cargar y los valida

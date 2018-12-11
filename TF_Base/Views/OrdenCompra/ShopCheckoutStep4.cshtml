@@ -1,4 +1,6 @@
-﻿@{
+﻿@model TF_Base.Models.OrdenCompra
+
+@{
     ViewBag.Title = "ShopCheckoutStep4";
     Layout = "~/Views/Shared/_eCommerceLayout.cshtml";
 }
@@ -13,7 +15,7 @@
                 <div class="col-md-5">
                     <ul class="breadcrumb d-flex justify-content-end">
                         <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
-                        <li class="breadcrumb-item active">Pago y envío - Revisión de pedidos</li>
+                        <li class="breadcrumb-item active">Revisión de pedidos</li>
                     </ul>
                 </div>
             </div>
@@ -26,7 +28,7 @@
                     <div class="box">
                         <form method="get" action="shop-checkout4.html">
                             <ul class="nav nav-pills nav-fill">
-                                <li class="nav-item"><a href="shop-checkout1.html" class="nav-link disabled"> <i class="fa fa-address-book"></i><br>Datos del pedido</a></li>
+                                <li class="nav-item"><a href="@Url.Action("ShopCheckoutStep1","OrdenCompra", new { id = Model.idOrdenCompra })" class="nav-link disabled"> <i class="fa fa-address-book"></i><br>Datos del pedido</a></li>
                                 <li class="nav-item"><a href="#" class="nav-link active disabled"><i class="fa fa-eye"></i><br>Revisión del pedido</a></li>
                             </ul>
                         </form>
@@ -91,19 +93,19 @@
                                 <tbody>
                                     <tr>
                                         <td>Orden subtotal</td>
-                                        <th>$446.00</th>
+                                        <th>$ @(Model.OrdenCompraDetalle.Sum( ocd => ocd.Producto.precioUnitario * ocd.cantidad))</th>
                                     </tr>
                                     <tr>
                                         <td>Envío y traslado</td>
-                                        <th>$10.00</th>
+                                        <th>$@Model.OrdenCompraEnvio.OrderByDescending(o => o.idOrdenCompraEnvio).FirstOrDefault().Envio.costoEnvio</th>
                                     </tr>
                                     <tr>
                                         <td>Impuestos</td>
-                                        <th>$0.00</th>
+                                        <th>$@((Model.OrdenCompraDetalle.Sum(ocd => ocd.Producto.precioUnitario * ocd.cantidad) * 1.21m))</th>
                                     </tr>
                                     <tr class="total">
                                         <td>Total</td>
-                                        <th>$456.00</th>
+                                        <th>$@((Model.OrdenCompraDetalle.Sum(ocd => ocd.Producto.precioUnitario * ocd.cantidad) * 1.21m + Model.OrdenCompraEnvio.OrderByDescending(o => o.idOrdenCompraEnvio).FirstOrDefault().Envio.costoEnvio))</th>
                                     </tr>
                                 </tbody>
                             </table>

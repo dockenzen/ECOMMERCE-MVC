@@ -7,6 +7,8 @@ using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using TF_Base.Models;
+using TF_Base.ViewModels;
+using WebMatrix.WebData;
 
 namespace TF_Base.Controllers
 {
@@ -19,89 +21,40 @@ namespace TF_Base.Controllers
         [Authorize(Roles = "Cliente")]
         public ActionResult ShopBasket()
         {
-            OrdenCompra ordencompra = db.OrdenCompra.Include(oc => oc.OrdenCompraDetalle).FirstOrDefault(oc => oc.OrdenCompraEstado.idEstadoOrden == 1 &&
-                                                                     oc.idUsuario == WebMatrix.WebData.WebSecurity.CurrentUserId);
+            OrdenCompra ordencompra = db.OrdenCompra.FirstOrDefault(oc => oc.OrdenCompraEstado.idEstadoOrden == 1
+                                                     && oc.idUsuario == WebMatrix.WebData.WebSecurity.CurrentUserId);
 
             if (ordencompra == null)
                 ordencompra = new OrdenCompra();
 
             ViewBag.ProductosAlAzar = db.Producto.OrderByDescending(p => p.Stock.FirstOrDefault().cantidad).ToList();
 
-            return View(ordencompra);
+            return View(ordencompra.OrdenCompraDetalle);
         }
 
         //
-        // GET: /OrdenCompra/Details/5
-
-        public ActionResult Details(int id = 0)
-        {
-            OrdenCompra ordencompra = db.OrdenCompra.Find(id);
-            if (ordencompra == null)
-            {
-                return HttpNotFound();
-            }
-            return View(ordencompra);
-        }
-
-        //
-        // GET: /OrdenCompra/Create
-
-        public ActionResult Create()
-        {
-            ViewBag.idCupon = new SelectList(db.Cupon, "idCupon", "codigo");
-            ViewBag.idEstadoOrden = new SelectList(db.OrdenCompraEstado, "idEstadoOrden", "descripcion");
-            ViewBag.idPago = new SelectList(db.Pago, "idPago", "idPago");
-            ViewBag.idSucursal = new SelectList(db.Sucursal, "idSucursal", "telefono");
-            ViewBag.idUsuario = new SelectList(db.Usuario, "idUsuario", "userName");
-            return View();
-        }
-
-        //
-        // POST: /OrdenCompra/Create
-
+        // POST: /OrdenCompra/
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(OrdenCompra ordencompra)
+        [Authorize(Roles = "Cliente")]
+        public ActionResult ShopBasket(FormCollection form)
         {
             if (ModelState.IsValid)
             {
-                db.OrdenCompra.Add(ordencompra);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                String[] claves = form.AllKeys;
+                foreach (string clave in claves)
+                {
+                    string id = clave.Split('_')[1];
+                    string valor = form[clave];
+                    OrdenCompraDetalle ocd = db.OrdenCompraDetalle.Find(Convert.ToInt32(id));
+                    ocd.cantidad = Convert.ToInt32(valor);
+                    db.Entry(ocd).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
             }
-
-            ViewBag.idCupon = new SelectList(db.Cupon, "idCupon", "codigo", ordencompra.idCupon);
-            ViewBag.idEstadoOrden = new SelectList(db.OrdenCompraEstado, "idEstadoOrden", "descripcion", ordencompra.idEstadoOrden);
-            ViewBag.idPago = new SelectList(db.Pago, "idPago", "idPago", ordencompra.idPago);
-            ViewBag.idSucursal = new SelectList(db.Sucursal, "idSucursal", "telefono", ordencompra.idSucursal);
-            ViewBag.idUsuario = new SelectList(db.Usuario, "idUsuario", "userName", ordencompra.idUsuario);
-            return View(ordencompra);
+            return RedirectToAction("ShopBasket");
         }
 
-        //
-        // GET: /OrdenCompra/Delete/5
-        public ActionResult Delete(int id = 0)
-        {
-            OrdenCompra ordencompra = db.OrdenCompra.Find(id);
-            if (ordencompra == null)
-            {
-                return HttpNotFound();
-            }
-            return View(ordencompra);
-        }
 
-        //
-        // POST: /OrdenCompra/Delete/5
-
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            OrdenCompra ordencompra = db.OrdenCompra.Find(id);
-            db.OrdenCompra.Remove(ordencompra);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
 
         [ActionName("DeleteDetalle")]
         public ActionResult DeleteDetalle(int id = 0)
@@ -123,12 +76,119 @@ namespace TF_Base.Controllers
 
         public ActionResult ShopCheckoutStep1(int id = 0)
         {
-            return View();
+            BuyerDataModelView data = new BuyerDataModelView();
+
+            ViewData.Add("sc", db.Sucursal.ToList());
+            ViewData.Add("dp", db.DatosPersonales.FirstOrDefault(d => d.idUsuario == WebMatrix.WebData.WebSecurity.CurrentUserId));
+
+            return View(data);
         }
 
-        public ActionResult ShopCheckoutStep4()
+        [HttpPost]
+        public ActionResult ShopCheckoutStep1(BuyerDataModelView data, int idSucursal = 0)
         {
-            return View();
+            //if (ModelState.IsValid)
+            //{
+
+            OrdenCompra ordencompra = db.OrdenCompra.FirstOrDefault(oc => oc.OrdenCompraEstado.idEstadoOrden == 1
+                                                     && oc.idUsuario == WebSecurity.CurrentUserId);
+
+            CargarPago(data, ordencompra);
+            CargarEnvio(ordencompra, data, idSucursal);
+
+            return RedirectToAction("ShopCheckoutStep4", "OrdenCompra", new { id = ordencompra.idOrdenCompra });
+            //un par de save y creacion de otros objetos, se le cambia el estado a la orden de compra y se pasa a chackout4
+            //}
+
+            ModelState.AddModelError("", "Se produjo un error cuando se procesaba la solicitud");
+
+            return View(data);
+        }
+
+        private void CargarPago(BuyerDataModelView data, OrdenCompra oc)
+        {
+            Pago pago = new Pago();
+            pago.idEstadoPago = 1;
+            pago.tipoPago = (int)data.MetodoDePago;
+            pago.total = oc.OrdenCompraDetalle.Sum(detalle => detalle.cantidad * detalle.Producto.precioUnitario);
+            pago.OrdenCompra.Add(oc);
+        }
+
+        private void CargarEnvio(OrdenCompra ordencompra, BuyerDataModelView data, int idSucursal = 0)
+        {
+            Envio e = new Envio();
+            DatosPersonales dp = db.DatosPersonales.FirstOrDefault(d => d.idUsuario == WebSecurity.CurrentUserId);
+
+            if (data.MetodoEntrega == MetodoEntrega.RetiroEnSucursal)
+            {
+                e.idDireccion = db.Sucursal.FirstOrDefault(s => s.idSucursal == idSucursal).idDireccion;
+            }
+            else
+            {
+                if (data.UsarDireccionDeContacto)
+                {
+                    e.idDireccion = dp.idDireccion;
+                    e.fechaEntrega = new DateTime().AddDays(10);
+                    e.costoEnvio = GetCostoEnvio(dp.Direccion.Localidad);
+                }
+                else
+                {
+                    e.costoEnvio = GetCostoEnvio(data.Direccion.Ciudad);
+                    e.Direccion = new Direccion()
+                    {
+                        codigoPostal = data.Direccion.CodigoPostal,
+                        direccion1 = data.Direccion.Calle + " " + data.Direccion.Numero,
+                        Localidad = db.Localidad.FirstOrDefault(ce => ce.localidad1.ToLower() == data.Direccion.Ciudad.ToLower()),
+
+                    };
+                    e.fechaEntrega = new DateTime().AddDays(10);
+                }
+            }
+            if (data.UsarDatosDeContacto)
+            {
+                e.nombre = dp.nombre;
+                e.apellido = dp.apellido;
+                e.telefono = "21132123"; //todo cambiar x dp.telefono
+                e.mail = dp.Usuario.email;
+            }
+            else
+            {
+                e.nombre = data.Nombre;
+                e.apellido = data.Apellido;
+                e.telefono = data.Telefono;
+                e.mail = data.Mail;
+            }
+
+            OrdenCompraEnvio oce = new OrdenCompraEnvio();
+            oce.Envio = e;
+            oce.OrdenCompra = ordencompra;
+
+            db.OrdenCompraEnvio.Add(oce);
+            db.SaveChanges();
+            //cambiar estado a la vaina
+
+        }
+        private decimal GetCostoEnvio(Localidad localidad)
+        {
+            return db.CostoEnvio.FirstOrDefault(ce => ce.idLocalidad == localidad.id).Importe;
+        }
+
+        private decimal GetCostoEnvio(string localidad)
+        {
+            localidad = localidad.ToLower();
+            return db.CostoEnvio.FirstOrDefault(ce => ce.Localidad.localidad1.ToLower() == localidad).Importe;
+        }
+
+
+        public ActionResult ShopCheckoutStep4(int id = 0)
+        {
+            OrdenCompra orden = db.OrdenCompra.Find(id);
+            return View(orden);
+        }
+
+        private Usuario GetUsuario()
+        {
+            return db.Usuario.FirstOrDefault(u => u.idUsuario == WebSecurity.CurrentUserId);
         }
 
         private bool ValidarNumeroTarjetaIngresada(string numero)

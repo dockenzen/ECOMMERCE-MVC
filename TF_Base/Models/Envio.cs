@@ -24,6 +24,10 @@ namespace TF_Base.Models
         public System.DateTime fechaEntrega { get; set; }
         public decimal costoEnvio { get; set; }
         public Nullable<int> idDireccion { get; set; }
+        public string nombre { get; set; }
+        public string apellido { get; set; }
+        public string telefono { get; set; }
+        public string mail { get; set; }
     
         public virtual Direccion Direccion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
