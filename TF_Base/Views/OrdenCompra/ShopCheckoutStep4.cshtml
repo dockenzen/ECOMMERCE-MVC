@@ -23,7 +23,7 @@
     </div>
     <div id="content">
         <div class="container">
-            <div class="row">
+            <div class="row bar">
                 <div id="checkout" class="col-lg-9">
                     <div class="box">
                         <form method="get" action="shop-checkout4.html">
@@ -69,10 +69,10 @@
                         <div class="box-footer d-flex flex-wrap align-items-center justify-content-between">
 
                             <div class="left-col">
-                                <a href="@Url.Action("ShopCheckoutStep1","OrdenCompra")" class="btn btn-secondary mt-0"><i class="fa fa-chevron-left"></i>Volver al método de pago</a>
+                                <a href="@Url.Action("ShopCheckoutStep1","OrdenCompra")" class="btn btn-secondary mt-0"><i class="fa fa-chevron-left"></i>Volver</a>
                             </div>
                             <div class="right-col">
-                                <button type="submit" class="btn btn-template-main">Hacer el pedido<i class="fa fa-chevron-right"></i></button>
+                                <a href="@Url.Action("ConfirmarCompra","OrdenCompra", new { id = Model.idOrdenCompra })" class="btn btn-template-main"><i class="fa fa-chevron-right"></i>Hacer el pedido</a>
                             </div>
                         </div>
                     </div>
@@ -96,39 +96,65 @@
                                     </tr>
                                     <tr>
                                         <td>Impuestos</td>
-                                        <th>$@((Model.OrdenCompraDetalle.Sum(ocd => ocd.Producto.precioUnitario * ocd.cantidad) * 0.21m))</th>
+                                        <th>$@((Model.OrdenCompraDetalle.Sum(ocd => ocd.Producto.precioUnitario * ocd.cantidad) * 0.21m).ToString("N2"))</th>
                                     </tr>
                                     @if (Model.Cupon != null)
                                     {
                                         <tr>
                                             <td>Descuento</td>
-                                            <th>$@((Model.OrdenCompraDetalle.Sum(ocd => ocd.Producto.precioUnitario * ocd.cantidad) * Model.Cupon.porcentajeDescuento))</th>
+                                            <th>$ @((Model.OrdenCompraDetalle.Sum(ocd => ocd.Producto.precioUnitario * ocd.cantidad) * (Convert.ToDecimal(Model.Cupon.porcentajeDescuento)/100)).ToString("N2"))</th>
+                                        </tr>
+                                        <tr class="total">
+                                            <td>Total</td>
+                                            <th>$@((
+                                                    (
+                                                    (Model.OrdenCompraDetalle.Sum(ocd => ocd.Producto.precioUnitario * ocd.cantidad) * 1.21m
+                                                    + Model.OrdenCompraEnvio.OrderByDescending(o => o.idOrdenCompraEnvio).FirstOrDefault().Envio.costoEnvio)
+                                                    ) -
+                                                    (
+                                                    Model.OrdenCompraDetalle.Sum(ocd => ocd.Producto.precioUnitario * ocd.cantidad) * 1.21m
+                                                    + Model.OrdenCompraEnvio.OrderByDescending(o => o.idOrdenCompraEnvio).FirstOrDefault().Envio.costoEnvio)
+                                                    * (Convert.ToDecimal(Model.Cupon.porcentajeDescuento) / 100
+                                                    )).ToString("N2")
+                                                 )
+                                            </th>
                                         </tr>
                                     }
-                                    <tr class="total">
-                                        <td>Total</td>
-                                        <th>$@((Model.OrdenCompraDetalle.Sum(ocd => ocd.Producto.precioUnitario * ocd.cantidad) * 1.21m + Model.OrdenCompraEnvio.OrderByDescending(o => o.idOrdenCompraEnvio).FirstOrDefault().Envio.costoEnvio))</th>
-                                    </tr>
+                                    else
+                                    {
+                                        <tr>
+                                            <td>Descuento</td>
+                                            <th>$@((Model.OrdenCompraDetalle.Sum(ocd => ocd.Producto.precioUnitario * ocd.cantidad) * 0))</th>
+                                        </tr>
+
+                                        <tr class="total">
+                                            <td>Total</td>
+                                            <th>$@((Model.OrdenCompraDetalle.Sum(ocd => ocd.Producto.precioUnitario * ocd.cantidad) * 1.21m + Model.OrdenCompraEnvio.OrderByDescending(o => o.idOrdenCompraEnvio).FirstOrDefault().Envio.costoEnvio).ToString("N2"))</th>
+                                        </tr>
+                                    }
+
                                 </tbody>
                             </table>
                         </div>
                     </div>
-                </div>
-                <div class="box box mt-0 mb-4 p-0">
-                    <div class="box-header mt-0">
-                        <h4>Código Promocional</h4>
-                    </div>
-                    <p class="text-muted">Si tenés un cupón de descuento, ingresalo en el siguiente cuadro.</p>
-                    <form>
-                        <div class="input-group">
-                            <input type="text" class="form-control">
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-template-main">
-                                    <i class="fa fa-gift"></i>
-                                </button>
-                            </span>
+
+                    <div class="box box mt-0 mb-4 p-0">
+                        <div class="box-header mt-0">
+                            <h4>Código Promocional</h4>
                         </div>
-                    </form>
+                        <p class="text-muted">Si tenés un cupón de descuento, ingresalo en el siguiente cuadro.</p>
+                        <form action="@Url.Action("AplicarDescuento", "OrdenCompra")" method="post">
+                            <div class="input-group">
+                                @Html.Hidden("idOrden", Model.idOrdenCompra)
+                                @Html.TextBox("descuento", "", htmlAttributes: new { @class = "control-label col-md-10" })
+                                <span class="input-group-btn">
+                                    <button type="submit" class="btn btn-template-main">
+                                        <i class="fa fa-gift"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

@@ -44,7 +44,7 @@
                                         <th colspan="2" class="border-top-0">Producto</th>
                                         <th class="border-top-0">Cantidad</th>
                                         <th class="border-top-0">Precio unitario</th>
-                                        <th class="border-top-0">Descuento</th>
+
                                         <th class="border-top-0">Total</th>
                                     </tr>
                                 </thead>
@@ -61,41 +61,87 @@
                                                 <a href="#">@detalle.Producto.descripcion</a>
                                             </td>
                                             <td>@detalle.cantidad</td>
-                                            <td>$ @detalle.Producto.precioUnitario</td>
-                                            <td>$ @detalle.Producto.precioUnitario</td>
-                                            <td>$ @(detalle.cantidad * detalle.Producto.precioUnitario)</td>
+                                            <td>$@detalle.Producto.precioUnitario</td>
+
+                                            <td>$@(detalle.cantidad * detalle.Producto.precioUnitario)</td>
                                         </tr>
                                     }
                                 </tbody>
                             </table>
                             <div class="row col-md-12">
                                 <div class="col-md-10 text-right">Orden subtotal</div>
-                                <div class="text-right">$ 446.00</div>
+                                <div class="text-right">$@Model.OrdenCompraDetalle.Sum(ocd => ocd.cantidad * ocd.Producto.precioUnitario).ToString("N2")</div>
                             </div>
                             <div class="row col-md-12">
                                 <div class="col-md-10 text-right">
-                                    Shipping and handling
+                                    Envio y traslado
                                 </div>
-                                <div class="text-right">$ 446.00</div>
+                                <div class="text-right">$@Model.OrdenCompraEnvio.OrderByDescending(o => o.idOrdenCompraEnvio).FirstOrDefault().Envio.costoEnvio</div>
                             </div>
                             <div class="row col-md-12">
-                                <div class="col-md-10 text-right">Total</div>
-                                <div class="text-right">$@Model.OrdenCompraDetalle.Sum(o => o.cantidad * o.Producto.precioUnitario)</div>
+                                <div class="col-md-10 text-right">Impuestos</div>
+                                <div class="text-right">$@((Model.OrdenCompraDetalle.Sum(ocd => ocd.Producto.precioUnitario * ocd.cantidad) * 0.21m).ToString("N2"))</div>
                             </div>
-
-
+                            @if (Model.Cupon != null)
+                            {
+                                <div class="row col-md-12">
+                                    <div class="col-md-10 text-right">Descuentos</div>
+                                    <div class="text-right">
+                                        $@((Model.OrdenCompraDetalle.Sum(ocd => ocd.Producto.precioUnitario * ocd.cantidad) * (Convert.ToDecimal(Model.Cupon.porcentajeDescuento) / 100)).ToString("N2"))
+                                    </div>
+                                </div>
+                                <div class="row col-md-12">
+                                    <div class="col-md-10 text-right">Total</div>
+                                    <div class="text-right">
+                                        $@(((
+                                                                 (Model.OrdenCompraDetalle.Sum(ocd => ocd.Producto.precioUnitario * ocd.cantidad) * 1.21m
+                                                                 + Model.OrdenCompraEnvio.OrderByDescending(o => o.idOrdenCompraEnvio).FirstOrDefault().Envio.costoEnvio)
+                                                                 ) -
+                                                                 (
+                                                                 Model.OrdenCompraDetalle.Sum(ocd => ocd.Producto.precioUnitario * ocd.cantidad) * 1.21m
+                                                                 + Model.OrdenCompraEnvio.OrderByDescending(o => o.idOrdenCompraEnvio).FirstOrDefault().Envio.costoEnvio)
+                                                                 * (Convert.ToDecimal(Model.Cupon.porcentajeDescuento) / 100
+                                                                 )).ToString("N2")
+                                        )
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="row col-md-12">
+                                    <div class="col-md-10 text-right">Descuentos</div>
+                                    <div class="text-right">
+                                        $@((Model.OrdenCompraDetalle.Sum(ocd => ocd.Producto.precioUnitario * ocd.cantidad) * 0))
+                                    </div>
+                                </div>
+                                <div class="row col-md-12">
+                                    <div class="col-md-10 text-right">Total</div>
+                                    <div class="text-right">$@((Model.OrdenCompraDetalle.Sum(ocd => ocd.Producto.precioUnitario * ocd.cantidad) * 1.21m + Model.OrdenCompraEnvio.OrderByDescending(o => o.idOrdenCompraEnvio).FirstOrDefault().Envio.costoEnvio).ToString("N2"))</div>
+                                </div>
+                            }
                         </div>
                     </div>
-                    <div class="row addresses">
-                        <div class="col-md-12 text-center">
-                            <h3 class="text-uppercase">Dirección de envío</h3>
-                            <p>
-                                @Model.Usuario.DatosPersonales.FirstOrDefault().nombre @Model.Usuario.DatosPersonales.FirstOrDefault().apellido
-                                <br> @Model.Usuario.DatosPersonales.FirstOrDefault().Direccion.direccion1
-                                <br>CP @Model.Usuario.DatosPersonales.FirstOrDefault().Direccion.codigoPostal
-                            </p>
+                    @if (Model.OrdenCompraEnvio.Any())
+                    {
+                        <div class="row addresses">
+                            <div class="col-md-12 text-center">
+                                <h3 class="text-uppercase">Dirección de envío</h3>
+                                <p>
+                                    <h5>
+                                        Retira  @Model.OrdenCompraEnvio.OrderByDescending(e => e.idEnvio).First().Envio.nombre @Model.OrdenCompraEnvio.OrderByDescending(e => e.idEnvio).First().Envio.apellido
+                                    </h5>
+                                    
+                                    <h5>
+                                        En @Model.OrdenCompraEnvio.OrderByDescending(e => e.idEnvio).First().Envio.Direccion.direccion1
+                                    </h5>
+                                    
+                                    <h5>
+                                        Ciudad @Model.OrdenCompraEnvio.OrderByDescending(e => e.idEnvio).First().Envio.Direccion.Localidad.localidad1
+                                    </h5>
+                                </p>
+                            </div>
                         </div>
-                    </div>
+                    }
                 </div>
                 <div class="col-lg-3 mt-4 mt-lg-0">
                     <!-- CUSTOMER MENU -->

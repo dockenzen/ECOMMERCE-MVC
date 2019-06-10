@@ -79,8 +79,15 @@ namespace TF_Base.Controllers
         [Authorize(Roles = "Cliente")]
         public ActionResult ShopCheckoutStep1(int id = 0)
         {
-            db.OrdenCompra.Find(id).idEstadoOrden = 2;
+            OrdenCompra oc = db.OrdenCompra.Find(id);
+            oc.idEstadoOrden = 2;
             db.SaveChanges();
+            //IList<Sucursal> lista = new List<Sucursal>();
+            //foreach (OrdenCompraDetalle detalle in oc.OrdenCompraDetalle)
+            //{
+            //    lista.(db.Stock.Where(f => f.idProducto == detalle.idProducto && f.cantidad > detalle.cantidad).Select(s => s.Sucursal).ToList());
+            //}
+            
 
             BuyerDataModelView data = new BuyerDataModelView();
             ViewData.Add("sc", db.Sucursal.ToList());
@@ -95,10 +102,8 @@ namespace TF_Base.Controllers
         {
             if (ModelState.IsValid)
             {
-
                 OrdenCompra ordencompra = db.OrdenCompra.FirstOrDefault(oc => oc.OrdenCompraEstado.idEstadoOrden == 2
                                                          && oc.idUsuario == WebSecurity.CurrentUserId);
-
                 CargarPago(data, ordencompra);
                 CargarEnvio(ordencompra, data, Convert.ToInt32(collection["idSucursal"]));
                 return RedirectToAction("ShopCheckoutStep4", "OrdenCompra", new { id = ordencompra.idOrdenCompra });
@@ -118,6 +123,7 @@ namespace TF_Base.Controllers
             pago.tipoPago = (int)data.MetodoDePago;
             pago.total = oc.OrdenCompraDetalle.Sum(detalle => detalle.cantidad * detalle.Producto.precioUnitario);
             pago.OrdenCompra.Add(oc);
+            oc.Pago = pago;
         }
 
         private void CargarEnvio(OrdenCompra ordencompra, BuyerDataModelView data, int idSucursal = 0)
@@ -181,6 +187,7 @@ namespace TF_Base.Controllers
             //cambiar estado a la vaina
 
         }
+
         private decimal GetCostoEnvio(Localidad localidad)
         {
             return db.CostoEnvio.FirstOrDefault(ce => ce.idLocalidad == localidad.id).Importe;
@@ -191,7 +198,6 @@ namespace TF_Base.Controllers
             localidad = localidad.ToLower();
             return db.CostoEnvio.FirstOrDefault(ce => ce.Localidad.localidad1.ToLower() == localidad).Importe;
         }
-
 
         public ActionResult ShopCheckoutStep4(int id = 0)
         {
@@ -209,5 +215,42 @@ namespace TF_Base.Controllers
             Regex regex = new Regex("/^(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\\d{3})\\d{11})$/");
             return regex.IsMatch(numero);
         }
+
+        [HttpPost]
+        public ActionResult AplicarDescuento(FormCollection form)
+        {
+            string codigo = form["descuento"];
+            int idOrden = Convert.ToInt32(form["idOrden"]);
+
+            Cupon cupon = db.Cupon.FirstOrDefault(c => c.codigo == codigo);
+            OrdenCompra ordenCompra = db.OrdenCompra.Find(idOrden);
+            if (cupon != null && cupon.cantidad > 0 && cupon.fechaCaducidad > DateTime.Now && ordenCompra.Cupon == null)
+            {
+                cupon.cantidad--;
+                ordenCompra.Cupon = cupon;
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("ShopCheckoutStep4", new { id = idOrden });
+        }
+
+        public ActionResult ConfirmarCompra(int id = 0)
+        {
+            OrdenCompra oc = db.OrdenCompra.Find(id);
+            if (oc.Pago.tipoPago == 1)
+                oc.idEstadoOrden = 4;
+            else
+                oc.idEstadoOrden = 5;
+
+            foreach(OrdenCompraDetalle detalle in oc.OrdenCompraDetalle)
+            {
+           //  oc.Sucursal.Stock.First(s=> s.idProducto == detalle.idProducto).cantidad 
+                
+            }
+
+            db.SaveChanges();
+
+            return RedirectToAction("CustomerOrder","Usuario", new { id });
+        }       
     }
 }

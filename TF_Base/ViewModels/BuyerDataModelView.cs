@@ -14,16 +14,12 @@ namespace TF_Base.ViewModels
 
         public MetodoPago MetodoDePago { get; set; }
 
-        [Required]
         public string Nombre { get; set; }
 
-        [Required]
         public string Apellido { get; set; }
 
-        [Required]
         public string Telefono { get; set; }
 
-        [Required]
         public string Mail { get; set; }
 
         public DireccionEntregaViewModel Direccion { get; set; }
@@ -31,13 +27,13 @@ namespace TF_Base.ViewModels
 
     public enum MetodoEntrega
     {
-        RetiroEnSucursal,
-        EnvioDomicilio
+        RetiroEnSucursal = 1,
+        EnvioDomicilio = 2
     }
 
     public enum MetodoPago
     {
-        Efectivo,
-        Credito
+        Efectivo = 1,
+        Credito = 2
     }
 }
